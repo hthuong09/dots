@@ -85,3 +85,6 @@ mkcd() {
 # fe() { find . -type f -iname '*'$1'*' -exec "${2:-file}" {} \;  ; }
 # # copy with progress bar
 #alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
+
+# TODO: allow params
+alias startwm='startx ~/.xinitrc bspwm'
