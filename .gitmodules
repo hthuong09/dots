@@ -1,0 +1,12 @@
+[submodule ".zsh/autosuggestions/external"]
+	path = .zsh/autosuggestions/external
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule ".zsh/syntax-highlighting/external"]
+	path = .zsh/syntax-highlighting/external
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule ".zsh/history-substring-search/external"]
+	path = .zsh/history-substring-search/external
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule ".zsh/completion/external"]
+	path = .zsh/completion/external
+	url = https://github.com/zsh-users/zsh-completions

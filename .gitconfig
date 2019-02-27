@@ -1,0 +1,42 @@
+[user]
+  name = Thuong Nguyen
+  email = thuongnguyen.net@gmail.com
+  signingKey = A2F97ED3
+
+[core]
+  editor = 'nvim'
+
+[push]
+  default = current
+
+[alias]
+  a = add
+  b = branch
+  c = commit
+  d = diff
+  f = fetch
+  p = pull
+  s = status
+  aa = add .
+  au = add --update
+  co = checkout
+  cob = checkout -b
+  cs = commit -S
+  cm = commit --message
+  cms = commit -S --message
+  untracked = status -u .
+  untracked-at = status -u
+  ls = ls-files
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(dim white)(%an)%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  lg2 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  push-to-all-remotes = !git remote | xargs -I% -n1 git push %
+
+[color]
+  ui = auto
+
+[merge]
+  tool = vimdiff
+
+[mergetool]
+  prompt = false
+

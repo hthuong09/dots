@@ -1,0 +1,26 @@
+# Temporary files
+*.bak
+*.tmp
+
+/.gdots
+/.local/share
+
+# Other configs
+/.atom
+/.cache
+/.dbus
+/.gdfuse
+/.gimp*
+/.gnome
+/.gstreamer*
+/.kde4
+/.links
+/.lyrics
+/.mozilla
+/.npm
+/.steam
+/.subversion
+/.thumbnails
+/.ultrastardx
+/.vnc
+/.zcompcache
