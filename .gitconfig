@@ -1,7 +1,7 @@
 [user]
   name = Thuong Nguyen
   email = thuongnguyen.net@gmail.com
-  signingKey = A2F97ED3
+  signingKey = 76EDB5FD
 
 [core]
   editor = 'nvim'
