@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# bspc config external_rules_command "$(dirname $0)/external_rules"
+
+bspc monitor eDP1 -d 1 2 3 4 5
+
+bspc config -m ^1 border_width  2
+bspc config -m ^2 border_width  2
+
+bspc config window_gap          8
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config focus_by_distance    true
+bspc config history_aware_focus  true
+bspc config focus_follows_pointer   true
+bspc config pointer_follows _focus  true
+
+bspc config pointer_modifier mod4
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_side
+bspc config pointer_action3 resize_corner
+
+# wallpaper
+feh --bg-fill ~/.wallpapers/motor-vinh-hy.jpeg &
+
+#bar
+polybar example &
