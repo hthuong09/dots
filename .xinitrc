@@ -30,8 +30,9 @@ if xrandr | grep "HDMI1 connected"; then
     xrandr --output HDMI1 --mode 1920x1080 --left-of LVDS1
 fi
 
-#setxkbmap -option ctrl:nocaps
-#setxkbmap -option 'caps:ctrl_modifier' && xcape -e 'Caps_Lock=Escape' &
+setxkbmap -option 'ctrl:nocaps,altwin:swap_alt_win'
+# setxkbmap -option 'caps:ctrl_modifier,altwin:swap_alt_win' && xcape -e 'Caps_Lock=Escape' &
+ibus-daemon -d --xim
 
 session=${1:-xfce}
 case $session in
@@ -65,3 +66,4 @@ case $session in
     # No known session, try to run it as command
     *) exec $1;;
 esac
+

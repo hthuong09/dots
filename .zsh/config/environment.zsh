@@ -20,7 +20,7 @@ fi
 
 # Editor
 if hash nvim 2>/dev/null; then
-    export EDITOR="vim"
+    export EDITOR="nvim"
 else
     export EDITOR="nano"
 fi

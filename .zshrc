@@ -7,6 +7,7 @@ fi
 
 # Define list of module going to be used
 ZSH_MODULES=(
+    config
     editor
     completion
     history
