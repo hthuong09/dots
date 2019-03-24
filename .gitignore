@@ -2,6 +2,7 @@
 *.bak
 *.tmp
 
+/.vim/plugged
 /.gdots
 /.local/share
 

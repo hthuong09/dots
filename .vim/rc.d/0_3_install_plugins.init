@@ -1,0 +1,6 @@
+if isFirstTime == 1
+    echo "Install plugins with vim-plug\n"
+    :PlugInstall
+endif
+
+" vim: set syntax=vim:

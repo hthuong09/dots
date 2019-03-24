@@ -1,0 +1,58 @@
+call plug#begin('~/.vim/plugged')
+" {{{ Colorscheme
+" Colorscheme
+Plug 'chriskempson/base16-vim'
+" }}}
+
+" {{{ UI Enhancements
+" Airline status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" }}}
+
+" Syntax {{{
+" HTML/CSS
+Plug 'hail2u/vim-css3-syntax'
+Plug 'gorodinskiy/vim-coloresque'
+" Plug 'digitaltoad/vim-pug'
+
+" Javascript
+Plug 'pangloss/vim-javascript'
+" Plug 'mattn/emmet-vim'
+" }}}
+
+" {{{ Auto complete
+" Auto close quote, brackets
+Plug 'jiangmiao/auto-pairs'
+
+" Auto complete
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Snippets
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+
+" }}}
+
+" {{{ Code Generator
+Plug 'heavenshell/vim-jsdoc'
+" }}}
+
+
+" Plug 'takac/vim-hardtime'
+
+" Vim Helpers
+" Asynchronous execution library
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+" Auto do set paste
+Plug 'ConradIrwin/vim-bracketed-paste'
+
+" WakaTime API Plugin
+Plug 'wakatime/vim-wakatime'
+
+Plug 'tpope/vim-commentary'
+
+call plug#end()
+
+" vim: set syntax=vim:

@@ -2,10 +2,10 @@
 # For example to edit a file, run command "e filename"
 
 # Terminal
-alias term='kitty'
+#alias term='kitty'
 
 # Editor
-alias e=$EDITOR
+#alias e=$EDITOR
 
 # Browser
-alias browser='chromium'
+#alias browser='chromium'
