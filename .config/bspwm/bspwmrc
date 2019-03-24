@@ -2,12 +2,12 @@
 
 # bspc config external_rules_command "$(dirname $0)/external_rules"
 
-bspc monitor eDP1 -d 1 2 3 4 5
+bspc monitor eDP1 -d web term editor calendar others
 
 bspc config -m ^1 border_width  2
 bspc config -m ^2 border_width  2
 
-bspc config window_gap          8
+bspc config window_gap 0
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
@@ -26,4 +26,4 @@ bspc config pointer_action3 resize_corner
 feh --bg-fill ~/.wallpapers/motor-vinh-hy.jpeg &
 
 #bar
-polybar example &
+polybar-launch &
