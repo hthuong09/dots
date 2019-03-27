@@ -7,6 +7,7 @@ super + d
     dmenu_run
 
 # make sxhkd reload its configuration files:
+# TODO add notification after load
 super + shift + r
     pkill -SIGUSR1 sxhkd
 
@@ -15,8 +16,8 @@ super + shift + r
 #
 
 # quit bspwm normally
-super + shift + e
-    bspc quit
+# super + shift + e
+#     bspc quit
 
 # close and kill
 super + shift + {w,k}
@@ -166,11 +167,10 @@ ctrl + alt + i
     chromium
 # file manager
 super + e
-    kitty  -T "File Manager" /bin/sh -c "ranger"
+    kitty --class ranger_fm  -T "File Manager" /bin/sh -c "ranger"
 
-# minimal file manager
-#ctrl + alt + e
-#    st  -c "floating_ranger" -t "File Manager" -e /bin/sh -c "ranger"
+super + shift + e
+    kitty --class floating_ranger_fm  -T "File Manager" /bin/sh -c "ranger"
 
 # terminal emulator
 super + Return
