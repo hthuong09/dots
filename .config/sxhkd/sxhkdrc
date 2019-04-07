@@ -3,8 +3,18 @@
 #
 
 # program launcher
-super + d
-    dmenu_run
+# super + d
+#     dmenu_run
+# TODO:
+# super + d => menu tong hop
+# super + r => run command
+# super + shift + r => desktop app
+# super + w => windows
+super + w
+    rofi -show window
+
+super + r
+    rofi -show run
 
 # make sxhkd reload its configuration files:
 # TODO add notification after load

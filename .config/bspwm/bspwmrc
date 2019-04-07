@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# bspc config external_rules_command "$(dirname $0)/external_rules"
+bspc config external_rules_command "$(dirname $0)/external_rules"
 
 bspc monitor eDP1 -d web term editor calendar others
 
@@ -26,6 +26,9 @@ bspc config pointer_action3 resize_corner
 # Mini Ranger File Manager Window
 bspc rule -a floating_ranger_fm state=floating rectangle=800x500+560+290
 
+# No border ulauncher
+bspc rule -a ulauncher border=off
+
 # Auto swap in correct workspace
 # Terminal
 bspc rule -a kitty desktop='^2' follow=on
@@ -38,3 +41,7 @@ feh --bg-fill ~/.wallpapers/motor-vinh-hy.jpeg &
 
 #bar
 polybar-launch &
+
+compton &
+dunst &
+ulauncher --hide-window &
