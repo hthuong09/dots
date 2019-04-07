@@ -1,0 +1,18 @@
+! hjkl as arrow key in Mode_switch
+keycode 43 = h H Left
+keycode 44 = j J Down
+keycode 45 = k K Up
+keycode 46 = l L Right
+
+! yuio as Home, Page Down, Page Up, End keys in Mode_switch
+keycode 29 = y Y Home
+keycode 30 = u U Next
+keycode 31 = i I Prior
+keycode 32 = o O End
+
+! Super_L as mode switch key
+keycode 133 = Mode_switch NoSymbol NoSymbol
+
+! Swich backspace and backslash
+keycode 51 = BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace
+keycode 22 = backslash bar backslash bar backslash bar
