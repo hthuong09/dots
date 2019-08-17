@@ -34,6 +34,10 @@ fi
 setxkbmap -option 'caps:ctrl_modifier,altwin:swap_lalt_lwin' && xcape -e 'Caps_Lock=Escape' &
 ibus-daemon -d --xim
 
+# gnome keyring daemon
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+
 session=${1:-xfce}
 case $session in
     awesome           ) exec awesome;;

@@ -1,10 +1,15 @@
-" Default encoding - Use UTF-8 without BOM
-set encoding=utf8 nobomb
+" Genaral settings, vim settings only, no plugin settings
 
-set runtimepath^=$VIM_PATH
-
+" Required:
 filetype plugin indent on
 
+" Default encoding
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+
+" Fix backspace indent
+set backspace=indent,eol,start
 
 " Improve responsiveness of plugins that depend on this
 set updatetime=750
@@ -37,7 +42,7 @@ set smartcase
 " Auto indent
 set autoindent
 
-"set nowrap
+set nowrap
 "set linebreak
 
 " Hidden buffer
@@ -62,7 +67,18 @@ set foldmethod=marker
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:¬
 
-" Use system clipboard when in X session
-if $DISPLAY
-  set clipboard=unnamedplus
-endif
+" Disable line/column number in status line
+" Shows up in preview window when airline is disabled if not
+set noruler
+
+" Don't give completion messages like 'match 1 of 2'
+" or 'The only match'
+set shortmess+=c
+
+" Use system clipboard
+set clipboard^=unnamedplus
+
+" Set backups
+" set backupdir=~/.local/share/nvim/backup " Don't put backups in current dir
+" set backup
+" set noswapfile

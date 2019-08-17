@@ -29,6 +29,9 @@ bspc rule -a floating_ranger_fm state=floating rectangle=800x500+560+290
 # No border ulauncher
 bspc rule -a ulauncher border=off
 
+# Oneko always on top
+# bspc rule -a "oneko" layer=above
+
 # Auto swap in correct workspace
 # Terminal
 bspc rule -a kitty desktop='^2' follow=on
@@ -37,7 +40,7 @@ bspc rule -a kitty desktop='^2' follow=on
 bspc rule -a code-oss desktop='^3' follow=on
 
 # wallpaper
-feh --bg-fill ~/.wallpapers/motor-vinh-hy.jpeg &
+feh --bg-fill ~/.wallpapers/ganbaranaito.jpg &
 
 #bar
 polybar-launch &
@@ -45,3 +48,4 @@ polybar-launch &
 compton &
 dunst &
 ulauncher --hide-window &
+start-oneko &

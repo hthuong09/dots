@@ -6,6 +6,7 @@
 [core]
   editor = 'nvim'
   excludesfile = ~/.gitignore
+  pager = diff-so-fancy | less --tabs=4 -RFX
 
 [push]
   default = current
@@ -25,6 +26,8 @@
   cs = commit -S
   cm = commit --message
   cms = commit -S --message
+  pu = push
+  puf = push --force-with-lease
   untracked = status -u .
   untracked-at = status -u
   ls = ls-files

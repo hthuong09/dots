@@ -170,11 +170,14 @@ XF86TouchpadToggle
 #    bspc config -d focused top_padding 0;
 #
 
+super + shift + @l
+    betterlockscreen -l
+
 
 # Software shortcut
 # browser
 ctrl + alt + i
-    chromium
+    chromium --remote-debugging-port=9222
 # file manager
 super + e
     kitty --class ranger_fm  -T "File Manager" /bin/sh -c "ranger"

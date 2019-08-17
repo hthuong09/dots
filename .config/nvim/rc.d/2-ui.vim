@@ -1,3 +1,5 @@
+" UI settings, vim settings only, no plugin settings
+
 " Enable true color if supported
 if (has("termguicolors"))
     set termguicolors
@@ -15,5 +17,3 @@ colorscheme base16-tomorrow-night
 set cursorline
 " Highlight current column
 "set cursorcolumn
-
-

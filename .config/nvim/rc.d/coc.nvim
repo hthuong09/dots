@@ -1,0 +1,20 @@
+let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-eslint', 'coc-pairs', 'coc-neosnippet']
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Remap keys for gotos
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+" Goto vscode styles
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+nmap <F2> <Plug>(coc-rename)
+
+" Disable pair ` in markdown files
+autocmd FileType markdown let b:coc_pairs_disabled = ['`']
+
+" vim: set syntax=vim:

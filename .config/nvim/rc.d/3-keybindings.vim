@@ -1,5 +1,7 @@
-" Change map leader to ,
-let mapleader = ','
+" Keybinding settings, vim settings only, no plugin settings
+
+" Change map leader to space
+let mapleader = ' '
 
 " Saving files
 noremap <C-S> :update<CR>
@@ -23,22 +25,13 @@ nnoremap <C-h> <Esc>:bprevious<CR>
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
+
 noremap <Right> <NOP>
+
 inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 inoremap <Left> <NOP>
 inoremap <Right> <NOP>
-
-" Magic tab
-imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-"
-" Enter to select autocomplete option
-inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
-" Esc to cancel autocomplete
-inoremap <expr><Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-
-" Clear search
-nnoremap <leader><space> :nohlsearch<CR>
 
 " move vertically by visual line
 nnoremap j gj
@@ -47,10 +40,22 @@ nnoremap k gk
 " move to beginning/end of line
 nnoremap B ^
 nnoremap E $
-
-" $/^ doesn't do anything
+" disable $/^
 nnoremap $ <nop>
 nnoremap ^ <nop>
 
-
+" Toggle conceal level
 map <leader>l :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Allows you to save files you opened without write permissions via sudo
+cmap w!! w !sudo tee %
+
+" Page up/Page down
+nnoremap <silent> <leader>u <C-U>zz
+nnoremap <silent> <leader>d <C->zz
+
