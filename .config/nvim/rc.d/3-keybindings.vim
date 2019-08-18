@@ -57,5 +57,5 @@ cmap w!! w !sudo tee %
 
 " Page up/Page down
 nnoremap <silent> <leader>u <C-U>zz
-nnoremap <silent> <leader>d <C->zz
+nnoremap <silent> <leader>d <C-D>zz
 

@@ -77,6 +77,7 @@ endtry
 "   <leader>sd - Search current directory for occurences of given term and close window if no results
 "   <leader>sc - Search current directory for occurences of word under cursor
 nmap <leader>ob :Denite buffer<CR>
+nmap <leader>; :Denite buffer<CR>
 nmap <leader>of :DeniteProjectDir file/rec<CR>
 nnoremap <leader>sd :<C-u>Denite grep:. -no-empty<CR>
 nnoremap <leader>sc :<C-u>DeniteCursorWord grep:.<CR>
