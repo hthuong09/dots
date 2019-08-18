@@ -14,6 +14,14 @@ nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nmap <F2> <Plug>(coc-rename)
 
+" Remap for do codeAction of current line (code action)
+nmap <leader>ca  <Plug>(coc-codeaction)
+" Fix autofix problem of current line (quick fix)
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+
 " Disable pair ` in markdown files
 autocmd FileType markdown let b:coc_pairs_disabled = ['`']
 

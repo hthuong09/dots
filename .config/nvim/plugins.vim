@@ -76,6 +76,10 @@ Plug 'takac/vim-hardtime'
 " You can also use it as a command, either with a range like :7,17Commentary, or as part of a :global invocation like with :g/TODO/Commentary.
 Plug 'tpope/vim-commentary'
 
+" Surround
+" s become surround operator, just like i for inisde/inner
+Plug 'tpope/vim-surround'
+
 " Faster movement
 Plug 'easymotion/vim-easymotion'
 
