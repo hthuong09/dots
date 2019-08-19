@@ -25,15 +25,17 @@ endif
 " Load plugins
 call plug#begin(pluggedFolder)
 " Colorscheme
-Plug 'chriskempson/base16-vim'
+Plug 'mhartington/oceanic-next'
+" Plug 'chriskempson/base16-vim'
 
 " Status bar
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 
 " Syntax higlighting
 "" JavaScript, TypeScript and React (jsx)
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
 Plug 'mxw/vim-jsx'
 Plug 'HerringtonDarkholme/yats.vim'
 
@@ -48,9 +50,6 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release', 'do': { -> coc#util#
 
 " Fuzzy search
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Dislay git changes
-Plug 'mhinz/vim-signify'
 
 " Snippets
 Plug 'Shougo/neosnippet'
@@ -89,5 +88,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Icons
 Plug 'ryanoasis/vim-devicons'
+
+" Auto detect indent
+" Plug 'tpope/vim-sleuth'
 
 call plug#end()

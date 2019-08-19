@@ -34,6 +34,8 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(dim white)(%an)%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   lg2 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
   push-to-all-remotes = !git remote | xargs -I% -n1 git push %
+  pull-submodule = submodule foreach git pull origin master
+  deloy-heroku = !git aa && git cm "deloy" && git push heroku master
 
 [color]
   ui = auto

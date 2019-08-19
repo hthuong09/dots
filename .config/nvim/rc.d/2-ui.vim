@@ -8,7 +8,7 @@ endif
 " Colorscheme
 syntax enable
 
-colorscheme base16-tomorrow-night
+colorscheme OceanicNext
 
 " Status bar
 "set laststatus=2

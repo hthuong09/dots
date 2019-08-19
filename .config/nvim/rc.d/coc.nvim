@@ -1,4 +1,10 @@
-let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-eslint', 'coc-pairs', 'coc-neosnippet']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-eslint', 'coc-pairs', 'coc-neosnippet', 'coc-git']
+
+" Open CocList
+nnoremap <silent> <leader>cl  :<C-u>CocList<cr>
+
+" Show commands
+nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -18,10 +24,12 @@ nmap <leader>ca  <Plug>(coc-codeaction)
 " Fix autofix problem of current line (quick fix)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-
 " Disable pair ` in markdown files
 autocmd FileType markdown let b:coc_pairs_disabled = ['`']
 
+" coc-git keymaps
+"- <leader>gs: show git chunk info
+"- <leader>gc: show commit contain line
+nmap <leader>gs <Plug>(coc-git-chunkinfo)
+nmap <leader>gc <Plug>(coc-git-commit)
 " vim: set syntax=vim:
