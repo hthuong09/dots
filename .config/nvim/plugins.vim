@@ -90,6 +90,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 
 " Auto detect indent
-" Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-sleuth'
 
 call plug#end()
