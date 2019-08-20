@@ -59,3 +59,5 @@ cmap w!! w !sudo tee %
 nnoremap <silent> <leader>u <C-U>zz
 nnoremap <silent> <leader>d <C-D>zz
 
+" Escape terminal mode
+tnoremap <Esc> <C-\><C-n>
