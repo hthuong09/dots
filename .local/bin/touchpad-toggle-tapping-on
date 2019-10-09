@@ -1,0 +1,8 @@
+#!/bin/bash
+
+tpid=`xinput list | grep Touchpad | sed 's/.*id\=\([0-9]\+\).*/\1/g'`
+opt=`xinput list-props $tpid | grep Tapping\ Enabled\ \( | sed 's/.*\([0-9][0-9][0-9]\).*/\1/g'`
+
+xinput set-prop ${tpid} ${opt} 1
+libinput-gestures-setup start
+

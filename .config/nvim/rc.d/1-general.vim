@@ -18,8 +18,8 @@ set updatetime=750
 set history=500
 
 " Using soft tab
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 
 " Show line number, relative

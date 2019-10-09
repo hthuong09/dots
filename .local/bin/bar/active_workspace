@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+activeWorkspace() {
+    background=$1
+    foreground=$2
+    while read -r line ; do
+        case $line in
+            W*)
+                activeWS=""
+                isFocused=0
+                IFS=':'
+                set -- ${line#?}
+                while [ $# -gt 0 ] ; do
+                    item=$1
+                    name=${item#?}
+                    case $item in
+                        M*)
+                            isFocused=1
+                            ;;
+                        m*)
+                            isFocused=0
+                            ;;
+                        [FO]* )
+                            if [[ $isFocused -eq 1 ]]; then
+                                activeWS="${name}"
+                            fi
+                            ;;
+                    esac
+                    shift
+                done
+                ;;
+        esac
+
+        echo "%{B$background}%{F$foreground}  ${activeWS}  %{F-}%{B-}"
+    done
+}
+
+bspc subscribe report | activeWorkspace $1 $2

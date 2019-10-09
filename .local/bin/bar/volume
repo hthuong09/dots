@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+state=$(amixer get Master | grep 'Front Left: Playback' | grep '\[on]')
+volume=$(amixer -D pulse get Master | grep 'Front Left: Playback' | grep -o '...%' | sed 's/\[//' | sed 's/%//' | sed 's/ //')
+if [ "$state" != "" ]; then
+    if [ $volume -ge 50 ]; then
+        v=$(printf "\ue050")
+    elif [ $volume -gt 0 ] && [ $volume -lt 50 ]; then
+        v=$(printf "\ue04e")
+    else
+        v=$(printf "\ue04e")
+    fi
+else
+    v=$(printf "\ue04f")
+fi
+echo -e "$v $volume"

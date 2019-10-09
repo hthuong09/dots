@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+workspace() {
+
+    while read -r line ; do
+    	case $line in
+    		W*)
+    			# bspwm's state
+    			wm=""
+    			IFS=':'
+    			set -- ${line#?}
+    			while [ $# -gt 0 ] ; do
+    				item=$1
+    				name=${item#?}
+    				case $item in
+    					[fFoOuU]*)
+    						case $item in
+    							f*)
+                                    wm="${wm}%{A:bspc desktop -f ${name}:}\ue0f6%{A}"
+    								;;
+    							F*)
+                                    wm="${wm}%{A:bspc desktop -f ${name}:}\ue098%{A}"
+    								;;
+    							o*)
+                                    wm="${wm}%{A:bspc desktop -f ${name}:}\ue0f6%{A}"
+    								;;
+    							O*)
+                                    wm="${wm}%{A:bspc desktop -f ${name}:}\ue098%{A}"
+    								;;
+    							u*)
+                                    wm="${wm}%{A:bspc desktop -f ${name}:}\ue0f6%{A}"
+    								;;
+    							U*)
+                                    wm="${wm}%{A:bspc desktop -f ${name}:}\ue098%{A}"
+    								;;
+    						esac
+    						;;
+    				esac
+    				shift
+    			done
+    			;;
+    	esac
+        echo -e "${wm}"
+    done
+}
+
+bspc subscribe report | workspace

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+while true; do
+    echo -e "%{F$1}\ue0aa%{F-} 0"
+    if ! pacman_updates=$(checkupdates 2> /dev/null | wc -l ); then
+        pacman_updates=0
+    fi
+    if ! aur_updates=$(trizen -Su --aur --quiet | wc -l); then
+        aur_updates=0
+    fi
+    available_packages=$(("$pacman_updates" + "$aur_updates"))
+    echo -e "%{F$1}\ue0aa%{F-} $available_packages"
+    sleep 1800 # sleep 30mins
+done

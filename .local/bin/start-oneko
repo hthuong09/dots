@@ -1,0 +1,4 @@
+#!/bin/bash
+killall oneko
+sleep 10
+oneko -time 200000

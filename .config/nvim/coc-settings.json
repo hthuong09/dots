@@ -5,6 +5,21 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
-  "git.addGlameToVirtualText": true
+  "git.addGlameToVirtualText": true,
+  "coc.preferences.formatOnSaveFiletypes": ["css", "typescript", "typescriptreact", "javascript", "javascriptreact"],
+  "prettier.tabWidth": 4,
+  "prettier.singleQuote": true,
+  "prettier.jsxBracketSameLine": true,
+  "prettier.trailingComma": "es5",
+  "languageserver": {
+      "intelephense": {
+          "command": "intelephense",
+          "args": ["--stdio"],
+          "filetypes": ["php"],
+          "initializationOptions": {
+              "storagePath": "/tmp/intelephense"
+          }
+      }
+  }
 }
 

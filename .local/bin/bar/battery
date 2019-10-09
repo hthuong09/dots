@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+ICON_BATTERY="\ue238"
+ICON_BATTERY_CHARGING="\ue200"
+ICON_BATTERY_FULL="\ue1ff"
+ICON_BATTERY_HALF="\ue1fe"
+ICON_BATTERY_EMPTY="\ue1fd"
+function icon()
+{
+    if [[ "$2" != "" ]]; then
+        COLOR=$2
+    else
+        COLOR=$COLOR_ICON
+    fi
+    echo "%{F$COLOR}%{T2}$(printf $1)%{T-}%{F-}"
+}
+
+bat=$(acpi -b | awk '{print $4}' | sed 's/%//g' | sed 's/,//g')
+status=$(acpi -b | awk '{print $3}' | sed 's/,//g')
+
+if [[ "$status" = "Charging" ]]; then
+    icon=$(printf "\ue200")
+elif [[ $bat -lt 10 ]]; then
+    icon=$(printf "\ue200")
+elif [[ $bat -lt 50 ]]; then
+    icon=$(printf "\ue200")
+else
+    icon=$(printf "\ue200")
+fi
+echo "${icon} ${bat}"

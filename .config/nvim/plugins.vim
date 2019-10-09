@@ -92,4 +92,8 @@ Plug 'ryanoasis/vim-devicons'
 " Auto detect indent
 Plug 'tpope/vim-sleuth'
 
+" Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
 call plug#end()

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+IP=$(showip update)
+
+echo -n "%{A1:showip toggle:}${IP}%{A}"

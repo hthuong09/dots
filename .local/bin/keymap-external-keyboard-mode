@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+setxkbmap us
+killall xcape

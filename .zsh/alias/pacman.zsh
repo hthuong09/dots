@@ -1,6 +1,5 @@
 # Check if current distro is not Arch Linux
 which pacman &>/dev/null || return 1
-which yaourt &>/dev/null || return 1
 
 # Sync db
 alias psync='sudo pacman -Sy'
