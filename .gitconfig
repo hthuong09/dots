@@ -21,6 +21,7 @@
   s = status
   aa = add .
   au = add --update
+  ds = diff --stat
   co = checkout
   cob = checkout -b
   cs = commit -S
