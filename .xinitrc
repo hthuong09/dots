@@ -35,6 +35,7 @@ setxkbmap -option 'caps:ctrl_modifier,altwin:swap_lalt_lwin' && xcape -e 'Caps_L
 ibus-daemon -d --xim
 
 # gnome keyring daemon
+dbus-update-activation-environment --systemd DISPLAY
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 

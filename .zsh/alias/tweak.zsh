@@ -25,6 +25,9 @@ alias c='clear'
 # sudo pacman
 alias pacman='sudo pacman'
 
+# use ls++
+alias ls='ls++'
+
 # show colour list
 showcolours() {
     for i in {0..255} ; do

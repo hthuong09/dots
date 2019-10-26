@@ -16,6 +16,9 @@ super + w
 super + r
     rofi -show run
 
+super + p
+    bwmenu --auto-lock 120
+
 # make sxhkd reload its configuration files:
 # TODO add notification after load
 super + shift + r
