@@ -18,7 +18,7 @@ ZSH_MODULES=(
     alias
     syntax-highlighting
     gpg
-#    tmux
+    tmux
 )
 for module in $ZSH_MODULES; do
     # Check if module directory exist before loading *.zsh files
@@ -30,3 +30,4 @@ for module in $ZSH_MODULES; do
     for config in ~/.zsh/$module/*.zsh(.N); do source $config; done;
 done
 
+source /usr/share/nvm/init-nvm.sh

@@ -28,6 +28,7 @@
   cm = commit --message
   cms = commit -S --message
   pu = push
+  puu = push -u
   puf = push --force-with-lease
   untracked = status -u .
   untracked-at = status -u

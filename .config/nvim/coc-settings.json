@@ -5,7 +5,7 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
-  "git.addGlameToVirtualText": true,
+  "git.addGBlameToVirtualText": true,
   "coc.preferences.formatOnSaveFiletypes": ["css", "typescript", "typescriptreact", "javascript", "javascriptreact"],
   "prettier.tabWidth": 4,
   "prettier.singleQuote": true,
