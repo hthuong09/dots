@@ -192,3 +192,14 @@ super + shift + e
 super + Return
     kitty
 
+Print
+    screenshot
+
+alt + shift + 1
+    screenshot --output=clipboard
+
+alt + shift + @2
+    screenshot --selection --output=clipboard
+
+alt + shift + @3
+    screenshot --selection --output=upload

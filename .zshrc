@@ -7,7 +7,6 @@ fi
 
 # Define list of module going to be used
 ZSH_MODULES=(
-    config
     editor
     completion
     history
@@ -17,7 +16,6 @@ ZSH_MODULES=(
     prompt
     alias
     syntax-highlighting
-    gpg
     tmux
 )
 for module in $ZSH_MODULES; do

@@ -37,7 +37,7 @@ ibus-daemon -d --xim
 # gnome keyring daemon
 dbus-update-activation-environment --systemd DISPLAY
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
+# export SSH_AUTH_SOCK
 
 session=${1:-xfce}
 case $session in

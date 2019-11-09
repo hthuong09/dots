@@ -1,0 +1,112 @@
+#!/usr/bin/bash
+
+IMGUR_UPLOAD_URL="https://api.imgur.com/3/image"
+ALBUM_ID="Pj1B5"
+
+# default settings
+selection=0
+output="file"
+save_path="$HOME/media/screenshots"
+
+usage() {
+    #
+    echo "Small script that takes screenshot then upload them to imgur" >&2
+    echo "Usage: $(basename $0) [OPTION]"
+    echo "    -s --selection, selection mode"
+    echo "    -o --output=[file|clipboard|imgur] default to file"
+    echo "    -p --path, save path"
+    echo "    -h --help"
+}
+
+send_notification() {
+    dunstify "Screenshot" "$1"
+}
+
+file_save() {
+    # preparing directory
+    mkdir -p "$save_path" > /dev/null 2>&1
+    mv "$1" "$2" && send_notification "Screenshot was saved successfully to $2" || send_notification "Failed to save screento to $2. Please try again."
+}
+
+clipboard_save() {
+    xclip -selection clipboard -t image/png -i "$1" && send_notification "Screenshot was copied to clipboard."
+}
+
+imgur_upload() {
+    path="$1"
+    access_token_response=$(curl -s --location --request POST "https://api.imgur.com/oauth2/token" \
+        --form "refresh_token=$IMGUR_REFRESH_TOKEN" \
+        --form "client_id=$IMGUR_CLIENT_ID" \
+        --form "client_secret=$IMGUR_CLIENT_SECRET" \
+        --form "grant_type=refresh_token")
+    access_token=$(echo $access_token_response | sed -e 's/.*"access_token":"\([^"]*\).*/\1/' -e 's/\\//g')
+
+    upload_response=$(curl -sH POST https://api.imgur.com/3/image \
+        --header "Authorization: Bearer $access_token" \
+        --form "image=@$path" \
+        --form album="$ALBUM_ID")
+    if $(echo $upload_response | grep -qo '"status":200'); then
+        link=$(echo $upload_response | sed -e 's/.*"link":"\([^"]*\).*/\1/' -e 's/\\//g')
+        echo -n $link | xclip -i -selection clipboard
+        send_notification "Screenshot was uploaded to imgur successfully. Link was copied to clipboard"
+    else
+        send_notification "Screenshot was failed to upload. Please try again."
+    fi
+}
+
+if ! hash maim 2>/dev/null; then
+    send_notification "maim is required for this to run!"
+    exit 1
+fi
+
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -s | --selection )
+            selection=1
+        ;;
+        -o=* | --output=* )
+            output=${1#*=}
+        ;;
+        -p=* | --path=* )
+            save_path=${1#*=}
+        ;;
+        -h | --help )
+            usage
+            exit 1
+        ;;
+    esac
+    shift
+done
+
+# if [[ $temporary -eq 0 ]]; then
+#     # prepare dir
+#     mkdir -p "$save_path" > /dev/null 2>&1
+#     if [[ ! -d "$save_path" ]]; then
+#         echo "Output directory doesn't avaiable"
+#         exit 0
+#     fi
+# else
+#     save_path='/tmp'
+# fi
+
+capture_time=$(date '+%Y-%m-%d %H:%M:%S')
+full_path="${save_path}/screenshot-$capture_time.png"
+tmp_path="/tmp/screenshot-$capture_time.png"
+
+if [[ $selection -eq 1 ]]; then
+    maim --select "$tmp_path"
+else
+    maim "$tmp_path"
+fi
+
+if [[ $output == "clipboard" ]]; then
+    clipboard_save "$tmp_path"
+elif [[ $output == "upload" ]]; then
+    imgur_upload "$tmp_path"
+else
+    file_save "$tmp_path" "$full_path"
+fi
+
+# clean up image
+rm -rf $tmp_path > /dev/null 2>&1

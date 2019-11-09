@@ -1,3 +1,15 @@
+export PATH=$PATH:~/.local/bin
+
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+# Used for kitty terminal
+# export GLFW_IM_MODULE=ibus
+
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+
 if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
     PATH="$HOME/.config/composer/vendor/bin:$PATH"
 fi
@@ -56,3 +68,4 @@ if hash yarn 2>/dev/null; then
   fi
 fi
 
+# vim: set filetype=zsh:
