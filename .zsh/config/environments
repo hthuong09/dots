@@ -6,9 +6,13 @@ export XMODIFIERS=@im=ibus
 # Used for kitty terminal
 # export GLFW_IM_MODULE=ibus
 
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+# export GPG_TTY="$(tty)"
+# export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+# gpgconf --launch gpg-agent
+
+# export GPG_TTY="$(tty)"
+# export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+# gpg-connect-agent updatestartuptty /bye > /dev/null
 
 if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
     PATH="$HOME/.config/composer/vendor/bin:$PATH"
