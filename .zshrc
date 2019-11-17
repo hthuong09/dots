@@ -1,4 +1,3 @@
-
 # Check if .zsh dir exist
 if [ ! -d ~/.zsh ]; then
     print ".zsh directory does not exist"
@@ -17,6 +16,7 @@ ZSH_MODULES=(
     alias
     syntax-highlighting
     tmux
+    nvm
 )
 for module in $ZSH_MODULES; do
     # Check if module directory exist before loading *.zsh files
@@ -27,5 +27,3 @@ for module in $ZSH_MODULES; do
     # Modifier (.N) help ZSH to not return an error if no .zsh file is found
     for config in ~/.zsh/$module/*.zsh(.N); do source $config; done;
 done
-
-source /usr/share/nvm/init-nvm.sh

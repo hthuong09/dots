@@ -21,12 +21,17 @@ alias ping='ping -c 5'
 
 # fast clear screen
 alias c='clear'
+# windows alias in can i forgot that I'm using linux
+alias c='clear'
+alias cls='clear'
 
 # sudo pacman
 alias pacman='sudo pacman'
 
 # use ls++
-alias ls='ls++'
+if hash ls++ 2>/dev/null; then
+    alias ls='ls++'
+fi
 
 # show colour list
 showcolours() {
