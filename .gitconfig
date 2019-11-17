@@ -38,6 +38,7 @@
   push-to-all-remotes = !git remote | xargs -I% -n1 git push %
   pull-submodule = submodule foreach git pull origin master
   deloy-heroku = !git aa && git cm "deloy" && git push heroku master
+  ignore = "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
 
 [color]
   ui = auto
