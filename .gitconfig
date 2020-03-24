@@ -49,3 +49,5 @@
 [mergetool]
   prompt = false
 
+[http]
+	cookiefile = /home/aichan/.gitcookies

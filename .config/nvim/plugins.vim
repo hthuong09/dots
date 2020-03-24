@@ -38,6 +38,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'othree/yajs.vim'
 Plug 'mxw/vim-jsx'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 "" CSS3
 Plug 'hail2u/vim-css3-syntax'
@@ -65,7 +66,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'wakatime/vim-wakatime'
 
 " Prevent press hjkl mutil times
-Plug 'takac/vim-hardtime'
+" Plug 'takac/vim-hardtime'
 
 " Comments
 " - gcc to comment out a line (takes a count)

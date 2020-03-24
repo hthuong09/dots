@@ -1,0 +1,12 @@
+[Unit]
+Description=Battery Monitor
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/aichan/.local/bin/battery-monitor
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+
+[Install]
+WantedBy=default.target

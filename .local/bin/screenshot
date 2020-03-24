@@ -95,9 +95,9 @@ full_path="${save_path}/screenshot-$capture_time.png"
 tmp_path="/tmp/screenshot-$capture_time.png"
 
 if [[ $selection -eq 1 ]]; then
-    maim --select "$tmp_path" -m 1
+    maim --select "$tmp_path" -m 1 --hidecursor
 else
-    maim "$tmp_path" -m 1
+    maim "$tmp_path" -m 1 --hidecursor
 fi
 
 if [[ $output == "clipboard" ]]; then
