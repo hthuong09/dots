@@ -63,7 +63,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Coding time log
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 
 " Prevent press hjkl mutil times
 " Plug 'takac/vim-hardtime'
