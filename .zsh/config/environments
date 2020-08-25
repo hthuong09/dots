@@ -71,7 +71,11 @@ node_packages_preparing() {
 get_yarn_prefix_path() {
   yarnrc="$HOME/.yarnrc"
   
-  echo $(cat $yarnrc | grep -oP '(?<=prefix ").*(?=")')
+  if hash pcregrep 2>/dev/null; then
+    echo pcregrep -o1 'prefix "([^"]+)"'
+  else
+    echo $(cat $yarnrc | grep -oP '(?<=prefix ").*(?=")')
+  fi
 }
 
 # arn package manager
