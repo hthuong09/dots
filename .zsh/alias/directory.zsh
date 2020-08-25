@@ -1,5 +1,9 @@
+case $(uname) in
+  'Linux')   LS_OPTIONS='-hF --color=auto --group-directories-first' ;;
+  'Darwin')  LS_OPTIONS='-hG' ;;
+esac
 # ls with color, human-readable size, indicator, with directory display first
-alias ls='ls -hF --color=auto --group-directories-first'
+alias ls='ls $LS_OPTIONS'
 
 # list subdirectories recursively
 alias lr='ls -R'

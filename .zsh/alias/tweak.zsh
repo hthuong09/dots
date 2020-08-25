@@ -21,8 +21,7 @@ alias ping='ping -c 5'
 
 # fast clear screen
 alias c='clear'
-# windows alias in can i forgot that I'm using linux
-alias c='clear'
+# windows alias in case I forgot that I'm using linux
 alias cls='clear'
 
 # sudo pacman
