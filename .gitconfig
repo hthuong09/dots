@@ -7,6 +7,7 @@
   editor = 'nvim'
   excludesfile = ~/.gitignore
   pager = diff-so-fancy | less --tabs=4 -RFX
+  # hooksPath = /Users/tysonnguyen/.sb-git-hooks/hooks
 
 [push]
   default = current
@@ -39,6 +40,7 @@
   pull-submodule = submodule foreach git pull origin master
   deloy-heroku = !git aa && git cm "deloy" && git push heroku master
   ignore = "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
+  stash-staged = !git stash -- $(git diff --staged --name-only)
 
 [color]
   ui = auto
@@ -51,3 +53,8 @@
 
 [http]
 	cookiefile = /home/aichan/.gitcookies
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

@@ -10,3 +10,9 @@
 [submodule ".zsh/completion/external"]
 	path = .zsh/completion/external
 	url = https://github.com/zsh-users/zsh-completions
+[submodule ".zsh/z/external"]
+	path = .zsh/z/external
+	url = git@github.com:agkozak/zsh-z.git
+[submodule ".zsh/prompt/pure"]
+	path = .zsh/prompt/pure
+	url = git@github.com:sindresorhus/pure.git
