@@ -122,6 +122,34 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "If tap on touchpad and press A",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "multitouch_extension_finger_count_total",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript /Users/tysonnguyen/.config/karabiner/move-cursor.scpt"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
