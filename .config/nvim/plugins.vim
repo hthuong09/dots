@@ -44,7 +44,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'hail2u/vim-css3-syntax'
 
 " Intellisense Engine
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " " Auto close brackets
 " Plug 'rstacruz/vim-closer'
