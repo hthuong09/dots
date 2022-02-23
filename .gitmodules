@@ -16,3 +16,4 @@
 [submodule ".zsh/prompt/pure"]
 	path = .zsh/prompt/pure
 	url = git@github.com:sindresorhus/pure.git
+	branch = main
