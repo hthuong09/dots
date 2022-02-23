@@ -9,7 +9,7 @@
 
 export SB_GIT_HOOKS_DIR=$HOME/.sb-git-hooks
 
-export PATH=/usr/local/go/bin:$PATH
+export PATH=~/Library/Python/3.8/bin:/usr/local/go/bin:$PATH
 
 export GITHUB_TOKEN=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
 export SB_FLEET_REPO=~/ShopBack/Tools/fleet

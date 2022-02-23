@@ -41,6 +41,7 @@
   deloy-heroku = !git aa && git cm "deloy" && git push heroku master
   ignore = "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
   stash-staged = !git stash -- $(git diff --staged --name-only)
+  update-sub-modules = pull --recurse-submodules
 
 [color]
   ui = auto

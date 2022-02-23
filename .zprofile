@@ -1,6 +1,5 @@
 source ~/.zsh/config/environments
 [[ -f ~/.secret-environments ]] && source ~/.secret-environments
-export SB_GIT_HOOKS_DIR=$HOME/.sb-git-hooks
 
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx ~/.xinitrc bspwm
