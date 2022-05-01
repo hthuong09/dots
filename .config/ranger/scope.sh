@@ -32,6 +32,9 @@ maxln=200    # Stop after $maxln lines.  Can be used like ls | head -n $maxln
 mimetype=$(file --mime-type -Lb "$path")
 extension=$(/bin/echo "${path##*.}" | awk '{print tolower($0)}')
 
+HIGHLIGHT_STYLE="${HIGHLIGHT_STYLE:-vampire}"
+
+
 # Functions:
 # runs a command and saves its output into $output.  Useful if you need
 # the return value AND want to use the output in a pipe

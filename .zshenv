@@ -4,12 +4,16 @@
 #   gpg-connect-agent updatestartuptty /bye > /dev/null
 # fi
 # 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export SB_GIT_HOOKS_DIR=$HOME/.sb-git-hooks
+[ -f ".shopback" ] && source ".shopback"
 
-export PATH=~/Library/Python/3.8/bin:/usr/local/go/bin:$PATH
-
-export GITHUB_TOKEN=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
-export SB_FLEET_REPO=~/ShopBack/Tools/fleet
+export PATH=~/Library/Python/3.8/bin:/usr/local/go/bin:/opt/homebrew/bin:$PATH
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-indent/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"

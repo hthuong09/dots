@@ -1,0 +1,7 @@
+[ -f ".kubectl-alias" ] && source ".kubectl-alias"
+export SB_GIT_HOOKS_DIR=$HOME/.sb-git-hooks
+
+export SB_FLEET_REPO=~/ShopBack/Tools/fleet
+
+export PATH=~/ShopBack/Tools/fleetctl/bin:$PATH
+
