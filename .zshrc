@@ -28,4 +28,3 @@ for module in $ZSH_MODULES; do
     # Modifier (.N) help ZSH to not return an error if no .zsh file is found
     for config in ~/.zsh/$module/*.zsh(.N); do source $config; done;
 done
-
