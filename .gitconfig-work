@@ -1,0 +1,8 @@
+[user]
+  name = Tyson Nguyen
+  email = tyson.nguyen@shopback.com
+  signingKey = 14DFF47B23488038
+
+[core]
+sshCommand = ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519
+
