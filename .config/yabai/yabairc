@@ -7,7 +7,7 @@ yabai -m config top_padding                  5
 yabai -m config bottom_padding               5
 yabai -m config left_padding                 5
 yabai -m config right_padding                5
-yabai -m config focus_follows_mouse autoraise
+# yabai -m config focus_follows_mouse autoraise
 yabai -m config mouse_follows_focus on
 
 yabai -m rule --add app="^System Preferences$"                    manage=off
@@ -20,3 +20,23 @@ yabai -m rule --add app="^Font Book$"                             manage=off
 yabai -m rule --add app="^Archive Utility$"                       manage=off
 yabai -m rule --add label="App Store" app="^App Store$"           manage=off
 yabai -m rule --add app="^Installer$"                             manage=off
+yabai -m rule --add app="^Messenger$"                             manage=off
+
+# auto goes to correct spaces
+# 1. web
+yabai -m rule --add app="^Google Chrome$" title="Google Chrome - Tyson$"  space=^1
+
+# 2. term
+yabai -m rule --add app="^kitty$"          space=^2
+yabai -m rule --add app="^iTerm2$"         space=^2
+
+# 3. editor
+yabai -m rule --add app="^Code$"         space=^3
+
+# 4. calendar
+
+# 5. float
+yabai -m config --space 5 layout float
+
+# 6. personal
+yabai -m rule --add app="^Google Chrome$" title="Google Chrome - Thương$"  space=^6

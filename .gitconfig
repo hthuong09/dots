@@ -60,6 +60,6 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
-# [includeIf "gitdir:~/ShopBack/"]
-#   path = ~/.gitconfig-work
-# 
+[includeIf "gitdir:~/ShopBack/"]
+  path = ~/.gitconfig-work
+

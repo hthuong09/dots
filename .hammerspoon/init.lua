@@ -29,24 +29,51 @@ function yabai_key(mod, key, cmd, cmd2)
   end)
 end
 
-yabai_key("cmd", "j", { "-m", "window", "--focus", "south" })
-yabai_key("cmd", "k", { "-m", "window", "--focus", "north" })
-yabai_key("cmd", "h", { "-m", "window", "--focus", "west" })
-yabai_key("cmd", "l", { "-m", "window", "--focus", "east" })
+yabai_key({"cmd", "option"}, "j", { "-m", "window", "--focus", "south" })
+yabai_key({"cmd", "option"}, "k", { "-m", "window", "--focus", "north" })
+yabai_key({"cmd", "option"}, "h", { "-m", "window", "--focus", "west" })
+yabai_key({"cmd", "option"}, "l", { "-m", "window", "--focus", "east" })
 
 yabai_key({"cmd", "shift"}, "h", { "-m", "window", "--swap", "west" })
 yabai_key({"cmd", "shift"}, "l", { "-m", "window", "--swap", "east" })
 yabai_key({"cmd", "shift"}, "k", { "-m", "window", "--swap", "north" })
 yabai_key({"cmd", "shift"}, "j", { "-m", "window", "--swap", "south" })
 
-hs.hotkey.bind({"cmd", "shift", "control"}, "b", function() 
+yabai_key({"cmd", "control"}, "h", { "-m", "window", "--insert", "west" })
+yabai_key({"cmd", "control"}, "l", { "-m", "window", "--insert", "east" })
+yabai_key({"cmd", "control"}, "k", { "-m", "window", "--insert", "north" })
+yabai_key({"cmd", "control"}, "j", { "-m", "window", "--insert", "south" })
+
+yabai_key({"shift", "control"}, "f", { "-m", "window", "--toggle", "float" })
+
+-- move window to left half of screen
+yabai_key({ "option", "shift"}, "left", { "-m", "window", "--grid", "1:2:0:0:1:1"})
+-- move window to right half of screen
+yabai_key({ "option", "shift"}, "right", { "-m", "window", "--grid", "1:2:1:0:1:1"})
+-- move window to top half of screen
+yabai_key({ "option", "shift"}, "up", { "-m", "window", "--grid", "2:1:0:0:1:1"})
+-- move window to bottom half of screen
+yabai_key({ "option", "shift"}, "down", { "-m", "window", "--grid", "2:1:0:1:1:1"})
+
+-- stack
+yabai_key({"cmd", "control"}, "s", { "-m", "window", "--insert", "stack" })
+yabai_key({"shift", "control"}, "j", { "-m", "window", "--focus", "stack.prev" })
+yabai_key({"shift", "control"}, "k", { "-m", "window", "--focus", "stack.next" })
+
+hs.hotkey.bind({"cmd", "shift", "control", "option"}, "b", function() 
     yabai({ "-m", "space", "--layout", "bsp" })
     hs.alert.show("Tiling Mode Enabled")
   end)
 
-hs.hotkey.bind({"cmd", "shift", "control"}, "f", function() 
+hs.hotkey.bind({"cmd", "shift", "control", "option"}, "f", function() 
     yabai({ "-m", "space", "--layout", "float" })
     hs.alert.show("Float Mode Enabled")
+  end)
+
+
+hs.hotkey.bind({"option"}, "t", function() 
+    yabai({ "-m", "window", "--toggle", "float" })
+    yabai({ "-m", "window", "--grid", "4:4:1:1:2:2" })
   end)
 
 
@@ -92,6 +119,37 @@ do
       moveWindowToSpace(i)
   end)
 end
+
+hs.hotkey.bind({"cmd"}, "return", function()
+    hs.application.open("/opt/homebrew/bin/kitty")
+  end)
+
+hs.loadSpoon("URLDispatcher")
+
+local sendToProfile = function(t)
+    local fn = function(url)
+        local t = hs.task.new(
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            nil,
+            function() return false end,
+            {"--profile-directory=" .. t[2], url}
+        )
+        t:start()
+    end
+    return {t[1], nil, fn}
+end
+
+spoon.URLDispatcher.url_patterns = {
+    -- work
+    sendToProfile{"https?://shopadmin%.atlassian%.net", "Profile 1"},
+    sendToProfile{".*amplitude%.com", "Profile 1"},
+    sendToProfile{"https?://github%.com/shopback/", "Profile 1"},
+
+    -- personal
+    sendToProfile{".*", "Profile 2"},
+}
+
+spoon.URLDispatcher:start()
 
 function reloadConfig(files)
     doReload = false
