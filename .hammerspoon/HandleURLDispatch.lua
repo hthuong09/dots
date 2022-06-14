@@ -26,6 +26,7 @@ function module(logger)
       sendToProfile{"https?://shopadmin%.atlassian%.net", workProfile},
       sendToProfile{".*amplitude%.com", workProfile},
       sendToProfile{"https?://github%.com/shopback/", workProfile},
+      sendToProfile{"https?://device%.sso%.ap%-southeast%-1%.amazonaws%.com/", workProfile},
       {".*", nil, function(url, senderPID)
         local triggerApp = hs.application.applicationForPID(senderPID)
         if triggerApp then
