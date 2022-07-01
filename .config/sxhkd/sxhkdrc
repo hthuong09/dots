@@ -180,7 +180,7 @@ super + shift + @l
 # Software shortcut
 # browser
 ctrl + alt + i
-    chromium --remote-debugging-port=9222
+    google-chrome-stable --force-dark-mode
 # file manager
 super + e
     kitty --class ranger_fm  -T "File Manager" /bin/sh -c "ranger"

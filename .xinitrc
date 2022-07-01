@@ -39,6 +39,18 @@ dbus-update-activation-environment --systemd DISPLAY
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 # export SSH_AUTH_SOCK
 
+XFT_SETTINGS="
+Xft.antialias:  1
+Xft.autohint:   0
+Xft.dpi:        96
+Xft.hinting:    1
+Xft.hintstyle:  hintslight
+Xft.lcdfilter:  lcddefault
+Xft.rgba:       rgb
+"
+
+echo "$XFT_SETTINGS" | xrdb -merge > /dev/null 2>&1
+
 session=${1:-xfce}
 case $session in
     awesome           ) exec awesome;;

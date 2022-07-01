@@ -3,6 +3,7 @@
 bspc config external_rules_command "$(dirname $0)/external_rules"
 
 bspc monitor eDP1 -d web term editor calendar others
+bspc monitor HDMI2 -d slack calendar meeting
 
 bspc config -m ^1 border_width  2
 bspc config -m ^2 border_width  2
