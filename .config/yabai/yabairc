@@ -27,13 +27,15 @@ yabai -m rule --add app="^Messenger$"                             manage=off
 yabai -m rule --add app="^Google Chrome$" title="Google Chrome - Tyson$"  space=^1
 
 # 2. term
-yabai -m rule --add app="^kitty$"          space=^2
-yabai -m rule --add app="^iTerm2$"         space=^2
+yabai -m rule --add app="^kitty$"            space=^2
+yabai -m rule --add app="^iTerm2$"           space=^2
 
 # 3. editor
-yabai -m rule --add app="^Code$"         space=^3
+yabai -m rule --add app="^Code$"             space=^3
 
 # 4. calendar
+yabai -m rule --add app="^Jira Board"       space=^4
+yabai -m rule --add app="^Google Calendar"  space=^4
 
 # 5. float
 yabai -m config --space 5 layout float
