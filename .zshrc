@@ -15,7 +15,7 @@ ZSH_MODULES=(
     directory
     alias
     syntax-highlighting
-    # z
+    z
     # tmux
     nvm
 )
