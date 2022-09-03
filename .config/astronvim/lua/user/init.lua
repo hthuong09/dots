@@ -1,6 +1,3 @@
-vim.g.gitblame_message_template = " <author>, <date> • <summary>"
-vim.g.gitblame_date_format = "%r"
-
 local config = {
 
 	-- Configure AstroNvim updates
@@ -105,10 +102,6 @@ local config = {
 			--[[ 	end, ]]
 			--[[ }, ]]
 			{
-				"f-person/git-blame.nvim",
-				config = function() end,
-			},
-			{
 				"tzachar/cmp-tabnine",
 				run = "./install.sh",
 				requires = "hrsh7th/nvim-cmp",
@@ -131,6 +124,10 @@ local config = {
 			sources = {
 				{ name = "cmp_tabnine" },
 			},
+		},
+		gitsigns = {
+			current_line_blame = true,
+			current_line_blame_formatter = " <author>, <author_time:%R> • <summary>",
 		},
 		["null-ls"] = function(config)
 			local null_ls = require("null-ls")
