@@ -41,9 +41,11 @@ end
 
 M.register = function()
   local status_ok, which_key = pcall(require, "which-key")
-  if not status_ok then return end
+  if not status_ok then
+    return
+  end
 
-  local is_available = require('core.utils').is_available
+  local is_available = require("core.utils").is_available
   local mappings = {
     n = {
       ["<leader>"] = {
@@ -62,14 +64,22 @@ M.register = function()
   }
 
   local function init_table(mode, prefix, idx)
-    if not mappings[mode][prefix][idx] then mappings[mode][prefix][idx] = { name = extra_sections[idx] } end
+    if not mappings[mode][prefix][idx] then
+      mappings[mode][prefix][idx] = { name = extra_sections[idx] }
+    end
   end
 
-  if is_available "neovim-session-manager" then init_table("n", "<leader>", "S") end
+  if is_available "neovim-session-manager" then
+    init_table("n", "<leader>", "S")
+  end
 
-  if is_available "gitsigns.nvim" then init_table("n", "<leader>", "g") end
+  if is_available "gitsigns.nvim" then
+    init_table("n", "<leader>", "g")
+  end
 
-  if is_available "nvim-lspconfig" then init_table("n", "<leader>", "l") end
+  if is_available "nvim-lspconfig" then
+    init_table("n", "<leader>", "l")
+  end
 
   if is_available "toggleterm.nvim" then
     init_table("n", "<leader>", "g")

@@ -1,4 +1,4 @@
-local is_available = require('core.utils').is_available
+local is_available = require("core.utils").is_available
 
 local maps = { n = {}, v = {}, t = {}, [""] = {} }
 
@@ -9,9 +9,20 @@ maps[""]["<Space>"] = "<Nop>"
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>q<cr>", desc = "Quit" }
 maps.n["<leader>h"] = { "<cmd>nohlsearch<cr>", desc = "No Highlight" }
-maps.n["<leader>u"] = { function() astronvim.toggle_url_match() end, desc = "Toggle URL Highlights" }
+maps.n["<esc>"] = { "<cmd>nohlsearch<cr>", desc = "No Highlight" }
+maps.n["<leader>u"] = {
+  function()
+    M.toggle_url_match()
+  end,
+  desc = "Toggle URL Highlights",
+}
 maps.n["<leader>fn"] = { "<cmd>enew<cr>", desc = "New File" }
-maps.n["gx"] = { function() astronvim.url_opener() end, desc = "Open the file under cursor with system app" }
+maps.n["gx"] = {
+  function()
+    M.url_opener()
+  end,
+  desc = "Open the file under cursor with system app",
+}
 maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
 maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
 maps.n["Q"] = "<Nop>"
@@ -23,47 +34,69 @@ maps.n["<leader>ps"] = { "<cmd>PackerSync<cr>", desc = "Packer Sync" }
 maps.n["<leader>pS"] = { "<cmd>PackerStatus<cr>", desc = "Packer Status" }
 maps.n["<leader>pu"] = { "<cmd>PackerUpdate<cr>", desc = "Packer Update" }
 
--- Alpha
-if is_available "alpha-nvim" then maps.n["<leader>d"] = { "<cmd>Alpha<cr>", desc = "Alpha Dashboard" } end
-
--- Bufdelete
-if is_available "bufdelete.nvim" then
-  maps.n["<leader>c"] = { "<cmd>Bdelete<cr>", desc = "Close window" }
-else
-  maps.n["<leader>c"] = { "<cmd>bdelete<cr>", desc = "Close window" }
-end
-
--- Navigate buffers
-if is_available "bufferline.nvim" then
-  maps.n["<S-l>"] = { "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer tab" }
-  maps.n["<S-h>"] = { "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer tab" }
-  maps.n[">b"] = { "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer tab right" }
-  maps.n["<b"] = { "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer tab left" }
-else
-  maps.n["<S-l>"] = { "<cmd>bnext<cr>", desc = "Next buffer" }
-  maps.n["<S-h>"] = { "<cmd>bprevious<cr>", desc = "Previous buffer" }
-end
-
--- Comment
-if is_available "Comment.nvim" then
-  maps.n["<leader>/"] = { function() require("Comment.api").toggle.linewise.current() end, desc = "Comment line" }
-  maps.v["<leader>/"] = {
-    "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-    desc = "Toggle comment line",
-  }
-end
+maps.n["<leader>c"] = {
+  function()
+    require("core.utils").close_buffer()
+  end,
+  desc = "Close window",
+}
 
 -- GitSigns
 if is_available "gitsigns.nvim" then
-  maps.n["<leader>gj"] = { function() require("gitsigns").next_hunk() end, desc = "Next git hunk" }
-  maps.n["<leader>gk"] = { function() require("gitsigns").prev_hunk() end, desc = "Previous git hunk" }
-  maps.n["<leader>gl"] = { function() require("gitsigns").blame_line() end, desc = "View git blame" }
-  maps.n["<leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "Preview git hunk" }
-  maps.n["<leader>gh"] = { function() require("gitsigns").reset_hunk() end, desc = "Reset git hunk" }
-  maps.n["<leader>gr"] = { function() require("gitsigns").reset_buffer() end, desc = "Reset git buffer" }
-  maps.n["<leader>gs"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage git hunk" }
-  maps.n["<leader>gu"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "Unstage git hunk" }
-  maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "View git diff" }
+  maps.n["<leader>gj"] = {
+    function()
+      require("gitsigns").next_hunk()
+    end,
+    desc = "Next git hunk",
+  }
+  maps.n["<leader>gk"] = {
+    function()
+      require("gitsigns").prev_hunk()
+    end,
+    desc = "Previous git hunk",
+  }
+  maps.n["<leader>gl"] = {
+    function()
+      require("gitsigns").blame_line()
+    end,
+    desc = "View git blame",
+  }
+  maps.n["<leader>gp"] = {
+    function()
+      require("gitsigns").preview_hunk()
+    end,
+    desc = "Preview git hunk",
+  }
+  maps.n["<leader>gh"] = {
+    function()
+      require("gitsigns").reset_hunk()
+    end,
+    desc = "Reset git hunk",
+  }
+  maps.n["<leader>gr"] = {
+    function()
+      require("gitsigns").reset_buffer()
+    end,
+    desc = "Reset git buffer",
+  }
+  maps.n["<leader>gs"] = {
+    function()
+      require("gitsigns").stage_hunk()
+    end,
+    desc = "Stage git hunk",
+  }
+  maps.n["<leader>gu"] = {
+    function()
+      require("gitsigns").undo_stage_hunk()
+    end,
+    desc = "Unstage git hunk",
+  }
+  maps.n["<leader>gd"] = {
+    function()
+      require("gitsigns").diffthis()
+    end,
+    desc = "View git diff",
+  }
 end
 
 -- NeoTree
@@ -84,24 +117,68 @@ end
 
 -- Package Manager
 -- TODO: v2 rework these key bindings to be more general
-if is_available "mason.nvim" then maps.n["<leader>lI"] = { "<cmd>Mason<cr>", desc = "LSP installer" } end
+if is_available "mason.nvim" then
+  maps.n["<leader>lI"] = { "<cmd>Mason<cr>", desc = "LSP installer" }
+end
 
 -- LSP Installer
-if is_available "mason-lspconfig.nvim" then maps.n["<leader>li"] = { "<cmd>LspInfo<cr>", desc = "LSP information" } end
+if is_available "mason-lspconfig.nvim" then
+  maps.n["<leader>li"] = { "<cmd>LspInfo<cr>", desc = "LSP information" }
+end
 
 -- Smart Splits
 if is_available "smart-splits.nvim" then
   -- Better window navigation
-  maps.n["<C-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" }
-  maps.n["<C-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
-  maps.n["<C-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
-  maps.n["<C-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
+  maps.n["<C-h>"] = {
+    function()
+      require("smart-splits").move_cursor_left()
+    end,
+    desc = "Move to left split",
+  }
+  maps.n["<C-j>"] = {
+    function()
+      require("smart-splits").move_cursor_down()
+    end,
+    desc = "Move to below split",
+  }
+  maps.n["<C-k>"] = {
+    function()
+      require("smart-splits").move_cursor_up()
+    end,
+    desc = "Move to above split",
+  }
+  maps.n["<C-l>"] = {
+    function()
+      require("smart-splits").move_cursor_right()
+    end,
+    desc = "Move to right split",
+  }
 
   -- Resize with arrows
-  maps.n["<C-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" }
-  maps.n["<C-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" }
-  maps.n["<C-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" }
-  maps.n["<C-Right>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" }
+  maps.n["<C-Up>"] = {
+    function()
+      require("smart-splits").resize_up()
+    end,
+    desc = "Resize split up",
+  }
+  maps.n["<C-Down>"] = {
+    function()
+      require("smart-splits").resize_down()
+    end,
+    desc = "Resize split down",
+  }
+  maps.n["<C-Left>"] = {
+    function()
+      require("smart-splits").resize_left()
+    end,
+    desc = "Resize split left",
+  }
+  maps.n["<C-Right>"] = {
+    function()
+      require("smart-splits").resize_right()
+    end,
+    desc = "Resize split right",
+  }
 else
   maps.n["<C-h>"] = { "<C-w>h", desc = "Move to left split" }
   maps.n["<C-j>"] = { "<C-w>j", desc = "Move to below split" }
@@ -114,18 +191,50 @@ else
 end
 
 -- SymbolsOutline
-if is_available "aerial.nvim" then maps.n["<leader>lS"] = { "<cmd>AerialToggle<cr>", desc = "Symbols outline" } end
+if is_available "aerial.nvim" then
+  maps.n["<leader>lS"] = { "<cmd>AerialToggle<cr>", desc = "Symbols outline" }
+end
 
 -- Terminal
 if is_available "toggleterm.nvim" then
-  local toggle_term_cmd = astronvim.toggle_term_cmd
+  local toggle_term_cmd = M.toggle_term_cmd
   maps.n["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
-  maps.n["<leader>gg"] = { function() toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
-  maps.n["<leader>tn"] = { function() toggle_term_cmd "node" end, desc = "ToggleTerm node" }
-  maps.n["<leader>tu"] = { function() toggle_term_cmd "ncdu" end, desc = "ToggleTerm NCDU" }
-  maps.n["<leader>tt"] = { function() toggle_term_cmd "htop" end, desc = "ToggleTerm htop" }
-  maps.n["<leader>tp"] = { function() toggle_term_cmd "python" end, desc = "ToggleTerm python" }
-  maps.n["<leader>tl"] = { function() toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
+  maps.n["<leader>gg"] = {
+    function()
+      toggle_term_cmd "lazygit"
+    end,
+    desc = "ToggleTerm lazygit",
+  }
+  maps.n["<leader>tn"] = {
+    function()
+      toggle_term_cmd "node"
+    end,
+    desc = "ToggleTerm node",
+  }
+  maps.n["<leader>tu"] = {
+    function()
+      toggle_term_cmd "ncdu"
+    end,
+    desc = "ToggleTerm NCDU",
+  }
+  maps.n["<leader>tt"] = {
+    function()
+      toggle_term_cmd "htop"
+    end,
+    desc = "ToggleTerm htop",
+  }
+  maps.n["<leader>tp"] = {
+    function()
+      toggle_term_cmd "python"
+    end,
+    desc = "ToggleTerm python",
+  }
+  maps.n["<leader>tl"] = {
+    function()
+      toggle_term_cmd "lazygit"
+    end,
+    desc = "ToggleTerm lazygit",
+  }
   maps.n["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
   maps.n["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }
   maps.n["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" }
@@ -142,4 +251,4 @@ maps.t["<C-h>"] = { "<c-\\><c-n><c-w>h", desc = "Terminal left window navigation
 maps.t["<C-j>"] = { "<c-\\><c-n><c-w>j", desc = "Terminal down window navigation" }
 maps.t["<C-k>"] = { "<c-\\><c-n><c-w>k", desc = "Terminal up window navigation" }
 maps.t["<C-l>"] = { "<c-\\><c-n><c-w>l", desc = "Terminal right window naviation" }
-require('core.utils').set_mappings(maps)
+require("core.utils").set_mappings(maps)

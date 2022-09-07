@@ -3,9 +3,9 @@ local g = vim.g
 
 g.vim_version = vim.version().minor
 --  TODO: fix this
-g.nvchad_theme = require('plugins.configs.nvchad-ui').config.theme
+g.nvchad_theme = require("plugins.configs.nvchad-ui").config.theme
 g.toggle_theme_icon = "   "
-g.transparency = require('plugins.configs.nvchad-ui').config.transparency
+g.transparency = require("plugins.configs.nvchad-ui").config.transparency
 g.theme_switcher_loaded = false
 
 -- use filetype.lua instead of filetype.vim. it's enabled by default in neovim 0.8 (nightly)
@@ -35,6 +35,7 @@ opt.mouse = "a"
 
 -- Numbers
 opt.number = true
+opt.relativenumber = true
 opt.numberwidth = 2
 opt.ruler = false
 
@@ -54,6 +55,10 @@ opt.updatetime = 250
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append "<>[]hl"
+
+-- listchars
+opt.list = true
+opt.listchars = "tab:» ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:¬"
 
 g.mapleader = " "
 

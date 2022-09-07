@@ -5,19 +5,18 @@ local merge_tb = vim.tbl_deep_extend
 
 M.load_config = function()
   return {
-    ui = require('plugins.configs.nvchad-ui').config,
+    ui = require("plugins.configs.nvchad-ui").config,
     plugins = {
       override = {},
       remove = {},
       user = {},
-    }
+    },
   }
 end
 
 M.load_mappings = function(section, mapping_opt)
   -- this is called by nvchad_ui can't delete yet
 end
-
 
 M.load_override = function(default_table, plugin_name)
   local user_table = M.load_config().plugins.override[plugin_name] or {}
@@ -85,6 +84,34 @@ M.tabuflinePrev = function()
   end
 end
 
-M.is_available = function(plugin) return packer_plugins ~= nil and packer_plugins[plugin] ~= nil end
+M.is_available = function(plugin)
+  return packer_plugins ~= nil and packer_plugins[plugin] ~= nil
+end
+
+M.close_buffer = function(bufnr)
+  if vim.bo.buftype == "terminal" then
+    vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
+  else
+    bufnr = bufnr or api.nvim_get_current_buf()
+    require("core.utils").tabuflinePrev()
+    vim.cmd("confirm bd" .. bufnr)
+  end
+end
+
+M.closeAllBufs = function(action)
+  local bufs = vim.t.bufs
+
+  if action == "closeTab" then
+    vim.cmd "tabclose"
+  end
+
+  for _, buf in ipairs(bufs) do
+    M.close_buffer(buf)
+  end
+
+  if action ~= "closeTab" then
+    vim.cmd "enew"
+  end
+end
 
 return M

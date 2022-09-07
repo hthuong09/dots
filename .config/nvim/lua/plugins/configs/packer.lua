@@ -17,9 +17,8 @@ M.options = {
 }
 
 M.run = function(plugins)
-  local present, packer = pcall(require, "packer")
-
-  if not present then
+  local loaded, packer = pcall(require, "packer")
+  if not loaded then
     return
   end
 
