@@ -109,6 +109,22 @@ local plugins = {
     end
   },
 
+  -- Package Manager
+  ["williamboman/mason.nvim"] = { config = function() require "plugins.configs.mason" end },
+  ["WhoIsSethDaniel/mason-tool-installer.nvim"] = {
+    after = "mason.nvim",
+    config = function() require "plugins.configs.mason-tool-installer" end,
+  },
+
+  -- Built-in LSP
+  ["neovim/nvim-lspconfig"] = {},
+
+  -- LSP manager
+  ["williamboman/mason-lspconfig.nvim"] = {
+    after = { "mason.nvim", "nvim-lspconfig" },
+    config = function() require "plugins.configs.lsp" end,
+  },
+
   -- TODO: also depends on treesitter for context awareness
   ["lukas-reineke/indent-blankline.nvim"] = {
     -- event = "BufRead",
@@ -127,41 +143,39 @@ local plugins = {
     end,
   },
 
-  -- lsp stuff
-  ["williamboman/mason.nvim"] = {
-    cmd = {
-      "Mason",
-      "MasonInstall",
-      "MasonInstallAll",
-      "MasonUninstall",
-      "MasonUninstallAll",
-      "MasonLog",
-    },
-    config = function()
-      require "plugins.configs.mason"
-    end,
-  },
-
-  ["neovim/nvim-lspconfig"] = {
-    opt = true,
-    event = { "BufRead", "BufWinEnter", "BufNewFile" },
-    config = function()
-      require "plugins.configs.lspconfig"
-    end,
-  },
-
   -- load luasnips + cmp related in insert mode only
   ["rafamadriz/friendly-snippets"] = {
     module = { "cmp", "cmp_nvim_lsp" },
     event = "InsertEnter",
   },
 
-  -- UI looks good, LSP partly working, need to install mason-lspconfig.nvim
-  -- LSP seems working fine for lua but somehow broken in typescript
-  -- LSP only works in first run MasonInstallAll
-  -- Install tabnine-cmp
-  -- Current have to setup manually after install each server
-  -- Should install mason-lspconfig.nvim and setup auto load language server
+  ['tzachar/cmp-tabnine'] = {
+    run='./install.sh',
+    requires = 'hrsh7th/nvim-cmp',
+    after = "cmp-path",
+    config = function()
+      local tabnine = require('cmp_tabnine.config')
+      tabnine.setup({
+        max_lines = 1000,
+        max_num_results = 20,
+        sort = true,
+        run_on_every_keystroke = true,
+        snippet_placeholder = '..',
+        ignored_file_types = { 
+        -- default is not to ignore
+        -- uncomment to ignore in lua:
+        -- lua = true
+        },
+        show_prediction_strength = false
+      })
+    end
+  },
+
+  -- Setup ensure install language server
+  -- Trouble with cmp source, can't setup all at once, probaly move to astronvim add cmp source
+  -- Clean up lsp config files
+  -- Handle issue whereby the cmp-tabnine does not have function {} warp
+  -- install ls null for formatter
   ["hrsh7th/nvim-cmp"] = {
     after = "friendly-snippets",
     config = function()

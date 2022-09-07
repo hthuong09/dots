@@ -1,5 +1,5 @@
 return {
-  on_attach = M.lsp.disable_formatting,
+  on_attach = astronvim.lsp.disable_formatting,
   settings = {
     json = {
       schemas = require("schemastore").json.schemas(),

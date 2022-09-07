@@ -1,15 +1,14 @@
-local M = {}
-
-M.lsp = {}
+astronvim.lsp = {}
 local tbl_contains = vim.tbl_contains
-local user_plugin_opts = M.user_plugin_opts
-local conditional_func = M.conditional_func
-local user_registration = user_plugin_opts("lsp.server_registration", nil, false)
-local skip_setup = user_plugin_opts "lsp.skip_setup"
+local conditional_func = function(func, condition, ...)
+if (condition == nil and true or condition) and type(func) == "function" then return func(...) end
+end
+local user_registration = nil
+local skip_setup = {}
 
-M.lsp.setup = function(server)
+astronvim.lsp.setup = function(server)
   if not tbl_contains(skip_setup, server) then
-    local opts = M.lsp.server_settings(server)
+    local opts = astronvim.lsp.server_settings(server)
     if type(user_registration) == "function" then
       user_registration(server, opts)
     else
@@ -18,9 +17,9 @@ M.lsp.setup = function(server)
   end
 end
 
-M.lsp.on_attach = function(client, bufnr)
-  M.set_mappings(
-    user_plugin_opts("lsp.mappings", {
+astronvim.lsp.on_attach = function(client, bufnr)
+  require('core.utils').set_mappings(
+    {
       n = {
         ["K"] = { function() vim.lsp.buf.hover() end, desc = "Hover symbol details" },
         ["<leader>la"] = { function() vim.lsp.buf.code_action() end, desc = "LSP code action" },
@@ -36,7 +35,7 @@ M.lsp.on_attach = function(client, bufnr)
         ["]d"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" },
         ["gl"] = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
       },
-    }),
+    },
     { buffer = bufnr }
   )
 
@@ -61,46 +60,44 @@ M.lsp.on_attach = function(client, bufnr)
     })
   end
 
-  local on_attach_override = user_plugin_opts("lsp.on_attach", nil, false)
+  local on_attach_override = nil
   local aerial_avail, aerial = pcall(require, "aerial")
   conditional_func(on_attach_override, true, client, bufnr)
   conditional_func(aerial.on_attach, aerial_avail, client, bufnr)
 end
 
-M.lsp.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.lsp.capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-M.lsp.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.lsp.capabilities.textDocument.completion.completionItem.preselectSupport = true
-M.lsp.capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-M.lsp.capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-M.lsp.capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-M.lsp.capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-M.lsp.capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-M.lsp.capabilities.textDocument.completion.completionItem.resolveSupport = {
+astronvim.lsp.capabilities = vim.lsp.protocol.make_client_capabilities()
+astronvim.lsp.capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+astronvim.lsp.capabilities.textDocument.completion.completionItem.snippetSupport = true
+astronvim.lsp.capabilities.textDocument.completion.completionItem.preselectSupport = true
+astronvim.lsp.capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+astronvim.lsp.capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+astronvim.lsp.capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+astronvim.lsp.capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+astronvim.lsp.capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+astronvim.lsp.capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = { "documentation", "detail", "additionalTextEdits" },
 }
-M.lsp.capabilities = user_plugin_opts("lsp.capabilities", M.lsp.capabilities)
-M.lsp.flags = user_plugin_opts "lsp.flags"
+astronvim.lsp.capabilities = astronvim.lsp.capabilities
+astronvim.lsp.flags = {}
 
-function M.lsp.server_settings(server_name)
+function astronvim.lsp.server_settings(server_name)
   local server = require("lspconfig")[server_name]
-  local opts = user_plugin_opts(
-    "lsp.server-settings." .. server_name,
-    user_plugin_opts("lsp.server-settings." .. server_name, {
-      capabilities = vim.tbl_deep_extend("force", M.lsp.capabilities, server.capabilities or {}),
-      flags = vim.tbl_deep_extend("force", M.lsp.flags, server.flags or {}),
-    }, true, "configs")
-  )
+  -- this does not include config from ./server-settings/* yet
+  local opts = {
+    capabilities = vim.tbl_deep_extend("force", astronvim.lsp.capabilities, server.capabilities or {}),
+    flags = vim.tbl_deep_extend("force", astronvim.lsp.flags, server.flags or {}),
+  }
   local old_on_attach = server.on_attach
   local user_on_attach = opts.on_attach
   opts.on_attach = function(client, bufnr)
     conditional_func(old_on_attach, true, client, bufnr)
-    M.lsp.on_attach(client, bufnr)
+    astronvim.lsp.on_attach(client, bufnr)
     conditional_func(user_on_attach, true, client, bufnr)
   end
   return opts
 end
 
-function M.lsp.disable_formatting(client) client.resolved_capabilities.document_formatting = false end
+function astronvim.lsp.disable_formatting(client) client.resolved_capabilities.document_formatting = false end
 
-return M.lsp
+return astronvim.lsp

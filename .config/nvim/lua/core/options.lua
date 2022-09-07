@@ -60,6 +60,8 @@ opt.whichwrap:append "<>[]hl"
 opt.list = true
 opt.listchars = "tab:» ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:¬"
 
+opt.pumheight = 10
+
 g.mapleader = " "
 
 -- disable some builtin vim plugins

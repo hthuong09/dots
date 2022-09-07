@@ -1,9 +1,5 @@
-local loaded, _ = pcall(require, "lspconfig")
-if not loaded then return end
-
-require("base46").load_highlight "lsp"
-require "nvchad_ui.lsp"
-
+local status_ok, _ = pcall(require, "lspconfig")
+if not status_ok then return end
 local sign_define = vim.fn.sign_define
 
 local signs = {
@@ -33,9 +29,10 @@ vim.diagnostic.config({
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-require "configs.lsp.handlers"
-require "configs.mason-lspconfig"
+require "plugins.configs.lsp.handlers"
+require "plugins.configs.mason-lspconfig"
 
-for _, server in ipairs(user_plugin_opts "lsp.servers") do
-  M.lsp.setup(server)
-end
+-- enable server that was created without mason
+-- for _, server in ipairs(user_plugin_opts "lsp.servers") do
+--   astronvim.lsp.setup(server)
+-- end
