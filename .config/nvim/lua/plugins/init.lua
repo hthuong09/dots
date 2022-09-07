@@ -150,7 +150,7 @@ local plugins = {
   },
 
   ['tzachar/cmp-tabnine'] = {
-    run='./install.sh',
+    run = './install.sh',
     requires = 'hrsh7th/nvim-cmp',
     after = "cmp-path",
     config = function()
@@ -161,14 +161,25 @@ local plugins = {
         sort = true,
         run_on_every_keystroke = true,
         snippet_placeholder = '..',
-        ignored_file_types = { 
-        -- default is not to ignore
-        -- uncomment to ignore in lua:
-        -- lua = true
+        ignored_file_types = {
+          -- default is not to ignore
+          -- uncomment to ignore in lua:
+          -- lua = true
         },
         show_prediction_strength = false
       })
     end
+  },
+
+  ["kyazdani42/nvim-tree.lua"] = {
+    ft = "alpha",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    config = function()
+      require "plugins.configs.nvimtree".setup()
+    end,
+    setup = function()
+      require "plugins.configs.nvimtree".load_keymaps()
+    end,
   },
 
   -- Setup ensure install language server
@@ -176,6 +187,7 @@ local plugins = {
   -- Clean up lsp config files
   -- Handle issue whereby the cmp-tabnine does not have function {} warp
   -- install ls null for formatter
+  -- setup popup for creatig file etc
   ["hrsh7th/nvim-cmp"] = {
     after = "friendly-snippets",
     config = function()
@@ -212,7 +224,7 @@ local plugins = {
   },
 
   ["folke/which-key.nvim"] = {
-    after = { "telescope.nvim", "indent-blankline.nvim", "ui", "Comment.nvim", "nvim-cmp"},
+    after = { "telescope.nvim", "indent-blankline.nvim", "ui", "Comment.nvim", "nvim-cmp", "nvim-tree.lua" },
     module = "which-key",
     keys = "<leader>",
     config = function()
