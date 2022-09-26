@@ -24,3 +24,6 @@ treesitter.setup({
   incremental_selection = { enable = true },
   -- indent = { enable = false }, -- lukas-reineke/indent-blankline.nvim
 })
+
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

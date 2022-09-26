@@ -21,9 +21,17 @@ local plugins = {
       require "plugins"
     end,
   },
+  ["stevearc/dressing.nvim"] = {
+    event = "VimEnter",
+    config = function()
+      require "plugins.configs.dressing"
+    end,
+  },
+
   ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
 
   -- UI
+  -- TODO: migrate bufferbar and status bar to bufferline and feline
   ["NvChad/base46"] = {
     config = function()
       require "plugins.configs.nvchad-base46"
@@ -68,10 +76,15 @@ local plugins = {
     end,
   },
 
-  -- misc
-  -- TODO: This needs cmp for something, need to check
+  ["lewis6991/gitsigns.nvim"] = {
+    event = "BufEnter",
+    config = function()
+      require "plugins.configs.gitsigns"
+    end,
+  },
+
   ["windwp/nvim-autopairs"] = {
-    -- after = "nvim-cmp", -- TODO: enabled this
+    after = "nvim-cmp",
     event = "InsertEnter",
     config = function()
       require "plugins.configs.autopairs"
@@ -102,18 +115,31 @@ local plugins = {
     module = { "Comment", "Comment.api" },
     keys = { "gc", "gb", "g<", "g>" },
     config = function()
-      require('plugins.configs.comment').setup()
+      require("plugins.configs.comment").setup()
     end,
     setup = function()
-      require('plugins.configs.comment').load_keymaps()
-    end
+      require("plugins.configs.comment").load_keymaps()
+    end,
+  },
+
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      require "plugins.configs.null-ls"
+    end,
   },
 
   -- Package Manager
-  ["williamboman/mason.nvim"] = { config = function() require "plugins.configs.mason" end },
+  ["williamboman/mason.nvim"] = {
+    config = function()
+      require "plugins.configs.mason"
+    end,
+  },
   ["WhoIsSethDaniel/mason-tool-installer.nvim"] = {
     after = "mason.nvim",
-    config = function() require "plugins.configs.mason-tool-installer" end,
+    config = function()
+      require "plugins.configs.mason-tool-installer"
+    end,
   },
 
   -- Built-in LSP
@@ -121,8 +147,10 @@ local plugins = {
 
   -- LSP manager
   ["williamboman/mason-lspconfig.nvim"] = {
-    after = { "mason.nvim", "nvim-lspconfig" },
-    config = function() require "plugins.configs.lsp" end,
+    after = { "mason.nvim", "nvim-lspconfig", "ui" },
+    config = function()
+      require "plugins.configs.lsp"
+    end,
   },
 
   -- TODO: also depends on treesitter for context awareness
@@ -149,45 +177,60 @@ local plugins = {
     event = "InsertEnter",
   },
 
-  ['tzachar/cmp-tabnine'] = {
-    run = './install.sh',
-    requires = 'hrsh7th/nvim-cmp',
+  ["tzachar/cmp-tabnine"] = {
+    run = "./install.sh",
+    requires = "hrsh7th/nvim-cmp",
     after = "cmp-path",
     config = function()
-      local tabnine = require('cmp_tabnine.config')
-      tabnine.setup({
+      local tabnine = require "cmp_tabnine.config"
+      tabnine.setup {
         max_lines = 1000,
         max_num_results = 20,
         sort = true,
         run_on_every_keystroke = true,
-        snippet_placeholder = '..',
+        snippet_placeholder = "..",
         ignored_file_types = {
           -- default is not to ignore
           -- uncomment to ignore in lua:
           -- lua = true
         },
-        show_prediction_strength = false
-      })
-    end
+        show_prediction_strength = false,
+      }
+    end,
   },
 
-  ["kyazdani42/nvim-tree.lua"] = {
-    ft = "alpha",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    config = function()
-      require "plugins.configs.nvimtree".setup()
-    end,
+  -- TODO: replace this with neotree.vim
+  -- ["kyazdani42/nvim-tree.lua"] = {
+  --   ft = "alpha",
+  --   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+  --   config = function()
+  --     require("plugins.configs.nvimtree").setup()
+  --   end,
+  --   setup = function()
+  --     require("plugins.configs.nvimtree").load_keymaps()
+  --   end,
+  -- },
+
+  ["nvim-neo-tree/neo-tree.nvim"] = {
+    branch = "v2.x",
+    module = "neo-tree",
+    cmd = "Neotree",
+    requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
     setup = function()
-      require "plugins.configs.nvimtree".load_keymaps()
+      vim.g.neo_tree_remove_legacy_commands = true
+      require("plugins.configs.neotree").load_keymaps()
+    end,
+    config = function()
+      require("plugins.configs.neotree").setup()
     end,
   },
 
-  -- Setup ensure install language server
   -- Trouble with cmp source, can't setup all at once, probaly move to astronvim add cmp source
   -- Clean up lsp config files
   -- Handle issue whereby the cmp-tabnine does not have function {} warp
   -- install ls null for formatter
   -- setup popup for creatig file etc
+  -- support load custom server settings
   ["hrsh7th/nvim-cmp"] = {
     after = "friendly-snippets",
     config = function()
@@ -199,7 +242,7 @@ local plugins = {
     wants = "friendly-snippets",
     after = "nvim-cmp",
     config = function()
-      require("plugins.configs.luasnip")
+      require "plugins.configs.luasnip"
     end,
   },
 
@@ -224,7 +267,7 @@ local plugins = {
   },
 
   ["folke/which-key.nvim"] = {
-    after = { "telescope.nvim", "indent-blankline.nvim", "ui", "Comment.nvim", "nvim-cmp", "nvim-tree.lua" },
+    after = { "telescope.nvim", "indent-blankline.nvim", "ui", "Comment.nvim", "nvim-cmp", "neo-tree.nvim" },
     module = "which-key",
     keys = "<leader>",
     config = function()

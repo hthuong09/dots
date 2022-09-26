@@ -31,6 +31,10 @@ M.load_keymaps = function()
   require("core.utils").set_mappings(maps)
 end
 
+-- TODO modular this so plugin can happens inside module's configuration
+-- TODO consider to add highlight current column HL CursorColumn
+-- Refactor so  can load color config here
+
 M.config = {
   hl_add = {
     AlphaButtonsShortcut = {
@@ -42,6 +46,9 @@ M.config = {
     -- Normal = {
     --   bg = "NONE"
     -- }
+    LspReferenceText = { bg = "#3e4451", fg = "NONE" },
+    LspReferenceRead = { bg = "#3e4451", fg = "NONE" },
+    LspReferenceWrite = { bg = "#3e4451", fg = "NONE" },
   },
   changed_themes = {
     -- tomorrow_night = {
@@ -49,9 +56,14 @@ M.config = {
     --     base00 = "#1e222a",
     --   }
     -- }
+    tomorrow_night = {
+      base_16 = {
+        base08 = "#81ac6f",
+      },
+    },
   },
   theme_toggle = { "onedark", "tomorrow_night" },
-  theme = "onedark",
+  theme = "tomorrow_night",
   transparency = false,
 }
 

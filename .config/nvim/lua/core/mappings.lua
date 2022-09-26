@@ -10,6 +10,7 @@ maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>q<cr>", desc = "Quit" }
 maps.n["<leader>h"] = { "<cmd>nohlsearch<cr>", desc = "No Highlight" }
 maps.n["<esc>"] = { "<cmd>nohlsearch<cr>", desc = "No Highlight" }
+-- TODO: copy URL toggle from astronvim
 maps.n["<leader>u"] = {
   function()
     M.toggle_url_match()
