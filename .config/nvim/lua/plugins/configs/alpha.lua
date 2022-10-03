@@ -73,7 +73,7 @@ local options = {
       button("SPC f o", "  Recent File  ", ":Telescope oldfiles<CR>"),
       button("SPC f w", "  Find Word  ", ":Telescope live_grep<CR>"),
       button("SPC b m", "  Bookmarks  ", ":Telescope marks<CR>"),
-      button("SPC t h", "  Themes  ", ":Telescope themes<CR>"),
+      -- button("SPC t h", "  Themes  ", ":Telescope themes<CR>"),
     },
     opts = {
       spacing = 1,

@@ -37,6 +37,7 @@ local plugins = {
       require "plugins.configs.nvchad-base46"
     end,
   },
+
   ["NvChad/ui"] = {
     after = "base46",
     config = function()
@@ -46,6 +47,17 @@ local plugins = {
       require("plugins.configs.nvchad-ui").load_keymaps()
     end,
   },
+
+  -- ["NvChad/nvterm"] = {
+  --   module = "nvterm",
+  --   config = function()
+  --     require("plugins.configs.nvterm").setup()
+  --   end,
+  --   setup = function()
+  --     require("plugins.configs.nvterm").load_keymaps()
+  --   end,
+  -- },
+
   ["kyazdani42/nvim-web-devicons"] = {
     after = "ui",
     module = "nvim-web-devicons",
@@ -210,6 +222,17 @@ local plugins = {
   --     require("plugins.configs.nvimtree").load_keymaps()
   --   end,
   -- },
+  --
+  ["akinsho/toggleterm.nvim"] = {
+    cmd = "ToggleTerm",
+    module = { "toggleterm", "toggleterm.terminal" },
+    config = function()
+      require("plugins.configs.toggleterm").setup()
+    end,
+    setup = function()
+      require("plugins.configs.toggleterm").load_keymaps()
+    end,
+  },
 
   ["nvim-neo-tree/neo-tree.nvim"] = {
     branch = "v2.x",
@@ -267,7 +290,15 @@ local plugins = {
   },
 
   ["folke/which-key.nvim"] = {
-    after = { "telescope.nvim", "indent-blankline.nvim", "ui", "Comment.nvim", "nvim-cmp", "neo-tree.nvim" },
+    after = {
+      "telescope.nvim",
+      "indent-blankline.nvim",
+      "ui",
+      "Comment.nvim",
+      "nvim-cmp",
+      "neo-tree.nvim",
+      "toggleterm.nvim",
+    },
     module = "which-key",
     keys = "<leader>",
     config = function()

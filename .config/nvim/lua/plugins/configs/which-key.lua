@@ -81,7 +81,7 @@ M.register = function()
     init_table("n", "<leader>", "l")
   end
 
-  if is_available "toggleterm.nvim" then
+  if is_available "nvterm" then
     init_table("n", "<leader>", "g")
     init_table("n", "<leader>", "t")
   end

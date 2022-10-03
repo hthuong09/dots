@@ -1,43 +1,5 @@
-local M = {};
-M.load_hightlight = function() 
-  local colors = require("base46").get_theme_tb "base_30"
-
-  local highlights = {
-    NeoTreeDirectoryName = { fg = colors.folder_bg },
-    -- NvimTreeEndOfBuffer = { fg = colors.darker_black },
-    NeoTreeDirectoryIcon = { fg = colors.folder_bg },
-    NvimTreeGitDirty = { fg = colors.red },
-    NeoTreeIndentMarker = { fg = colors.grey_fg },
-    NeoTreeNormal = { bg = colors.darker_black },
-    NeoTreeNormalNC = { bg = colors.darker_black },
-    NeoTreeGitIgnored = { fg = colors.light_grey },
-
-    NeoTreeWinSeparator = {
-      fg = colors.darker_black,
-      bg = colors.darker_black,
-    },
-
-    NeoTreeCursorLine = {
-      bg = colors.black2,
-    },
-
-    NeoTreeGitAdded = {
-      fg = colors.yellow,
-    },
-
-    NeoTreeGitDeleted = {
-      fg = colors.red,
-    },
-
-    NeoTreeDotfile = {
-      fg = colors.yellow,
-      bold = true,
-    },
-  }
-  for hl, col in pairs(highlights) do
-    vim.api.nvim_set_hl(0, hl, col)
-  end
-end
+local M = {}
+M.load_hightlight = function() end
 
 M.setup = function()
   local present, nvimtree = pcall(require, "nvim-tree")
@@ -129,13 +91,12 @@ M.setup = function()
 
   nvimtree.setup(options)
   M.load_hightlight()
-
 end
 
 M.load_keymaps = function()
   local maps = { n = {}, v = {}, t = {}, [""] = {} }
-  maps.n["<leader>e"] = {"<cmd> NvimTreeToggle <CR>", desc = "Toggle tree explorer"}
-  require('core.utils').set_mappings(maps)
+  maps.n["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", desc = "Toggle tree explorer" }
+  require("core.utils").set_mappings(maps)
 end
 
 return M
