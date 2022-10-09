@@ -4,6 +4,15 @@ M.setup = function()
   local loaded, nvchad_ui = pcall(require, "nvchad_ui")
   if loaded then
     nvchad_ui.setup()
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "TabEnter" }, {
+      pattern = "*",
+      callback = function()
+        if #vim.fn.getbufinfo { buflisted = 1 } >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
+          vim.opt.showtabline = 2
+          vim.opt.tabline = "%!v:lua.require('nvchad_ui').tabufline()"
+        end
+      end,
+    })
   end
 end
 

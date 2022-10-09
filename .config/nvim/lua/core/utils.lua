@@ -74,14 +74,14 @@ M.tabuflineNext = function()
 end
 
 M.tabuflinePrev = function()
-  local bufs = M.bufilter() or {}
-
-  for i, v in ipairs(bufs) do
-    if api.nvim_get_current_buf() == v then
-      vim.cmd(i == 1 and "b" .. bufs[#bufs] or "b" .. bufs[i - 1])
-      break
-    end
-  end
+  -- local bufs = M.bufilter() or {}
+  --
+  -- for i, v in ipairs(bufs) do
+  --   if api.nvim_get_current_buf() == v then
+  --     vim.cmd(i == 1 and "b" .. bufs[#bufs] or "b" .. bufs[i - 1])
+  --     break
+  --   end
+  -- end
 end
 
 M.is_available = function(plugin)

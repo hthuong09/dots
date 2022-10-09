@@ -141,29 +141,49 @@ local plugins = {
     end,
   },
 
+  ["jayp0521/mason-null-ls.nvim"] = {
+    after = { "mason.nvim", "null-ls.nvim" },
+    config = function()
+      require "plugins.configs.mason-null-ls"
+    end,
+  },
+
   -- Package Manager
   ["williamboman/mason.nvim"] = {
     config = function()
       require "plugins.configs.mason"
     end,
   },
-  ["WhoIsSethDaniel/mason-tool-installer.nvim"] = {
-    after = "mason.nvim",
-    config = function()
-      require "plugins.configs.mason-tool-installer"
-    end,
-  },
 
   -- Built-in LSP
-  ["neovim/nvim-lspconfig"] = {},
+  ["neovim/nvim-lspconfig"] = {
+    after = { "ui" },
+    config = function()
+      require "plugins.configs.lsp"
+    end,
+  },
 
   -- LSP manager
   ["williamboman/mason-lspconfig.nvim"] = {
     after = { "mason.nvim", "nvim-lspconfig", "ui" },
     config = function()
-      require "plugins.configs.lsp"
+      require "plugins.configs.mason-lspconfig"
     end,
   },
+
+  ["ray-x/lsp_signature.nvim"] = {
+    event = "BufRead",
+    config = function()
+      require "plugins.configs.lsp_signature"
+    end,
+  },
+
+  -- ["folke/trouble.nvim"] = {
+  --   requires = "kyazdani42/nvim-web-devicons",
+  --   config = function()
+  --     require("trouble").setup {}
+  --   end,
+  -- },
 
   -- TODO: also depends on treesitter for context awareness
   ["lukas-reineke/indent-blankline.nvim"] = {
@@ -298,6 +318,7 @@ local plugins = {
       "nvim-cmp",
       "neo-tree.nvim",
       "toggleterm.nvim",
+      "mason-lspconfig.nvim",
     },
     module = "which-key",
     keys = "<leader>",

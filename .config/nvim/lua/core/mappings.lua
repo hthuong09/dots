@@ -1,6 +1,9 @@
 local is_available = require("core.utils").is_available
 
-local maps = { n = {}, v = {}, t = {}, [""] = {} }
+-- replace :q with :close to prevent accidentally quit vim
+vim.cmd "cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>"
+
+local maps = { n = {}, v = {}, t = {}, i = {}, [""] = {} }
 
 maps[""]["<Space>"] = "<Nop>"
 
@@ -10,6 +13,8 @@ maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>q<cr>", desc = "Quit" }
 maps.n["<leader>h"] = { "<cmd>nohlsearch<cr>", desc = "No Highlight" }
 maps.n["<esc>"] = { "<cmd>nohlsearch<cr>", desc = "No Highlight" }
+maps.i["<M-BS>"] = { "<C-W>", desc = "Option+backspace delete word" }
+maps.i["<C-BS>"] = { "<C-W>", desc = "Control+backspace delete word" }
 -- TODO: copy URL toggle from astronvim
 maps.n["<leader>u"] = {
   function()
@@ -37,7 +42,12 @@ maps.n["<leader>pu"] = { "<cmd>PackerUpdate<cr>", desc = "Packer Update" }
 
 maps.n["<leader>c"] = {
   function()
+    local bufs = vim.fn.getbufinfo { buflisted = true }
     require("core.utils").close_buffer()
+    if require("core.utils").is_available "alpha-nvim" and not bufs[2] then
+      require("alpha").start(true)
+      vim.opt.showtabline = 1
+    end
   end,
   desc = "Close window",
 }
@@ -100,24 +110,9 @@ if is_available "gitsigns.nvim" then
   }
 end
 
--- NeoTree
-if is_available "neo-tree.nvim" then
-  maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
-  maps.n["<leader>o"] = { "<cmd>Neotree focus<cr>", desc = "Focus Explorer" }
-end
-
--- Session Manager
-if is_available "neovim-session-manager" then
-  maps.n["<leader>Sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session" }
-  maps.n["<leader>Ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session" }
-  maps.n["<leader>Sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }
-  maps.n["<leader>Sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" }
-  maps.n["<leader>S."] =
-    { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
-end
-
 -- Package Manager
 -- TODO: v2 rework these key bindings to be more general
+-- TODO: moving this config to plugin specified map
 if is_available "mason.nvim" then
   maps.n["<leader>lI"] = { "<cmd>Mason<cr>", desc = "LSP installer" }
 end
@@ -189,56 +184,6 @@ else
   maps.n["<C-Down>"] = { "<cmd>resize +2<CR>", desc = "Resize split down" }
   maps.n["<C-Left>"] = { "<cmd>vertical resize -2<CR>", desc = "Resize split left" }
   maps.n["<C-Right>"] = { "<cmd>vertical resize +2<CR>", desc = "Resize split right" }
-end
-
--- SymbolsOutline
-if is_available "aerial.nvim" then
-  maps.n["<leader>lS"] = { "<cmd>AerialToggle<cr>", desc = "Symbols outline" }
-end
-
--- Terminal
-if is_available "toggleterm.nvim" then
-  local toggle_term_cmd = M.toggle_term_cmd
-  maps.n["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
-  maps.n["<leader>gg"] = {
-    function()
-      toggle_term_cmd "lazygit"
-    end,
-    desc = "ToggleTerm lazygit",
-  }
-  maps.n["<leader>tn"] = {
-    function()
-      toggle_term_cmd "node"
-    end,
-    desc = "ToggleTerm node",
-  }
-  maps.n["<leader>tu"] = {
-    function()
-      toggle_term_cmd "ncdu"
-    end,
-    desc = "ToggleTerm NCDU",
-  }
-  maps.n["<leader>tt"] = {
-    function()
-      toggle_term_cmd "htop"
-    end,
-    desc = "ToggleTerm htop",
-  }
-  maps.n["<leader>tp"] = {
-    function()
-      toggle_term_cmd "python"
-    end,
-    desc = "ToggleTerm python",
-  }
-  maps.n["<leader>tl"] = {
-    function()
-      toggle_term_cmd "lazygit"
-    end,
-    desc = "ToggleTerm lazygit",
-  }
-  maps.n["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
-  maps.n["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }
-  maps.n["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" }
 end
 
 -- Stay in indent mode
