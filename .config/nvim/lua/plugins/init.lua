@@ -328,6 +328,9 @@ local plugins = {
     end,
   },
 
+  -- Better buffer closing
+  ["famiu/bufdelete.nvim"] = { cmd = { "Bdelete", "Bwipeout" } },
+
   -- Speed up deffered plugins
   ["lewis6991/impatient.nvim"] = {},
 }

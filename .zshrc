@@ -17,6 +17,7 @@ ZSH_MODULES=(
     syntax-highlighting
     z
     # tmux
+    fzf
     nvm
 )
 for module in $ZSH_MODULES; do

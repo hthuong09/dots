@@ -43,7 +43,7 @@ maps.n["<leader>pu"] = { "<cmd>PackerUpdate<cr>", desc = "Packer Update" }
 maps.n["<leader>c"] = {
   function()
     local bufs = vim.fn.getbufinfo { buflisted = true }
-    require("core.utils").close_buffer()
+    vim.cmd "Bdelete"
     if require("core.utils").is_available "alpha-nvim" and not bufs[2] then
       require("alpha").start(true)
       vim.opt.showtabline = 1
