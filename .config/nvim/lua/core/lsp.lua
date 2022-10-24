@@ -1,5 +1,3 @@
-local log = require "structlog"
-
 aivim.lsp = {}
 -- local sign_define = vim.fn.sign_define
 local conditional_func = function(func, condition, ...)
@@ -19,7 +17,7 @@ local signs = {
 -- end
 
 aivim.lsp.formatting = {
-  format_on_save = true,
+  format_on_save = false,
   disabled = {
     "sumeko_lua",
     "tsserver",
@@ -51,7 +49,7 @@ aivim.lsp.diagnostics = {
     update_in_insert = false,
   },
   on = {
-    virtual_text = true,
+    virtual_text = false,
     signs = { active = signs },
     update_in_insert = true,
     underline = true,
@@ -59,8 +57,19 @@ aivim.lsp.diagnostics = {
     float = {
       focused = false,
       style = "minimal",
-      border = "rounded",
+      -- workaround to have same border as cmpborder, should split when moving color base46 back to repo
+      border = {
+        { "╭", "CmpBorder" },
+        { "─", "CmpBorder" },
+        { "╮", "CmpBorder" },
+        { "│", "CmpBorder" },
+        { "╯", "CmpBorder" },
+        { "─", "CmpBorder" },
+        { "╰", "CmpBorder" },
+        { "│", "CmpBorder" },
+      },
       source = "always",
+      scope = "cursor",
       header = "",
       prefix = "",
     },
@@ -108,6 +117,15 @@ aivim.lsp.on_attach = function(client, bufnr)
     },
     v = {},
   }
+
+  vim.api.nvim_create_augroup("diagnostic_float", {})
+  vim.api.nvim_create_autocmd("CursorHold", {
+    group = "diagnostic_float",
+    buffer = bufn,
+    callback = function()
+      vim.diagnostic.open_float()
+    end,
+  })
 
   if capabilities.codeActionProvider then
     lsp_mappings.n["<leader>la"] = {

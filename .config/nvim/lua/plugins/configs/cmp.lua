@@ -1,6 +1,8 @@
 local loaded, cmp = pcall(require, "cmp")
 local snip_loaded, luasnip = pcall(require, "luasnip")
-if not (loaded and snip_loaded) then return end
+if not (loaded and snip_loaded) then
+  return
+end
 
 require("base46").load_highlight "cmp"
 
@@ -116,10 +118,10 @@ local options = {
   sources = {
     { name = "luasnip", priority = 800 },
     { name = "nvim_lsp", priority = 1000 },
-    -- { name = "buffer", priority = 100 },
-    -- { name = "nvim_lua", priority = 100 },
-    -- { name = "path", priority = 100 },
-    { name = 'cmp_tabnine', priority = 900 },
+    { name = "buffer", priority = 100 },
+    { name = "nvim_lua", priority = 100 },
+    { name = "path", priority = 100 },
+    { name = "cmp_tabnine", priority = 900 },
   },
 }
 
