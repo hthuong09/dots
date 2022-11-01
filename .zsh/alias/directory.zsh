@@ -3,7 +3,7 @@ case $(uname) in
   'Darwin')  LS_OPTIONS='-hG' ;;
 esac
 # ls with color, human-readable size, indicator, with directory display first
-alias ls='ls $LS_OPTIONS'
+alias ls='ls ${=LS_OPTIONS}'
 
 # list subdirectories recursively
 alias lr='ls -R'
