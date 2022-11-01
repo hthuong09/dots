@@ -17,7 +17,8 @@ local signs = {
 -- end
 
 aivim.lsp.formatting = {
-  format_on_save = false,
+  format_on_save = true,
+  organize_import_on_save = true,
   disabled = {
     "sumeko_lua",
     "tsserver",
