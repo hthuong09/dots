@@ -88,6 +88,15 @@ local plugins = {
     end,
   },
 
+  ["nvim-telescope/telescope-file-browser.nvim"] = {
+    config = function()
+      require("plugins.configs.telescope-file-browser").setup()
+    end,
+    setup = function()
+      require("plugins.configs.telescope-file-browser").load_keymaps()
+    end,
+  },
+
   ["lewis6991/gitsigns.nvim"] = {
     event = "BufEnter",
     config = function()
@@ -254,19 +263,19 @@ local plugins = {
     end,
   },
 
-  ["nvim-neo-tree/neo-tree.nvim"] = {
-    branch = "v2.x",
-    module = "neo-tree",
-    cmd = "Neotree",
-    requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
-    setup = function()
-      vim.g.neo_tree_remove_legacy_commands = true
-      require("plugins.configs.neotree").load_keymaps()
-    end,
-    config = function()
-      require("plugins.configs.neotree").setup()
-    end,
-  },
+  -- ["nvim-neo-tree/neo-tree.nvim"] = {
+  --   branch = "v2.x",
+  --   module = "neo-tree",
+  --   cmd = "Neotree",
+  --   requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
+  --   setup = function()
+  --     vim.g.neo_tree_remove_legacy_commands = true
+  --     require("plugins.configs.neotree").load_keymaps()
+  --   end,
+  --   config = function()
+  --     require("plugins.configs.neotree").setup()
+  --   end,
+  -- },
 
   -- Trouble with cmp source, can't setup all at once, probaly move to astronvim add cmp source
   -- Clean up lsp config files
@@ -316,7 +325,7 @@ local plugins = {
       "ui",
       "Comment.nvim",
       "nvim-cmp",
-      "neo-tree.nvim",
+      -- "neo-tree.nvim",
       "toggleterm.nvim",
       "mason-lspconfig.nvim",
     },
@@ -335,6 +344,8 @@ local plugins = {
 
   -- Speed up deffered plugins
   ["lewis6991/impatient.nvim"] = {},
+
+  ["wakatime/vim-wakatime"] = {},
 }
 
 require("plugins.configs.packer").run(plugins)
