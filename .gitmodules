@@ -12,10 +12,10 @@
 	url = https://github.com/zsh-users/zsh-completions
 [submodule ".zsh/z/external"]
 	path = .zsh/z/external
-	url = git@github.com:agkozak/zsh-z.git
+	url = https://github.com/agkozak/zsh-z
 [submodule ".zsh/prompt/pure"]
 	path = .zsh/prompt/pure
-	url = git@github.com:sindresorhus/pure.git
+	url = https://github.com/sindresorhus/pure
 	branch = main
 [submodule ".config/ranger/plugins/ranger_devicons"]
 	path = .config/ranger/plugins/ranger_devicons
