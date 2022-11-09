@@ -78,6 +78,17 @@ local plugins = {
     end,
   },
 
+  ["sindrets/diffview.nvim"] = {
+    requires = "nvim-lua/plenary.nvim",
+    after = "plenary.nvim",
+    config = function()
+      require("plugins.configs.diffview").setup()
+    end,
+    setup = function()
+      require("plugins.configs.diffview").load_keymaps()
+    end,
+  },
+
   ["nvim-telescope/telescope.nvim"] = {
     -- cmd = "Telescope", -- TODO: convert keymap to commad for lazy load to enable this
     config = function()
@@ -346,6 +357,7 @@ local plugins = {
   ["lewis6991/impatient.nvim"] = {},
 
   ["wakatime/vim-wakatime"] = {},
+  ["catppuccin/nvim"] = { as = "catppuccin" },
 }
 
 require("plugins.configs.packer").run(plugins)

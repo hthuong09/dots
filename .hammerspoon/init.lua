@@ -4,4 +4,4 @@ require("ConfigReload")(logger)
 
 require("HandleURLDispatch")(logger)
 require("TilingWindow")(logger)
-require("KittySession")(logger)
+-- require("KittySession")(logger)
