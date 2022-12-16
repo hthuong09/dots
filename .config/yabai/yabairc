@@ -8,7 +8,7 @@ yabai -m config bottom_padding               5
 yabai -m config left_padding                 5
 yabai -m config right_padding                5
 # yabai -m config focus_follows_mouse autoraise
-yabai -m config mouse_follows_focus on
+# yabai -m config mouse_follows_focus on
 
 yabai -m rule --add app="^System Preferences$"                    manage=off
 yabai -m rule --add app="^System Information$"                    manage=off
