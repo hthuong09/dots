@@ -2,10 +2,11 @@ import { ActionPanel, Action, Icon, List, closeMainWindow, popToRoot } from "@ra
 import { useEffect, useState } from "react";
 import fs from "fs";
 import { resolvePath } from "./utils";
-import { execa } from "execa";
+import { runAppleScript } from "run-applescript";
 
 async function runKitty(...args: string[]) {
-  execa("/opt/homebrew/bin/kitty", ["-d", "~", "--instance-group", "session", "-1", ...args], { detached: true });
+  const script = `do shell script "LC_ALL=en_US.UTF-8 open -n -a '/Applications/kitty.app' --args -d ~ --instance-group session -1 ${args.join(" ")}"`;
+  runAppleScript(script);
 }
 
 export default function Command() {

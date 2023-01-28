@@ -27,6 +27,7 @@
   ],
   "dependencies": {
     "@raycast/api": "^1.42.2",
+    "@raycast/utils": "^1.4.16",
     "execa": "^6.1.0",
     "jsonlint": "github:hthuong09/jsonlint",
     "run-applescript": "^6.0.0"
