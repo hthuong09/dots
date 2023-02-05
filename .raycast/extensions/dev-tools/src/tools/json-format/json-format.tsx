@@ -15,6 +15,7 @@ enum Formatter {
   TrimSpace = "JSON trim whitespace",
   Lint = "JSON lint",
   Unescape = "JSON unescape",
+  KeyToCamelCase = "Key to Camel Case",
 }
 
 const validateJSONAndReturnObject = (text: string): object | undefined => {
@@ -83,6 +84,30 @@ const handle = (formatter: Formatter) => async (): Promise<void> => {
       showHUD("Copied to clipboard");
       cleanUpAndCloseWindow();
     },
+    // implement handler for key to camel case
+    // it should support nested keys
+    [Formatter.KeyToCamelCase]: () => {
+      const obj = validateJSONAndReturnObject(text);
+      if (!obj) {
+        return;
+      }
+      const camelCase: any = (obj: any) => {
+        if (typeof obj !== "object") {
+          return obj;
+        }
+        if (Array.isArray(obj)) {
+          return obj.map(camelCase);
+        }
+        return Object.keys(obj).reduce((acc: any, key) => {
+          const camelCasedKey = key.replace(/([-_][a-z])/gi, ($1) => $1.toUpperCase().replace("-", "").replace("_", ""));
+          acc[camelCasedKey] = camelCase(obj[key]);
+          return acc;
+        }, {});
+      };
+      copyTextToClipboard(JSON.stringify(camelCase(obj), null, 2));
+      showHUD("Copied to clipboard");
+      cleanUpAndCloseWindow();
+    }
   };
   const handler = handlers[formatter];
   if (!handlers) {
