@@ -1,17 +1,3 @@
-local loaded, mason = pcall(require, "mason")
-if not loaded then
-  return
-end
-
-vim.api.nvim_create_augroup("_mason", { clear = true })
-vim.api.nvim_create_autocmd("Filetype", {
-  pattern = "mason",
-  callback = function()
-    require("base46").load_highlight "mason"
-  end,
-  group = "_mason",
-})
-
 local options = {
   ui = {
     icons = {
@@ -32,5 +18,4 @@ local options = {
   },
   max_concurrent_installers = 10,
 }
-
-mason.setup(options)
+require('mason').setup(options)

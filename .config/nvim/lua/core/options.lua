@@ -1,103 +1,72 @@
 local opt = vim.opt
 local g = vim.g
 
-g.vim_version = vim.version().minor
---  TODO: fix this
-g.nvchad_theme = require("plugins.configs.nvchad-ui").config.theme
-g.toggle_theme_icon = "   "
-g.transparency = require("plugins.configs.nvchad-ui").config.transparency
-g.theme_switcher_loaded = false
+-- Indentation settings
+opt.expandtab = true -- Use spaces instead of tabs
+opt.shiftwidth = 2 -- Number of spaces to use for each indentation level
+opt.smartindent = true -- Automatically indent and unindent code
+opt.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
+opt.softtabstop = 2 -- Number of spaces to use for a <Tab> keypress in insert mode
+opt.autoindent = true -- Copy the indentation of the previous line when starting a new line
 
--- use filetype.lua instead of filetype.vim. it's enabled by default in neovim 0.8 (nightly)
-if g.vim_version < 8 then
-  g.did_load_filetypes = 0
-  g.do_filetype_lua = 1
-end
+-- Display settings
+opt.number = true -- Display line numbers
+opt.relativenumber = true -- Display relative line numbers
+opt.numberwidth = 2 -- Width of the line number column
+opt.cursorline = true -- Highlight the current line
+opt.list = true -- Display invisible characters
+opt.listchars = "tab:» ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:¬" -- Characters used to show invisible characters
+opt.fillchars = { eob = " " } -- Replace '~' at the end of buffer with a space
 
-opt.laststatus = 3 -- global statusline
-opt.showmode = false
+-- Search settings
+opt.ignorecase = true -- Ignore case when searching
+opt.smartcase = true -- Ignore case when searching, unless an uppercase letter is used
 
-opt.title = true
-opt.clipboard = "unnamedplus"
-opt.cursorline = true
+-- Mouse settings
+opt.mouse = "a" -- Enable the mouse in all modes
 
--- Indenting
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
+-- Split settings
+opt.splitbelow = true -- Open new windows below the current one
+opt.splitright = true -- Open new windows to the right of the current one
 
-opt.fillchars = { eob = " " }
-opt.ignorecase = true
-opt.smartcase = true
-opt.mouse = "a"
-
--- Numbers
-opt.number = true
-opt.relativenumber = true
-opt.numberwidth = 2
+-- GUI settings
+opt.title = true -- Show the filename in the title bar
+opt.termguicolors = true -- Use true colors in the terminal
+opt.laststatus = 3 -- displays the status line on the last window of the screen when set to 2 or higher
+opt.showmode = false -- whether to display the current mode (normal, insert, visual, etc.) in the statusline
 opt.ruler = false
 
--- disable nvim intro
-opt.shortmess:append "sI"
 
-opt.signcolumn = "yes"
-opt.splitbelow = true
-opt.splitright = true
-opt.termguicolors = true
-opt.timeoutlen = 400
-opt.undofile = true
 
--- interval for writing swap file to disk, also used by gitsigns
-opt.updatetime = 250
+-- Clipboard settings
+opt.clipboard = "unnamedplus" -- Use the system clipboard
 
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
+-- Timings
+opt.updatetime = 250 -- Faster completion
+opt.timeoutlen = 400 -- Time to wait for a mapped sequence to complete
 
--- listchars
-opt.list = true
-opt.listchars = "tab:» ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:¬"
+-- Undo settings
+opt.undofile = true -- Save undo history
 
-opt.pumheight = 10
+-- Message settings
+opt.shortmess:append "sI" -- Reduce the amount of messages shown
 
-g.mapleader = " "
+-- Sign column
+opt.signcolumn = "yes" -- Always show the sign column
 
--- disable some builtin vim plugins
-local default_plugins = {
-  "2html_plugin",
-  "getscript",
-  "getscriptPlugin",
-  "gzip",
-  "logipat",
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "matchit",
-  "tar",
-  "tarPlugin",
-  "rrhelper",
-  "spellfile_plugin",
-  "vimball",
-  "vimballPlugin",
-  "zip",
-  "zipPlugin",
-  "tutor",
-  "rplugin",
-  "syntax",
-  "synmenu",
-  "optwin",
-  "compiler",
-  "bugreport",
-  "ftplugin",
-}
+-- Which wrap settings
+opt.whichwrap:append "<>[]hl" -- Allow < > [ ] { } h l to navigate wrapped lines
+opt.textwidth = 0 -- Disable text wrap
 
-for _, plugin in pairs(default_plugins) do
-  g["loaded_" .. plugin] = 1
-end
+-- Popup menu height
+opt.pumheight = 10 -- Height of the popup menu
 
+-- Disable backup, write backup, and swap files
+opt.backup = false -- Do not make a backup before overwriting a file
+opt.writebackup = false -- Do not make a backup when writing a file
+opt.swapfile = false -- Do not use swap files for recovery
+
+-- default some provider for better startup time
 local default_providers = {
   "node",
   "perl",

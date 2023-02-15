@@ -1,9 +1,9 @@
-local present, base64 = pcall(require, 'base46');
+local present, base46 = pcall(require, 'base46');
 if not present then
   return
 end
 
-base64.setup {
+base46.setup {
   hl_add = {
     AlphaButtonsShortcut = {
       fg = "#61afef",
@@ -31,7 +31,11 @@ base64.setup {
   theme = "tomorrow_night",
 }
 
-base64.load_highlight "blankline"
-base64.load_highlight "lsp"
-base64.load_highlight "mason"
-base64.load_highlight "treesitter"
+base46.load_highlight "blankline"
+base46.load_highlight "lsp"
+base46.load_highlight "mason"
+base46.load_highlight "treesitter"
+base46.load_highlight "cmp"
+base46.load_highlight "telescope"
+base46.load_highlight "devicons"
+base46.load_highlight "alpha"

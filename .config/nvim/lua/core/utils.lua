@@ -1,30 +1,8 @@
 local M = {}
-local api = vim.api
 
-local merge_tb = vim.tbl_deep_extend
+function M.is_mac() return vim.loop.os_uname().sysname == "Darwin" end
 
-M.load_config = function()
-  return {
-    ui = require("plugins.configs.nvchad-ui").config,
-    plugins = {
-      override = {},
-      remove = {},
-      user = {},
-    },
-  }
-end
-
-M.load_mappings = function(section, mapping_opt)
-  -- this is called by nvchad_ui can't delete yet
-end
-
-M.load_override = function(default_table, plugin_name)
-  local user_table = M.load_config().plugins.override[plugin_name] or {}
-  user_table = type(user_table) == "table" and user_table or user_table()
-  return merge_tb("force", default_table, user_table) or {}
-end
-
-M.set_mappings = function(map_table, base)
+function M.set_mappings(map_table, defaultOptions)
   local map = vim.keymap.set
   -- iterate over the first keys for each mode
   for mode, maps in pairs(map_table) do
@@ -40,78 +18,14 @@ M.set_mappings = function(map_table, base)
           options = {}
         end
         -- extend the keybinding options with the base provided and set the mapping
-        map(mode, keymap, cmd, vim.tbl_deep_extend("force", options, base or {}))
+        map(mode, keymap, cmd, vim.tbl_deep_extend("force", options, defaultOptions or {}))
       end
     end
   end
 end
 
-M.bufilter = function()
-  local bufs = vim.t.bufs or nil
-
-  if not bufs then
-    return {}
-  end
-
-  for i = #bufs, 1, -1 do
-    if not vim.api.nvim_buf_is_valid(bufs[i]) then
-      table.remove(bufs, i)
-    end
-  end
-
-  return bufs
-end
-
-M.tabuflineNext = function()
-  local bufs = M.bufilter() or {}
-
-  for i, v in ipairs(bufs) do
-    if api.nvim_get_current_buf() == v then
-      vim.cmd(i == #bufs and "b" .. bufs[1] or "b" .. bufs[i + 1])
-      break
-    end
-  end
-end
-
-M.tabuflinePrev = function()
-  -- local bufs = M.bufilter() or {}
-  --
-  -- for i, v in ipairs(bufs) do
-  --   if api.nvim_get_current_buf() == v then
-  --     vim.cmd(i == 1 and "b" .. bufs[#bufs] or "b" .. bufs[i - 1])
-  --     break
-  --   end
-  -- end
-end
-
-M.is_available = function(plugin)
+function M.is_available(plugin)
   return packer_plugins ~= nil and packer_plugins[plugin] ~= nil
-end
-
-M.close_buffer = function(bufnr)
-  if vim.bo.buftype == "terminal" then
-    vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
-  else
-    bufnr = bufnr or api.nvim_get_current_buf()
-    require("core.utils").tabuflinePrev()
-    vim.cmd("confirm bd" .. bufnr)
-  end
-end
-
-M.closeAllBufs = function(action)
-  local bufs = vim.t.bufs
-
-  if action == "closeTab" then
-    vim.cmd "tabclose"
-  end
-
-  for _, buf in ipairs(bufs) do
-    M.close_buffer(buf)
-  end
-
-  if action ~= "closeTab" then
-    vim.cmd "enew"
-  end
 end
 
 return M

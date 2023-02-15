@@ -3,8 +3,6 @@ if not loaded then
   return
 end
 
-require("base46").load_highlight "alpha"
-
 local function button(sc, txt, keybind)
   local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
 
@@ -40,7 +38,6 @@ local marginTopPercent = 0.3
 local headerPadding = fn.max { 2, fn.floor(fn.winheight(0) * marginTopPercent) }
 
 local options = {
-
   header = {
     type = "text",
     val = {
@@ -65,7 +62,6 @@ local options = {
       hl = "AlphaHeader",
     },
   },
-
   buttons = {
     type = "group",
     val = {
@@ -79,7 +75,6 @@ local options = {
       spacing = 1,
     },
   },
-
   headerPaddingTop = { type = "padding", val = headerPadding },
   headerPaddingBottom = { type = "padding", val = 2 },
 }
@@ -94,18 +89,23 @@ alpha.setup {
   opts = {},
 }
 
--- Disable statusline in dashboard
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "alpha",
+local group_name = vim.api.nvim_create_augroup("alpha_settings", { clear = true })
+vim.api.nvim_create_autocmd("User", {
+  desc = "Disable status and tablines for alpha",
+  group = group_name,
+  pattern = "AlphaReady",
   callback = function()
-    -- store current statusline value and use that
-    local old_laststatus = vim.opt.laststatus
+    local prev_showtabline = vim.opt.showtabline
+    local prev_status = vim.opt.laststatus
+    vim.opt.laststatus = 0
+    vim.opt.showtabline = 0
+    vim.opt_local.winbar = nil
     vim.api.nvim_create_autocmd("BufUnload", {
-      buffer = 0,
+      pattern = "<buffer>",
       callback = function()
-        vim.opt.laststatus = old_laststatus
+        vim.opt.laststatus = prev_status
+        vim.opt.showtabline = prev_showtabline
       end,
     })
-    vim.opt.laststatus = 0
   end,
 })

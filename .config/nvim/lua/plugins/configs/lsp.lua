@@ -3,14 +3,57 @@ if not loaded then
   return
 end
 
+vim.fn.sign_define("DaiagnosticSignError", { text = "", texthl = "LspDiagnosticsDefaultError" })
+vim.fn.sign_define("DiagnosticSignWarning", { text = "", texthl = "LspDiagnosticsDefaultWarning" })
+vim.fn.sign_define("DiagnosticSignInformation", { text = "", texthl = "LspDiagnosticsDefaultInformation" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "LspDiagnosticsDefaultHint" })
+
+vim.diagnostic.config {
+  virtual_text = {
+    prefix = "",
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+  severity_sort = true,
+  float = {
+    focused = false,
+    style = "minimal",
+    -- workaround to have same border as cmpborder, should split when moving color base46 back to repo
+    border = {
+      { "╭", "CmpBorder" },
+      { "─", "CmpBorder" },
+      { "╮", "CmpBorder" },
+      { "│", "CmpBorder" },
+      { "╯", "CmpBorder" },
+      { "─", "CmpBorder" },
+      { "╰", "CmpBorder" },
+      { "│", "CmpBorder" },
+    },
+    source = "always",
+    scope = "cursor",
+    header = "",
+    prefix = "",
+  },
+}
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "single",
+})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = "single",
+  focusable = false,
+  relative = "cursor",
+})
+
+-- Borders for LspInfo winodw
+require('lspconfig.ui.windows').default_options.border = 'single'
+
 local lsp_opts = {}
 lsp_opts.formatting = {
   format_on_save = true,
   organize_import_on_save = true,
-  disabled = {
-    "sumeko_lua",
-    "tsserver",
-  },
+  disabled = { "sumeko_lua", "tsserver" },
 }
 
 lsp_opts.format_opts = vim.deepcopy(lsp_opts.formatting)
@@ -56,6 +99,7 @@ mason_lspconfig.setup_handlers {
         workspace = {
           library = {
             [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua/lsp"] = true,
           },
         },
       },

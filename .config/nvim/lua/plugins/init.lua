@@ -1,104 +1,112 @@
-vim.cmd "packadd packer.nvim"
-
 local plugins = {
   -- Core
-  ["nvim-lua/plenary.nvim"] = { module = "plenary" },
-  ["wbthomason/packer.nvim"] = {
-    cmd = {
-      "PackerSnapshot",
-      "PackerSnapshotRollback",
-      "PackerSnapshotDelete",
-      "PackerInstall",
-      "PackerUpdate",
-      "PackerSync",
-      "PackerClean",
-      "PackerCompile",
-      "PackerStatus",
-      "PackerProfile",
-      "PackerLoad",
-    },
-    config = function()
-      require "plugins"
-    end,
+  ["lewis6991/impatient.nvim"] = {},
+  ["nvim-lua/plenary.nvim"] = {
+    module = "plenary",
   },
-  ["stevearc/dressing.nvim"] = {
-    event = "VimEnter",
-    config = function()
-      require "plugins.configs.dressing"
-    end,
-  },
-
-  ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
-
   -- UI
-  -- TODO: migrate bufferbar and status bar to bufferline and feline
-  ["NvChad/base46"] = {
+  ["hthuong09/base46"] = {
     config = function()
-      require "plugins.configs.nvchad-base46"
+      require('plugins.configs.base46')
+    end
+  },
+  ["lukas-reineke/indent-blankline.nvim"] = {
+    config = function()
+      require('plugins.configs.indent-blankline')
+    end
+  },
+  ["JoosepAlviste/nvim-ts-context-commentstring"] = {},
+  ["numToStr/Comment.nvim"] = {
+    after = { "nvim-ts-context-commentstring" },
+    config = function()
+      require('plugins.configs.comment')
     end,
   },
-
-  ["NvChad/ui"] = {
-    after = "base46",
+  ["windwp/nvim-autopairs"] = {
+    after = { 'nvim-cmp' },
     config = function()
-      require("plugins.configs.nvchad-ui").setup()
-    end,
-    setup = function()
-      require("plugins.configs.nvchad-ui").load_keymaps()
+      require('plugins.configs.autopairs')
     end,
   },
-
-  -- ["NvChad/nvterm"] = {
-  --   module = "nvterm",
-  --   config = function()
-  --     require("plugins.configs.nvterm").setup()
-  --   end,
-  --   setup = function()
-  --     require("plugins.configs.nvterm").load_keymaps()
-  --   end,
-  -- },
-
-  ["kyazdani42/nvim-web-devicons"] = {
-    after = "ui",
-    module = "nvim-web-devicons",
+  ["nvim-treesitter/nvim-treesitter"] = {
+    requires = {
+      { 'windwp/nvim-autopairs',                       opt = true },
+      { 'JoosepAlviste/nvim-ts-context-commentstring', opt = true },
+      { "lukas-reineke/indent-blankline.nvim",         opt = true }
+    },
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
     config = function()
-      require "plugins.configs.devicons"
+      require('plugins.configs.treesitter')
+    end
+  },
+  -- LSP
+  ["williamboman/mason.nvim"] = {
+    config = function()
+      require('plugins.configs.mason')
+    end
+  },
+  ["neovim/nvim-lspconfig"] = {},
+  ["williamboman/mason-lspconfig.nvim"] = {
+    after = { "mason.nvim", "nvim-lspconfig" },
+    config = function()
+      require('plugins.configs.lsp')
     end,
   },
+  -- Completion
+  ['hrsh7th/cmp-nvim-lsp'] = {},
+  ['hrsh7th/cmp-buffer'] = {},
+  ['hrsh7th/cmp-path'] = {},
+  ['L3MON4D3/LuaSnip'] = {},
+  ['saadparwaiz1/cmp_luasnip'] = {},
+  ['hrsh7th/nvim-cmp'] = {
+    after = { 'base46' },
+    config = function()
+      require('plugins.configs.cmp')
+    end
+  },
+  -- Moving around
+  ['nvim-telescope/telescope.nvim'] = {
+    tag = '0.1.x',
+    config = function()
+      require('plugins.configs.telescope').config()
+      require('plugins.configs.telescope').load_keymaps()
+    end
+  },
+  ["folke/which-key.nvim"] = {
+    module = "which-key",
+    event = "VimEnter",
+    keys = "<leader>",
+    config = function()
+      require("plugins.configs.which-key").setup()
+      require("plugins.configs.which-key").register()
+    end,
+  },
+  ["lewis6991/gitsigns.nvim"] = {
+    event = "BufEnter",
+    config = function()
+      require "plugins.configs.gitsigns"
+    end,
+  },
+  ["nvim-tree/nvim-web-devicons"] = {
+    commit = 'd7f598e',
+    config = function()
+      require('plugins.configs.devicons')
+    end
+  },
+  ["akinsho/bufferline.nvim"] = {
+    config = function()
+      require('plugins.configs.bufferline')
+    end
+  },
+  ["famiu/bufdelete.nvim"] = {},
   ["goolord/alpha-nvim"] = {
-    after = "base46",
     config = function()
       require "plugins.configs.alpha"
     end,
   },
-
-  ["NvChad/nvim-colorizer.lua"] = {
-    config = function()
-      require "plugins.configs.colorizer"
-    end,
-  },
-
-  ["sindrets/diffview.nvim"] = {
-    requires = "nvim-lua/plenary.nvim",
-    after = "plenary.nvim",
-    config = function()
-      require("plugins.configs.diffview").setup()
-    end,
-    setup = function()
-      require("plugins.configs.diffview").load_keymaps()
-    end,
-  },
-
-  ["nvim-telescope/telescope.nvim"] = {
-    -- cmd = "Telescope", -- TODO: convert keymap to commad for lazy load to enable this
-    config = function()
-      require("plugins.configs.telescope").setup()
-    end,
-    setup = function()
-      require("plugins.configs.telescope").load_keymaps()
-    end,
-  },
-
   ["nvim-telescope/telescope-file-browser.nvim"] = {
     config = function()
       require("plugins.configs.telescope-file-browser").setup()
@@ -107,257 +115,6 @@ local plugins = {
       require("plugins.configs.telescope-file-browser").load_keymaps()
     end,
   },
-
-  ["lewis6991/gitsigns.nvim"] = {
-    event = "BufEnter",
-    config = function()
-      require "plugins.configs.gitsigns"
-    end,
-  },
-
-  ["windwp/nvim-autopairs"] = {
-    after = "nvim-cmp",
-    event = "InsertEnter",
-    config = function()
-      require "plugins.configs.autopairs"
-    end,
-  },
-
-  ["nvim-treesitter/nvim-treesitter"] = {
-    run = ":TSUpdate",
-    event = { "BufRead", "BufWinEnter", "BufNewFile" },
-    cmd = {
-      "TSInstall",
-      "TSInstallInfo",
-      "TSInstallSync",
-      "TSUninstall",
-      "TSUpdate",
-      "TSUpdateSync",
-      "TSDisableAll",
-      "TSEnableAll",
-    },
-    config = function()
-      require "plugins.configs.treesitter"
-    end,
-  },
-
-  -- TODO: depends on treesitter, it's not loaded by default so the keymap not loaded
-  ["JoosepAlviste/nvim-ts-context-commentstring"] = { after = "nvim-treesitter" },
-  ["numToStr/Comment.nvim"] = {
-    module = { "Comment", "Comment.api" },
-    keys = { "gc", "gb", "g<", "g>" },
-    config = function()
-      require("plugins.configs.comment").setup()
-    end,
-    setup = function()
-      require("plugins.configs.comment").load_keymaps()
-    end,
-  },
-
-  ["jose-elias-alvarez/null-ls.nvim"] = {
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      require "plugins.configs.null-ls"
-    end,
-  },
-
-  ["jayp0521/mason-null-ls.nvim"] = {
-    after = { "mason.nvim", "null-ls.nvim" },
-    config = function()
-      require "plugins.configs.mason-null-ls"
-    end,
-  },
-
-  -- Package Manager
-  ["williamboman/mason.nvim"] = {
-    config = function()
-      require "plugins.configs.mason"
-    end,
-  },
-
-  -- Built-in LSP
-  ["neovim/nvim-lspconfig"] = {
-    after = { "ui" },
-    config = function()
-      require "plugins.configs.lsp"
-    end,
-  },
-
-  -- LSP manager
-  ["williamboman/mason-lspconfig.nvim"] = {
-    after = { "mason.nvim", "nvim-lspconfig", "ui" },
-    config = function()
-      require "plugins.configs.mason-lspconfig"
-    end,
-  },
-
-  ["ray-x/lsp_signature.nvim"] = {
-    event = "BufRead",
-    config = function()
-      require "plugins.configs.lsp_signature"
-    end,
-  },
-
-  -- ["folke/trouble.nvim"] = {
-  --   requires = "kyazdani42/nvim-web-devicons",
-  --   config = function()
-  --     require("trouble").setup {}
-  --   end,
-  -- },
-
-  -- TODO: also depends on treesitter for context awareness
-  ["lukas-reineke/indent-blankline.nvim"] = {
-    -- event = "BufRead",
-    after = "nvim-treesitter",
-    config = function()
-      require("plugins.configs.blankline").load_keymaps()
-      require("plugins.configs.blankline").setup()
-    end,
-  },
-
-  -- Utilities
-  ["rcarriga/nvim-notify"] = {
-    event = "VimEnter",
-    config = function()
-      require "plugins.configs.notify"
-    end,
-  },
-
-  -- load luasnips + cmp related in insert mode only
-  ["rafamadriz/friendly-snippets"] = {
-    module = { "cmp", "cmp_nvim_lsp" },
-    event = "InsertEnter",
-  },
-
-  ["tzachar/cmp-tabnine"] = {
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp",
-    after = "cmp-path",
-    config = function()
-      local tabnine = require "cmp_tabnine.config"
-      tabnine.setup {
-        max_lines = 1000,
-        max_num_results = 20,
-        sort = true,
-        run_on_every_keystroke = true,
-        snippet_placeholder = "..",
-        ignored_file_types = {
-          -- default is not to ignore
-          -- uncomment to ignore in lua:
-          -- lua = true
-        },
-        show_prediction_strength = false,
-      }
-    end,
-  },
-
-  -- TODO: replace this with neotree.vim
-  -- ["kyazdani42/nvim-tree.lua"] = {
-  --   ft = "alpha",
-  --   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-  --   config = function()
-  --     require("plugins.configs.nvimtree").setup()
-  --   end,
-  --   setup = function()
-  --     require("plugins.configs.nvimtree").load_keymaps()
-  --   end,
-  -- },
-  --
-  ["akinsho/toggleterm.nvim"] = {
-    cmd = "ToggleTerm",
-    module = { "toggleterm", "toggleterm.terminal" },
-    config = function()
-      require("plugins.configs.toggleterm").setup()
-    end,
-    setup = function()
-      require("plugins.configs.toggleterm").load_keymaps()
-    end,
-  },
-
-  -- ["nvim-neo-tree/neo-tree.nvim"] = {
-  --   branch = "v2.x",
-  --   module = "neo-tree",
-  --   cmd = "Neotree",
-  --   requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
-  --   setup = function()
-  --     vim.g.neo_tree_remove_legacy_commands = true
-  --     require("plugins.configs.neotree").load_keymaps()
-  --   end,
-  --   config = function()
-  --     require("plugins.configs.neotree").setup()
-  --   end,
-  -- },
-
-  -- Trouble with cmp source, can't setup all at once, probaly move to astronvim add cmp source
-  -- Clean up lsp config files
-  -- Handle issue whereby the cmp-tabnine does not have function {} warp
-  -- install ls null for formatter
-  -- setup popup for creatig file etc
-  -- support load custom server settings
-  ["hrsh7th/nvim-cmp"] = {
-    after = "friendly-snippets",
-    config = function()
-      require "plugins.configs.cmp"
-    end,
-  },
-
-  ["L3MON4D3/LuaSnip"] = {
-    wants = "friendly-snippets",
-    after = "nvim-cmp",
-    config = function()
-      require "plugins.configs.luasnip"
-    end,
-  },
-
-  ["saadparwaiz1/cmp_luasnip"] = {
-    after = "LuaSnip",
-  },
-
-  ["hrsh7th/cmp-nvim-lua"] = {
-    after = "cmp_luasnip",
-  },
-
-  ["hrsh7th/cmp-nvim-lsp"] = {
-    after = "cmp-nvim-lua",
-  },
-
-  ["hrsh7th/cmp-buffer"] = {
-    after = "cmp-nvim-lsp",
-  },
-
-  ["hrsh7th/cmp-path"] = {
-    after = "cmp-buffer",
-  },
-
-  ["folke/which-key.nvim"] = {
-    after = {
-      "telescope.nvim",
-      "indent-blankline.nvim",
-      "ui",
-      "Comment.nvim",
-      "nvim-cmp",
-      -- "neo-tree.nvim",
-      "toggleterm.nvim",
-      "mason-lspconfig.nvim",
-    },
-    module = "which-key",
-    keys = "<leader>",
-    config = function()
-      require("plugins.configs.which-key").setup()
-      require("plugins.configs.which-key").register()
-    end,
-  },
-
-  -- Better buffer closing
-  ["famiu/bufdelete.nvim"] = { cmd = { "Bdelete", "Bwipeout" } },
-
-  -- TODO: add diffview
-
-  -- Speed up deffered plugins
-  ["lewis6991/impatient.nvim"] = {},
-
-  ["wakatime/vim-wakatime"] = {},
-  ["catppuccin/nvim"] = { as = "catppuccin" },
 }
 
-require("plugins.configs.packer").run(plugins)
+require("plugins.boostrap").int(plugins)

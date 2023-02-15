@@ -1,14 +1,12 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
   local loaded, telescope = pcall(require, "telescope")
   if not loaded then
     return
   end
 
-  vim.g.theme_switcher_loaded = true
-
-  require("base46").load_highlight "telescope"
+  -- vim.g.theme_switcher_loaded = true
 
   local options = {
     defaults = {
@@ -64,7 +62,6 @@ M.setup = function()
         },
       },
     },
-
     extensions_list = { "themes" },
   }
 
@@ -79,7 +76,7 @@ M.setup = function()
 end
 
 M.load_keymaps = function()
-  local maps = { n = {}, v = {}, t = {}, [""] = {} }
+  local maps = { n = {}, v = {}, t = {},[""] = {} }
   maps.n["<leader>fw"] = {
     function()
       require("telescope.builtin").live_grep()
