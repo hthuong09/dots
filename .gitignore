@@ -3,6 +3,7 @@
 *.tmp
 
 /.config/nvim/plugged
+/.config/nvim/plugin
 /.gdots
 /.local/share
 

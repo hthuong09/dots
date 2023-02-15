@@ -2,8 +2,13 @@
 
 bspc config external_rules_command "$(dirname $0)/external_rules"
 
-bspc monitor eDP1 -d web term editor calendar others
-bspc monitor HDMI2 -d slack calendar meeting
+if xrandr | grep "DP2 connected"; then
+  bspc monitor DP2 -d web term editor calendar others
+  bspc monitor eDP1 -d web
+else
+  bspc monitor eDP1 -d web term editor calendar others
+fi
+
 
 bspc config -m ^1 border_width  2
 bspc config -m ^2 border_width  2
@@ -41,12 +46,16 @@ bspc rule -a kitty desktop='^2' follow=on
 bspc rule -a code-oss desktop='^3' follow=on
 
 # wallpaper
-feh --bg-fill ~/.wallpapers/ganbaranaito.jpg &
+feh --bg-fill --randomize ~/.wallpapers/*
 
 #bar
 polybar-launch &
 
+# put this to visudo
+# %wheel ALL=NOPASSWD: /usr/bin/xkeysnail
+sudo /usr/bin/xkeysnail --quiet --watch ~/.config/kinto/kinto.py &
+
 compton &
 dunst &
-ulauncher --hide-window &
+# ulauncher --hide-window &
 start-oneko &

@@ -33,6 +33,11 @@ if hash ls++ 2>/dev/null; then
     alias ls='ls++'
 fi
 
+# use exa if exists
+if hash exa 2>/dev/null; then
+  alias ls='exa --grid --git --icons'
+fi
+
 # show colour list
 showcolours() {
     for i in {0..255} ; do

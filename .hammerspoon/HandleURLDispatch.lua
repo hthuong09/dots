@@ -34,6 +34,10 @@ function module(logger)
 						openLinkWithChromePorifle(url, workProfile)
 						return
 					end
+					if triggerApp:name() == "Raycast" and url:find("https://meet.google.com", 1, true) == 1 then
+						openLinkWithChromePorifle(url, workProfile)
+						return
+					end
 				end
 				openLinkWithChromePorifle(url, personalProfile)
 			end,
