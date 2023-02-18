@@ -5,7 +5,6 @@ function M.config()
 	if not present then
 		return
 	end
-	print("loadedd")
 
 	noice.setup({
 		lsp = {
