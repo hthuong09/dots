@@ -1,6 +1,12 @@
-local present, bufferline = pcall(require, 'bufferline')
-if not present then
-  return
+local M = {}
+
+function M.config()
+	local present, bufferline = pcall(require, "bufferline")
+	if not present then
+		return
+	end
+
+	bufferline.setup({})
 end
 
-bufferline.setup {}
+return M

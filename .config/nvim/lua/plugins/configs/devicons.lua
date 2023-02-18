@@ -1,147 +1,153 @@
-local loaded, devicons = pcall(require, "nvim-web-devicons")
-if loaded then
-  local options = {
-    override = {
-      default_icon = {
-        icon = "",
-        name = "Default",
-      },
+local M = {}
 
-      c = {
-        icon = "",
-        name = "c",
-      },
+function M.config()
+	local loaded, devicons = pcall(require, "nvim-web-devicons")
+	if loaded then
+		local options = {
+			override = {
+				default_icon = {
+					icon = "",
+					name = "Default",
+				},
 
-      css = {
-        icon = "",
-        name = "css",
-      },
+				c = {
+					icon = "",
+					name = "c",
+				},
 
-      deb = {
-        icon = "",
-        name = "deb",
-      },
+				css = {
+					icon = "",
+					name = "css",
+				},
 
-      Dockerfile = {
-        icon = "",
-        name = "Dockerfile",
-      },
+				deb = {
+					icon = "",
+					name = "deb",
+				},
 
-      html = {
-        icon = "",
-        name = "html",
-      },
+				Dockerfile = {
+					icon = "",
+					name = "Dockerfile",
+				},
 
-      jpeg = {
-        icon = "",
-        name = "jpeg",
-      },
+				html = {
+					icon = "",
+					name = "html",
+				},
 
-      jpg = {
-        icon = "",
-        name = "jpg",
-      },
+				jpeg = {
+					icon = "",
+					name = "jpeg",
+				},
 
-      js = {
-        icon = "",
-        name = "js",
-      },
+				jpg = {
+					icon = "",
+					name = "jpg",
+				},
 
-      kt = {
-        icon = "",
-        name = "kt",
-      },
+				js = {
+					icon = "",
+					name = "js",
+				},
 
-      lock = {
-        icon = "",
-        name = "lock",
-      },
+				kt = {
+					icon = "",
+					name = "kt",
+				},
 
-      lua = {
-        icon = "",
-        name = "lua",
-      },
+				lock = {
+					icon = "",
+					name = "lock",
+				},
 
-      mp3 = {
-        icon = "",
-        name = "mp3",
-      },
+				lua = {
+					icon = "",
+					name = "lua",
+				},
 
-      mp4 = {
-        icon = "",
-        name = "mp4",
-      },
+				mp3 = {
+					icon = "",
+					name = "mp3",
+				},
 
-      out = {
-        icon = "",
-        name = "out",
-      },
+				mp4 = {
+					icon = "",
+					name = "mp4",
+				},
 
-      png = {
-        icon = "",
-        name = "png",
-      },
+				out = {
+					icon = "",
+					name = "out",
+				},
 
-      py = {
-        icon = "",
-        name = "py",
-      },
+				png = {
+					icon = "",
+					name = "png",
+				},
 
-      ["robots.txt"] = {
-        icon = "ﮧ",
-        name = "robots",
-      },
+				py = {
+					icon = "",
+					name = "py",
+				},
 
-      toml = {
-        icon = "",
-        name = "toml",
-      },
+				["robots.txt"] = {
+					icon = "ﮧ",
+					name = "robots",
+				},
 
-      ts = {
-        icon = "ﯤ",
-        name = "ts",
-      },
+				toml = {
+					icon = "",
+					name = "toml",
+				},
 
-      ttf = {
-        icon = "",
-        name = "TrueTypeFont",
-      },
+				ts = {
+					icon = "ﯤ",
+					name = "ts",
+				},
 
-      rb = {
-        icon = "",
-        name = "rb",
-      },
+				ttf = {
+					icon = "",
+					name = "TrueTypeFont",
+				},
 
-      rpm = {
-        icon = "",
-        name = "rpm",
-      },
+				rb = {
+					icon = "",
+					name = "rb",
+				},
 
-      vue = {
-        icon = "﵂",
-        name = "vue",
-      },
+				rpm = {
+					icon = "",
+					name = "rpm",
+				},
 
-      woff = {
-        icon = "",
-        name = "WebOpenFontFormat",
-      },
+				vue = {
+					icon = "﵂",
+					name = "vue",
+				},
 
-      woff2 = {
-        icon = "",
-        name = "WebOpenFontFormat2",
-      },
+				woff = {
+					icon = "",
+					name = "WebOpenFontFormat",
+				},
 
-      xz = {
-        icon = "",
-        name = "xz",
-      },
+				woff2 = {
+					icon = "",
+					name = "WebOpenFontFormat2",
+				},
 
-      zip = {
-        icon = "",
-        name = "zip",
-      },
-    }
-  }
-  devicons.setup(options)
+				xz = {
+					icon = "",
+					name = "xz",
+				},
+
+				zip = {
+					icon = "",
+					name = "zip",
+				},
+			},
+		}
+		devicons.setup(options)
+	end
 end
+
+return M
