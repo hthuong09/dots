@@ -43,6 +43,7 @@ function M.config()
 	base46.load_highlight("devicons")
 	base46.load_highlight("alpha")
 	base46.load_highlight("bufferline")
+	base46.load_highlight("notify")
 end
 
 return M
