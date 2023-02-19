@@ -151,8 +151,14 @@ local plugins = {
 		end,
 		requires = {
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
+			-- "rcarriga/nvim-notify",
 		},
+	},
+	["ray-x/lsp_signature.nvim"] = {
+		after = { "nvim-lspconfig" },
+		config = function()
+			require("plugins.configs.lsp_signature").config()
+		end,
 	},
 }
 
