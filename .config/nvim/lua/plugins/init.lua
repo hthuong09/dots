@@ -160,6 +160,12 @@ local plugins = {
 			require("plugins.configs.lsp_signature").config()
 		end,
 	},
+
+	["Darazaki/indent-o-matic"] = {
+		config = function()
+			require("plugins.configs.indent-o-matic").config()
+		end,
+	},
 }
 
 require("plugins.boostrap").int(plugins)
