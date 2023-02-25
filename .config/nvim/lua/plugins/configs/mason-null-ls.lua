@@ -9,6 +9,7 @@ function M.config()
 		ensure_installed = {
 			"stylua",
 			"eslint",
+			"cspell",
 		},
 	})
 	mason_null_ls.setup_handlers({
@@ -20,6 +21,19 @@ function M.config()
 					return
 				end
 				for _, type in ipairs({ "diagnostics", "formatting", "code_actions", "completion", "hover" }) do
+					if source == "cspell" then
+						null_ls.register(null_ls.builtins.diagnostics.cspell.with({
+							diagnostics_postprocess = function(diagnostic)
+								diagnostic.severity = vim.diagnostic.severity["WARN"]
+							end,
+							condition = function()
+								return vim.fn.executable("cspell") > 0
+							end,
+						}))
+						null_ls.register(null_ls.builtins.code_actions.cspell)
+						return
+					end
+
 					local builtin = require("null-ls.builtins._meta." .. type)
 					if builtin[source] then
 						null_ls.register(null_ls.builtins[type][source])
