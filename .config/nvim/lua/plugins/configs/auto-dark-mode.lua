@@ -5,7 +5,6 @@ function M.config()
 	if not loaded then
 		return
 	end
-	vim.notify("in")
 	auto_dark_mode.setup({
 		update_interval = 1000,
 		set_dark_mode = function()

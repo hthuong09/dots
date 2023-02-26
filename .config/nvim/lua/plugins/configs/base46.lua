@@ -7,11 +7,7 @@ function M.config()
 	end
 
 	base46.setup({
-		hl_add = {
-			AlphaButtonsShortcut = {
-				fg = "#61afef",
-			},
-		},
+		hl_add = {},
 		hl_override = {
 			DiffAdd = { fg = "#a4b595" },
 			DiffChange = { fg = "#DE935F" },

@@ -169,7 +169,6 @@ local plugins = {
 	["f-person/auto-dark-mode.nvim"] = {
 		after = { "base46" },
 		config = function()
-			vim.notify("1111111")
 			require("plugins.configs.auto-dark-mode").config()
 		end,
 	},
