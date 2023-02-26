@@ -16,13 +16,13 @@ function M.config()
 			DiffAdd = { fg = "#a4b595" },
 			DiffChange = { fg = "#DE935F" },
 
-			AlphaButtons = { fg = "#81A1C1" },
+			-- AlphaButtons = { fg = "#81A1C1" },
 			-- Normal = {
 			--   bg = "NONE"
 			-- }
-			LspReferenceText = { bg = "#3e4451", fg = "NONE" },
-			LspReferenceRead = { bg = "#3e4451", fg = "NONE" },
-			LspReferenceWrite = { bg = "#3e4451", fg = "NONE" },
+			-- LspReferenceText = { bg = "#3e4451", fg = "NONE" },
+			-- LspReferenceRead = { bg = "#3e4451", fg = "NONE" },
+			-- LspReferenceWrite = { bg = "#3e4451", fg = "NONE" },
 		},
 		changed_themes = {
 			tomorrow_night = {
@@ -44,6 +44,13 @@ function M.config()
 	base46.load_highlight("alpha")
 	base46.load_highlight("bufferline")
 	base46.load_highlight("notify")
+end
+
+function M.toggle_mode(mode)
+	local dark_theme = "tomorrow_night"
+	local light_theme = "ayu-light"
+	vim.g.base46_theme = mode == "light" and light_theme or dark_theme
+	require("base46").load_all_highlights()
 end
 
 return M
