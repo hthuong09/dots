@@ -22,15 +22,35 @@ function M.config()
 				end
 				for _, type in ipairs({ "diagnostics", "formatting", "code_actions", "completion", "hover" }) do
 					if source == "cspell" then
+						local config_file = vim.fn.expand("~/.cspell.json")
+						-- check if config_file exits
+						if vim.fn.filereadable(config_file) == 0 then
+							local cspell_json = {
+								version = "0.2",
+								language = "en",
+								words = {},
+								flagWords = {},
+							}
+							local cspell_json_str = vim.json.encode(cspell_json)
+							vim.fn.writefile({ cspell_json_str }, config_file)
+						end
+
 						null_ls.register(null_ls.builtins.diagnostics.cspell.with({
+							extra_args = { "--config", config_file },
 							diagnostics_postprocess = function(diagnostic)
-								diagnostic.severity = vim.diagnostic.severity["WARN"]
+								diagnostic.severity = vim.diagnostic.severity.HINT
 							end,
 							condition = function()
 								return vim.fn.executable("cspell") > 0
 							end,
 						}))
-						null_ls.register(null_ls.builtins.code_actions.cspell)
+						null_ls.register(null_ls.builtins.code_actions.cspell.with({
+							config = {
+								find_json = function(cwd)
+									return config_file
+								end,
+							},
+						}))
 						return
 					end
 
