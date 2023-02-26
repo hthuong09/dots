@@ -19,10 +19,10 @@ function M.int(plugins)
 		plugins[key][1] = key
 		final_plugins[#final_plugins + 1] = plugins[key]
 	end
-	-- require("packer").init({
-	-- 	snapshot = "default",
-	-- 	snapshot_path = vim.fn.stdpath("config") .. "/packer_snapshots/",
-	-- })
+	require("packer").init({
+		snapshot = "default",
+		snapshot_path = vim.fn.stdpath("config") .. "/packer_snapshots/",
+	})
 	return require("packer").startup(function(use)
 		use("wbthomason/packer.nvim")
 
