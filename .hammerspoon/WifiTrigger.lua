@@ -2,7 +2,7 @@ function module(logger)
 	logger:i("[WifiTrigger] module loaded")
 	logger:i(hs.inspect.inspect(hs.audiodevice.allOutputDevices()))
 	-- using hammerspoon hs.wifi.watcher to watch wifi changes and trigger events
-	hs.wifi.watcher
+	toPreventGarbageCollection = hs.wifi.watcher
 		.new(function()
 			officeSSID = "SHOPBACK"
 			logger:i("wifi changed")
