@@ -289,10 +289,46 @@ function M.config()
 
 				require("core.utils").set_mappings(lsp_mappings, { buffer = bufnr })
 			end
-
+			if server == "tsserver" then
+				opts = M.tsserver(opts)
+			end
 			require("lspconfig")[server].setup(opts)
 		end,
 	})
+end
+
+function M.tsserver(opts)
+	local function organize_imports()
+		local params = {
+			command = "_typescript.organizeImports",
+			arguments = { vim.api.nvim_buf_get_name(0) },
+			title = "",
+		}
+		vim.lsp.buf.execute_command(params)
+	end
+
+	opts.commands = {
+		OrganizeImports = {
+			organize_imports,
+			description = "Organize Imports",
+		},
+	}
+
+	local opts_on_attach = opts.on_attach
+
+	opts.on_attach = function(client, bufnr)
+		opts_on_attach(client, bufnr)
+		local mappings = { n = {} }
+		mappings.n["<leader>lo"] = {
+			function()
+				organize_imports()
+			end,
+			desc = "Organize Imports",
+		}
+		require("core.utils").set_mappings(mappings, { buffer = bufnr })
+	end
+
+	return opts
 end
 
 return M
