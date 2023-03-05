@@ -172,6 +172,7 @@ local plugins = {
 			require("plugins.configs.auto-dark-mode").config()
 		end,
 	},
+	["wakatime/vim-wakatime"] = {},
 }
 
 require("plugins.boostrap").int(plugins)
