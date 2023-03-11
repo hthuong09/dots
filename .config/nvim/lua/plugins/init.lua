@@ -1,8 +1,8 @@
 local plugins = {
 	-- Core
-	["lewis6991/impatient.nvim"] = {},
+	-- ["lewis6991/impatient.nvim"] = {},
 	["nvim-lua/plenary.nvim"] = {
-		module = "plenary",
+		-- module = "plenary",
 	},
 	-- UI
 	["hthuong09/base46"] = {
@@ -17,24 +17,24 @@ local plugins = {
 	},
 	["JoosepAlviste/nvim-ts-context-commentstring"] = {},
 	["numToStr/Comment.nvim"] = {
-		after = { "nvim-ts-context-commentstring" },
+		-- after = { "nvim-ts-context-commentstring" },
 		config = function()
 			require("plugins.configs.comment").config()
 		end,
 	},
 	["windwp/nvim-autopairs"] = {
-		after = { "nvim-cmp" },
+		-- after = { "nvim-cmp" },
 		config = function()
 			require("plugins.configs.autopairs").config()
 		end,
 	},
 	["nvim-treesitter/nvim-treesitter"] = {
-		requires = {
-			{ "windwp/nvim-autopairs", opt = true },
-			{ "JoosepAlviste/nvim-ts-context-commentstring", opt = true },
-			{ "lukas-reineke/indent-blankline.nvim", opt = true },
+		dependencies = {
+			{ "windwp/nvim-autopairs", lazy = true },
+			{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+			{ "lukas-reineke/indent-blankline.nvim", lazy = true },
 		},
-		run = function()
+		build = function()
 			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
 			ts_update()
 		end,
@@ -50,7 +50,7 @@ local plugins = {
 	},
 	["neovim/nvim-lspconfig"] = {},
 	["williamboman/mason-lspconfig.nvim"] = {
-		after = { "mason.nvim", "nvim-lspconfig" },
+		-- after = { "mason.nvim", "nvim-lspconfig" },
 		config = function()
 			require("plugins.configs.lsp").config()
 		end,
@@ -62,7 +62,7 @@ local plugins = {
 	["L3MON4D3/LuaSnip"] = {},
 	["saadparwaiz1/cmp_luasnip"] = {},
 	["hrsh7th/nvim-cmp"] = {
-		after = { "base46" },
+		-- after = { "base46" },
 		config = function()
 			require("plugins.configs.cmp").config()
 		end,
@@ -70,7 +70,7 @@ local plugins = {
 
 	-- Moving around
 	["nvim-telescope/telescope.nvim"] = {
-		tag = "0.1.x",
+		version = "0.1.x",
 		config = function()
 			require("plugins.configs.telescope").config()
 			require("plugins.configs.telescope").load_keymaps()
@@ -112,13 +112,13 @@ local plugins = {
 		config = function()
 			require("plugins.configs.telescope-file-browser").config()
 		end,
-		setup = function()
+		init = function()
 			require("plugins.configs.telescope-file-browser").load_keymaps()
 		end,
 	},
 	["nvim-telescope/telescope-ui-select.nvim"] = {},
 	["nvim-telescope/telescope-fzf-native.nvim"] = {
-		run = "make",
+		build = "make",
 	},
 	["jose-elias-alvarez/null-ls.nvim"] = {
 		event = { "BufRead", "BufNewFile" },
@@ -127,7 +127,7 @@ local plugins = {
 		end,
 	},
 	["jayp0521/mason-null-ls.nvim"] = {
-		after = { "mason.nvim", "null-ls.nvim" },
+		-- after = { "mason.nvim", "null-ls.nvim" },
 		config = function()
 			require("plugins.configs.mason-null-ls").config()
 		end,
@@ -140,7 +140,7 @@ local plugins = {
 		end,
 	},
 	["zbirenbaum/copilot-cmp"] = {
-		after = { "copilot.lua" },
+		-- after = { "copilot.lua" },
 		config = function()
 			require("plugins.configs.copilot-cmp").config()
 		end,
@@ -149,13 +149,13 @@ local plugins = {
 		config = function()
 			require("plugins.configs.noice").config()
 		end,
-		requires = {
+		dependencies = {
 			"MunifTanjim/nui.nvim",
 			-- "rcarriga/nvim-notify",
 		},
 	},
 	["ray-x/lsp_signature.nvim"] = {
-		after = { "nvim-lspconfig" },
+		-- after = { "nvim-lspconfig" },
 		config = function()
 			require("plugins.configs.lsp_signature").config()
 		end,
@@ -167,7 +167,7 @@ local plugins = {
 		end,
 	},
 	["f-person/auto-dark-mode.nvim"] = {
-		after = { "base46" },
+		-- after = { "base46" },
 		config = function()
 			require("plugins.configs.auto-dark-mode").config()
 		end,

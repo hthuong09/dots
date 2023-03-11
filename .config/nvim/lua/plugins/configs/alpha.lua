@@ -79,6 +79,14 @@ function M.config()
 		},
 		headerPaddingTop = { type = "padding", val = headerPadding },
 		headerPaddingBottom = { type = "padding", val = 2 },
+		footer = {
+			type = "text",
+			val = require("alpha.fortune")(),
+			opts = {
+				position = "center",
+				hl = "AlphaButtons",
+			},
+		},
 	}
 
 	alpha.setup({
@@ -87,6 +95,7 @@ function M.config()
 			options.header,
 			options.headerPaddingBottom,
 			options.buttons,
+			options.footer,
 		},
 		opts = {},
 	})
