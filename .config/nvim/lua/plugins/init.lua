@@ -1,9 +1,6 @@
 local plugins = {
 	-- Core
-	-- ["lewis6991/impatient.nvim"] = {},
-	["nvim-lua/plenary.nvim"] = {
-		-- module = "plenary",
-	},
+	["nvim-lua/plenary.nvim"] = {},
 	-- UI
 	["hthuong09/base46"] = {
 		config = function()
@@ -11,24 +8,25 @@ local plugins = {
 		end,
 	},
 	["lukas-reineke/indent-blankline.nvim"] = {
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("plugins.configs.indent-blankline").config()
 		end,
 	},
-	["JoosepAlviste/nvim-ts-context-commentstring"] = {},
 	["numToStr/Comment.nvim"] = {
-		-- after = { "nvim-ts-context-commentstring" },
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 		config = function()
 			require("plugins.configs.comment").config()
 		end,
 	},
 	["windwp/nvim-autopairs"] = {
-		-- after = { "nvim-cmp" },
 		config = function()
 			require("plugins.configs.autopairs").config()
 		end,
 	},
 	["nvim-treesitter/nvim-treesitter"] = {
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			{ "windwp/nvim-autopairs", lazy = true },
 			{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
@@ -43,33 +41,60 @@ local plugins = {
 		end,
 	},
 	-- LSP
+	["neovim/nvim-lspconfig"] = {
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+	},
 	["williamboman/mason.nvim"] = {
 		config = function()
 			require("plugins.configs.mason").config()
 		end,
 	},
-	["neovim/nvim-lspconfig"] = {},
 	["williamboman/mason-lspconfig.nvim"] = {
-		-- after = { "mason.nvim", "nvim-lspconfig" },
+		lazy = true,
 		config = function()
 			require("plugins.configs.lsp").config()
 		end,
 	},
 	-- Completion
-	["hrsh7th/cmp-nvim-lsp"] = {},
-	["hrsh7th/cmp-buffer"] = {},
-	["hrsh7th/cmp-path"] = {},
-	["L3MON4D3/LuaSnip"] = {},
-	["saadparwaiz1/cmp_luasnip"] = {},
 	["hrsh7th/nvim-cmp"] = {
-		-- after = { "base46" },
+		event = "InsertEnter",
 		config = function()
 			require("plugins.configs.cmp").config()
 		end,
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+		},
 	},
 
 	-- Moving around
+	["nvim-telescope/telescope-file-browser.nvim"] = {
+		lazy = true,
+		config = function()
+			require("plugins.configs.telescope-file-browser").config()
+		end,
+		init = function()
+			require("plugins.configs.telescope-file-browser").load_keymaps()
+		end,
+	},
+	["nvim-telescope/telescope-ui-select.nvim"] = {
+		lazy = true,
+	},
+	["nvim-telescope/telescope-fzf-native.nvim"] = {
+		lazy = true,
+		build = "make",
+	},
 	["nvim-telescope/telescope.nvim"] = {
+		dependencies = {
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim",
+		},
+		cmd = "Telescope",
 		version = "0.1.x",
 		config = function()
 			require("plugins.configs.telescope").config()
@@ -77,8 +102,7 @@ local plugins = {
 		end,
 	},
 	["folke/which-key.nvim"] = {
-		module = "which-key",
-		event = "VimEnter",
+		event = "VeryLazy",
 		keys = "<leader>",
 		config = function()
 			require("plugins.configs.which-key").config()
@@ -86,7 +110,7 @@ local plugins = {
 		end,
 	},
 	["lewis6991/gitsigns.nvim"] = {
-		event = "BufEnter",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("plugins.configs.gitsigns").config()
 		end,
@@ -102,23 +126,14 @@ local plugins = {
 			require("plugins.configs.bufferline").config()
 		end,
 	},
-	["famiu/bufdelete.nvim"] = {},
+	["famiu/bufdelete.nvim"] = {
+		cmd = { "Bdelete", "Bwipeout" },
+	},
 	["goolord/alpha-nvim"] = {
+		event = "VimEnter",
 		config = function()
 			require("plugins.configs.alpha").config()
 		end,
-	},
-	["nvim-telescope/telescope-file-browser.nvim"] = {
-		config = function()
-			require("plugins.configs.telescope-file-browser").config()
-		end,
-		init = function()
-			require("plugins.configs.telescope-file-browser").load_keymaps()
-		end,
-	},
-	["nvim-telescope/telescope-ui-select.nvim"] = {},
-	["nvim-telescope/telescope-fzf-native.nvim"] = {
-		build = "make",
 	},
 	["jose-elias-alvarez/null-ls.nvim"] = {
 		event = { "BufRead", "BufNewFile" },
@@ -127,41 +142,41 @@ local plugins = {
 		end,
 	},
 	["jayp0521/mason-null-ls.nvim"] = {
-		-- after = { "mason.nvim", "null-ls.nvim" },
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("plugins.configs.mason-null-ls").config()
 		end,
 	},
 	["zbirenbaum/copilot.lua"] = {
 		cmd = "Copilot",
-		event = "InsertEnter",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("plugins.configs.copilot").config()
 		end,
 	},
 	["zbirenbaum/copilot-cmp"] = {
-		-- after = { "copilot.lua" },
 		config = function()
 			require("plugins.configs.copilot-cmp").config()
 		end,
 	},
 	["folke/noice.nvim"] = {
+		event = "VeryLazy",
 		config = function()
 			require("plugins.configs.noice").config()
 		end,
 		dependencies = {
-			"MunifTanjim/nui.nvim",
+			{ "MunifTanjim/nui.nvim", lazy = true },
 			-- "rcarriga/nvim-notify",
 		},
 	},
 	["ray-x/lsp_signature.nvim"] = {
-		-- after = { "nvim-lspconfig" },
 		config = function()
 			require("plugins.configs.lsp_signature").config()
 		end,
 	},
 
 	["Darazaki/indent-o-matic"] = {
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("plugins.configs.indent-o-matic").config()
 		end,
@@ -172,7 +187,9 @@ local plugins = {
 			require("plugins.configs.auto-dark-mode").config()
 		end,
 	},
-	["wakatime/vim-wakatime"] = {},
+	["wakatime/vim-wakatime"] = {
+		event = "VeryLazy",
+	},
 }
 
 require("plugins.boostrap").int(plugins)
