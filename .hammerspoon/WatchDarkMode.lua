@@ -11,7 +11,6 @@ function module(logger)
 
 	local current_theme = ""
 	local function watchDarkMode()
-		logger:i("Start checking dark mode")
 		local darkMode = isDarkMode()
 		local theme = ""
 		if darkMode == "Dark" then
