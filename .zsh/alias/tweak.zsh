@@ -20,10 +20,10 @@ alias more='less'
 alias ping='ping -c 5'
 
 # fast clear screen
-alias c='clear'
+alias c='clear && printf "\e[3J"'
 
 # windows alias in case I forgot that I'm using linux
-alias cls='clear'
+alias cls='clear && printf "\e[3J"'
 
 # sudo pacman
 alias pacman='sudo pacman'
