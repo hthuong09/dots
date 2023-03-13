@@ -3,7 +3,6 @@ function module(logger)
 	logger:i("[WifiTrigger] module loaded")
 	logger:i(hs.inspect.inspect(hs.audiodevice.allOutputDevices()))
 	local knownWifi = {
-		"SHOPBACK",
 		"HOMELAB",
 		"Hong Bui House 4.2_5G",
 		"Hong Bui House 4.2",
