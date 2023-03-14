@@ -7,6 +7,12 @@ function M.config()
 	end
 
 	noice.setup({
+		routes = {
+			{
+				view = "notify",
+				filter = { event = "msg_showmode" },
+			},
+		},
 		views = {
 			cmdline_popup = { -- minimal cmdline_popup
 				border = {

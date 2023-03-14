@@ -40,6 +40,7 @@ function M.config()
 	base46.load_highlight("alpha")
 	base46.load_highlight("bufferline")
 	base46.load_highlight("notify")
+	base46.load_highlight("indentscope")
 end
 
 function M.toggle_mode(mode)
