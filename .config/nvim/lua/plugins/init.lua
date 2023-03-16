@@ -208,6 +208,11 @@ local plugins = {
 			require("mini.indentscope").setup(opts)
 		end,
 	},
+	["NvChad/nvim-colorizer.lua"] = {
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
 }
 
 require("plugins.boostrap").int(plugins)
