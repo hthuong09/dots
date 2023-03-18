@@ -1,6 +1,7 @@
 # Temporary files
 *.bak
 *.tmp
+.DS_Store
 
 /.config/nvim/plugged
 /.config/nvim/plugin
