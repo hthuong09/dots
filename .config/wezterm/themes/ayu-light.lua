@@ -18,13 +18,11 @@ return {
 			bg_color = "#999",
 			fg_color = "#444",
 			italic = false,
-			bold = false,
 		},
 		inactive_tab_hover = {
 			bg_color = "#f0ede4",
 			fg_color = "#5b6673",
 			italic = true,
-			bold = false,
 		},
 	},
 }

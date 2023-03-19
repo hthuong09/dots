@@ -13,15 +13,16 @@ function M.config()
 			DiffChange = { fg = "#DE935F" },
 
 			-- AlphaButtons = { fg = "#81A1C1" },
-			-- Normal = {
-			--   bg = "NONE"
-			-- }
+			Normal = {
+				bg = "NONE",
+			},
 			-- LspReferenceText = { bg = "#3e4451", fg = "NONE" },
 			-- LspReferenceRead = { bg = "#3e4451", fg = "NONE" },
 			-- LspReferenceWrite = { bg = "#3e4451", fg = "NONE" },
 		},
 		changed_themes = {
 			tomorrow_night = {
+				background = "none",
 				base_16 = {
 					base08 = "#81ac6f",
 				},

@@ -14,7 +14,6 @@ end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local theme = get_theme(wezterm.gui.get_appearance())
-	wezterm.log_warn(theme)
 	local tab_bar = theme.tab_bar
 	local is_last_tab = tab.tab_index + 1 == #tabs
 
@@ -49,10 +48,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	return create_tab_components(tab_bar.background, tab_bar.inactive_tab.bg_color, "╱")
 end)
 
+local theme = get_theme(wezterm.gui.get_appearance())
+
 return {
 	font = wezterm.font({ family = "Fira Code" }),
 	font_size = 13.5,
-	line_height = 1.3,
+	line_height = 1.25,
 	font_rules = {
 		{
 			intensity = "Bold",
@@ -72,14 +73,17 @@ return {
 		},
 	},
 
+	window_decorations = "RESIZE",
 	window_padding = {
 		left = 10,
 		right = 10,
 		top = 10,
-		bottom = 0,
+		bottom = 10,
 	},
 
-	colors = get_theme(wezterm.gui.get_appearance()),
+	scrollback_lines = 10000,
+
+	colors = theme,
 
 	use_fancy_tab_bar = false,
 
@@ -91,5 +95,77 @@ return {
 		brightness = 0.8,
 		saturation = 0.6,
 	},
-	window_background_opacity = 0.989,
+
+	keys = {
+		-- {
+		-- 	key = "P",
+		-- 	mods = "CTRL",
+		-- 	action = wezterm.action.ActivateCommandPalette, -- need nightly build
+		-- },
+		{ key = "H", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Left") },
+		{ key = "L", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Right") },
+		{ key = "K", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Up") },
+		{ key = "J", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Down") },
+		{ key = "z", mods = "CMD", action = wezterm.action.TogglePaneZoomState },
+
+		{ key = "1", mods = "ALT", action = wezterm.action.ActivateTab(0) },
+		{ key = "2", mods = "ALT", action = wezterm.action.ActivateTab(1) },
+		{ key = "3", mods = "ALT", action = wezterm.action.ActivateTab(2) },
+		{ key = "4", mods = "ALT", action = wezterm.action.ActivateTab(3) },
+		{ key = "5", mods = "ALT", action = wezterm.action.ActivateTab(4) },
+		{ key = "6", mods = "ALT", action = wezterm.action.ActivateTab(5) },
+		{ key = "7", mods = "ALT", action = wezterm.action.ActivateTab(6) },
+		{ key = "8", mods = "ALT", action = wezterm.action.ActivateTab(7) },
+		{ key = "9", mods = "ALT", action = wezterm.action.ActivateTab(8) },
+
+		{ key = "X", mods = "CTRL|ALT", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
+
+		{
+			key = "s",
+			mods = "CTRL|SHIFT|ALT",
+			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		},
+		{
+			key = "v",
+			mods = "CTRL|SHIFT|ALT",
+			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+		},
+		{
+			key = "E",
+			mods = "CTRL",
+			action = wezterm.action.QuickSelectArgs({
+				patterns = {
+					"https?://\\S+",
+				},
+				action = wezterm.action_callback(function(window, pane)
+					local url = window:get_selection_text_for_pane(pane)
+					wezterm.open_with(url)
+				end),
+			}),
+		},
+	},
+	-- window_background_opacity = 0.989,
+	background = {
+		{
+			source = {
+				Color = theme.background,
+			},
+			opacity = 0.989,
+			height = "100%",
+			width = "100%",
+		},
+		{
+			source = {
+				File = "/Users/tyson.nguyen/.config/kitty/window-logo.png",
+			},
+			opacity = 0.035,
+			attachment = "Fixed",
+			repeat_x = "NoRepeat",
+			repeat_y = "NoRepeat",
+			vertical_align = "Bottom",
+			horizontal_align = "Right",
+			height = 1000,
+			width = 479,
+		},
+	},
 }

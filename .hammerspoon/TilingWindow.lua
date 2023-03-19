@@ -48,8 +48,8 @@ function module(logger)
 
 	-- stack
 	yabai_key({ "cmd", "control" }, "s", { "-m", "window", "--insert", "stack" })
-	yabai_key({ "shift", "control" }, "j", { "-m", "window", "--focus", "stack.prev" })
-	yabai_key({ "shift", "control" }, "k", { "-m", "window", "--focus", "stack.next" })
+	-- yabai_key({ "shift", "control" }, "j", { "-m", "window", "--focus", "stack.prev" })
+	-- yabai_key({ "shift", "control" }, "k", { "-m", "window", "--focus", "stack.next" })
 
 	hs.hotkey.bind({ "cmd", "shift", "control", "option" }, "b", function()
 		yabai({ "-m", "space", "--layout", "bsp" })

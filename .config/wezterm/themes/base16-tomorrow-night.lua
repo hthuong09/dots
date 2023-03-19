@@ -2,7 +2,6 @@
 -- Chris Kempson (http://chriskempson.com)
 
 return {
-	name = "Base 16 Tomorrow Night",
 	background = "#1d1f21",
 	foreground = "#c5c8c6",
 	cursor_bg = "#c5c8c6",
