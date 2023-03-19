@@ -51,7 +51,10 @@ end)
 local theme = get_theme(wezterm.gui.get_appearance())
 
 return {
-	font = wezterm.font({ family = "Fira Code" }),
+	font = wezterm.font_with_fallback({
+		{ family = "Fira Code" },
+		{ family = "Symbols Nerd Font Mono", scale = 0.7 },
+	}),
 	font_size = 13.5,
 	line_height = 1.25,
 	font_rules = {
@@ -92,8 +95,8 @@ return {
 	tab_bar_at_bottom = true,
 
 	inactive_pane_hsb = {
-		brightness = 0.8,
-		saturation = 0.6,
+		brightness = 0.6,
+		saturation = 0.5,
 	},
 
 	keys = {
@@ -144,7 +147,6 @@ return {
 			}),
 		},
 	},
-	-- window_background_opacity = 0.989,
 	background = {
 		{
 			source = {
@@ -156,7 +158,7 @@ return {
 		},
 		{
 			source = {
-				File = "/Users/tyson.nguyen/.config/kitty/window-logo.png",
+				File = wezterm.config_dir .. "/window-logo.png",
 			},
 			opacity = 0.035,
 			attachment = "Fixed",
