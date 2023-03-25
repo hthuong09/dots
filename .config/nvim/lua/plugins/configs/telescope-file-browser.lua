@@ -12,7 +12,7 @@ end
 function M.load_keymaps()
 	local maps = { n = {}, v = {}, t = {}, [""] = {} }
 	maps.n["<leader>e"] = {
-		"<cmd>lua require 'telescope'.extensions.file_browser.file_browser({ cwd_to_path = true, path = vim.fn.expand('%:p:h') })<CR>",
+		"<cmd>lua require 'telescope'.extensions.file_browser.file_browser({ cwd_to_path = true, path = vim.fn.expand('%:p:h'), hidden = true, })<CR>",
 		desc = "File Browser",
 	}
 	require("core.utils").set_mappings(maps)

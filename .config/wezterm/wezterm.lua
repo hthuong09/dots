@@ -146,13 +146,19 @@ return {
 				end),
 			}),
 		},
+
+		{ key = "UpArrow", mods = "SHIFT", action = wezterm.action.ScrollToPrompt(-1) },
+		{ key = "DownArrow", mods = "SHIFT", action = wezterm.action.ScrollToPrompt(1) },
 	},
+
+	macos_window_background_blur = 50,
 	background = {
 		{
 			source = {
 				Color = theme.background,
 			},
-			opacity = 0.989,
+			-- opacity = 0.989,
+			opacity = 0.94,
 			height = "100%",
 			width = "100%",
 		},
