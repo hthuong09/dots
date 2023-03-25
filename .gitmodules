@@ -13,10 +13,6 @@
 [submodule ".zsh/z/external"]
 	path = .zsh/z/external
 	url = https://github.com/agkozak/zsh-z
-[submodule ".zsh/prompt/pure"]
-	path = .zsh/prompt/pure
-	url = https://github.com/sindresorhus/pure
-	branch = main
 [submodule ".config/ranger/plugins/ranger_devicons"]
 	path = .config/ranger/plugins/ranger_devicons
 	url = https://github.com/alexanderjeurissen/ranger_devicons
