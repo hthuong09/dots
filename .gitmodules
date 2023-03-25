@@ -19,3 +19,6 @@
 [submodule ".zsh/fzf/external"]
 	path = .zsh/fzf/external
 	url = https://github.com/junegunn/fzf
+[submodule ".zsh/prompt/pure"]
+	path = .zsh/prompt/pure
+	url = https://github.com/hthuong09/pure
