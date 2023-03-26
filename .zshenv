@@ -4,8 +4,7 @@
 #   gpg-connect-agent updatestartuptty /bye > /dev/null
 # fi
 # 
-
-[ -f ".shopback" ] && source ".shopback"
+[ -f "$HOME/.shopback" ] && source "$HOME/.shopback"
 
 export PATH=~/Library/Python/3.8/bin:/usr/local/go/bin:/opt/homebrew/bin:$PATH
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
