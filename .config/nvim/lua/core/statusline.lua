@@ -121,13 +121,46 @@ M.LSP_Diagnostics = function()
 end
 
 M.LSP_status = function()
+	local lsp = "%#St_LspStatus#" .. "  "
+	local client_names = {}
+	local function has_value(tab, val)
+		for index, value in ipairs(tab) do
+			if value == val then
+				return true
+			end
+		end
+		return false
+	end
+
 	if rawget(vim, "lsp") then
 		for _, client in ipairs(vim.lsp.get_active_clients()) do
 			if client.attached_buffers[vim.api.nvim_get_current_buf()] then
-				return (vim.o.columns > 100 and "%#St_LspStatus#" .. "   LSP ~ " .. client.name .. " ")
-					or "   LSP "
+				if vim.o.columns <= 100 then
+					return "   LSP "
+				end
+				if client.name == "null-ls" then
+					local null_ls = require("null-ls")
+					local formatters = null_ls.builtins.formatting
+					local linters = null_ls.builtins.diagnostics
+					local ft = vim.bo.filetype
+					for _, formatter in pairs(formatters) do
+						if has_value(formatter.filetypes, ft) then
+							table.insert(client_names, formatter.name)
+						end
+					end
+					for _, linter in pairs(linters) do
+						if has_value(linter.filetypes, ft) then
+							table.insert(client_names, linter.name)
+						end
+					end
+				else
+					table.insert(client_names, client.name)
+				end
 			end
 		end
+	end
+	if client_names ~= "" then
+		return lsp .. table.concat(client_names, ", ") .. " "
 	end
 end
 
