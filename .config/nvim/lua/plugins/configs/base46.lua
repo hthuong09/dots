@@ -11,6 +11,7 @@ function M.config()
 		hl_override = {
 			DiffAdd = { fg = "#a4b595" },
 			DiffChange = { fg = "#DE935F" },
+			NormalFloat = { bg = "NONE" },
 
 			-- AlphaButtons = { fg = "#81A1C1" },
 			Normal = {
