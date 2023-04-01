@@ -9,6 +9,7 @@ function M.config()
 	base46.setup({
 		hl_add = {},
 		hl_override = {
+			-- TODO: move this to base46 repo
 			DiffAdd = { fg = "#a4b595" },
 			DiffChange = { fg = "#DE935F" },
 			-- NormalFloat = { bg = "NONE" },
@@ -48,8 +49,11 @@ end
 function M.toggle_mode(mode)
 	local dark_theme = "tomorrow_night"
 	local light_theme = "ayu-light"
-	vim.g.base46_theme = mode == "light" and light_theme or dark_theme
-	require("base46").load_all_highlights()
+	local theme = mode == "light" and light_theme or dark_theme
+	if vim.g.base46_theme ~= theme then
+		vim.g.base46_theme = theme
+		require("base46").load_all_highlights()
+	end
 end
 
 return M
