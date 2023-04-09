@@ -11,6 +11,13 @@
   "license": "MIT",
   "commands": [
     {
+      "name": "wezterm",
+      "title": "Wezterm Workspace",
+      "description": "",
+      "mode": "view",
+      "icon": "wezterm.png"
+    },
+    {
       "name": "kitty",
       "title": "Kitty Profile",
       "description": "",

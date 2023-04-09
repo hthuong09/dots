@@ -6,7 +6,6 @@
   programs.htop.settings.show_program_path = true;
 
   home.packages = with pkgs; [
-    wezterm
     postman
     vscode
     obsidian

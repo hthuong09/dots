@@ -23,8 +23,6 @@ function contains(list, x)
 end
 
 wezterm.on("gui-startup", function(cmd)
-	-- allow `wezterm start -- something` to affect what we spawn
-	-- in our initial window
 	local args = {}
 	if cmd then
 		args = cmd.args
@@ -51,6 +49,26 @@ wezterm.on("gui-startup", function(cmd)
 
 	workspace.startup(wezterm, mux)
 end)
+
+local launch_workspace_action = wezterm.action.InputSelector({
+	action = wezterm.action_callback(function(window, pane, id, label)
+		if not id and not label then
+			wezterm.log_info("cancelled")
+			return
+		else
+			wezterm.log_info("you selected ", id, label)
+			pane:send_text(id)
+			-- TODO: launch workspace here
+		end
+	end),
+	title = "Select Workspace",
+	choices = {
+		{
+			label = "challenge",
+			id = "challenge",
+		},
+	},
+})
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local theme = get_theme(wezterm.gui.get_appearance())
@@ -200,6 +218,19 @@ return {
 
 		{ key = "UpArrow", mods = "SHIFT", action = wezterm.action.ScrollToPrompt(-1) },
 		{ key = "DownArrow", mods = "SHIFT", action = wezterm.action.ScrollToPrompt(1) },
+		{
+			key = "~",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.SplitPane({
+				direction = "Down",
+				size = { Percent = 25 },
+			}),
+		},
+		-- {
+		-- 	key = "t",
+		-- 	mods = "CMD|CTRL",
+		-- 	action = launch_workspace_action,
+		-- },
 	},
 
 	macos_window_background_blur = 50,
