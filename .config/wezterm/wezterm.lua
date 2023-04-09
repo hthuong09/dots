@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local mux = wezterm.mux
 local darkTheme = require("themes.base16-tomorrow-night")
 local lightTheme = require("themes.ayu-light")
 
@@ -12,15 +13,65 @@ local function get_theme(appearance)
 	end
 end
 
+function contains(list, x)
+	for _, v in pairs(list) do
+		if v == x then
+			return true
+		end
+	end
+	return false
+end
+
+wezterm.on("gui-startup", function(cmd)
+	-- allow `wezterm start -- something` to affect what we spawn
+	-- in our initial window
+	local args = {}
+	if cmd then
+		args = cmd.args
+	end
+
+	local workspace_name = args[1]
+
+	local all_workspaces = wezterm.mux.get_workspace_names()
+	if contains(all_workspaces, workspace_name) then
+		mux.set_active_workspace(workspace_name)
+		return
+	end
+
+	local success, workspace = pcall(require, "workspaces." .. workspace_name)
+	if not success then
+		wezterm.log_error("Failed to load workspace: " .. workspace_name)
+		return
+	end
+
+	if type(workspace.startup) ~= "function" then
+		wezterm.log_error("Workspace startup is not a function")
+		return
+	end
+
+	workspace.startup(wezterm, mux)
+end)
+
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local theme = get_theme(wezterm.gui.get_appearance())
 	local tab_bar = theme.tab_bar
 	local is_last_tab = tab.tab_index + 1 == #tabs
 
+	function tab_title(tab_info)
+		local title = tab_info.tab_title
+		-- if the tab title is explicitly set, take that
+		if title and #title > 0 then
+			return title
+		end
+		-- Otherwise, use the title from the active pane
+		-- in that tab
+		return tab.active_pane.title
+	end
+
 	local function create_tab_components(fg_color, bg_color, symbol)
 		return {
 			{ Text = " " },
-			{ Text = wezterm.truncate_right(tab.tab_index + 1 .. " ╱ " .. tab.active_pane.title, tab_max_width - 3) },
+			{ Text = wezterm.truncate_right(tab.tab_index + 1 .. " ╱ " .. tab_title(tab), tab_max_width - 3) },
 			{ Text = " " },
 			{ Foreground = { Color = fg_color } },
 			{ Background = { Color = bg_color } },
