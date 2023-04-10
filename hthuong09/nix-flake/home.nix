@@ -10,7 +10,6 @@
     vscode
     obsidian
     dbeaver
-    slack
   ];
 }
 

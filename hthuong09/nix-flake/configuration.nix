@@ -10,11 +10,16 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
+  services.karabiner-elements.enable = true;
   programs.zsh.enable = true;
   homebrew.enable = true;
   homebrew.global.autoUpdate = false;
   homebrew.taps = [ "wez/wezterm" ];
-  homebrew.casks = [ "wez/wezterm/wezterm" ];
+  homebrew.casks = [ "wez/wezterm/wezterm" "slack" "hammerspoon" ];
+  # TODO: add fira code font
+  # fonts.fontDir.enable = true;
+  # fonts.fonts = [];
+  security.pam.enableSudoTouchIdAuth = true;
 
   nix.package = pkgs.nix;
 }
