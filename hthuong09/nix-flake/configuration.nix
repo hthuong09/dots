@@ -15,7 +15,11 @@
   homebrew.enable = true;
   homebrew.global.autoUpdate = false;
   homebrew.taps = [ "wez/wezterm" ];
-  homebrew.casks = [ "wez/wezterm/wezterm" "slack" "hammerspoon" ];
+  homebrew.casks = [ "wez/wezterm/wezterm" "slack" "hammerspoon" "raycast" "tableplus" ];
+  homebrew.masApps = {
+    Messenger = 1480068668;
+    RunCat = 1429033973;
+  };
   # TODO: add fira code font
   # fonts.fontDir.enable = true;
   # fonts.fonts = [];
