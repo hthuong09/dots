@@ -208,6 +208,12 @@ local plugins = {
 			require("mini.indentscope").setup(opts)
 		end,
 	},
+	["ruifm/gitlinker.nvim"] = {
+		dependencies = "nvim-lua/plenary.nvim",
+		config = function()
+			require("plugins.configs.gitlinker").config()
+		end,
+	},
 }
 
 require("plugins.boostrap").int(plugins)
