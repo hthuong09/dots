@@ -74,7 +74,7 @@ M.git = function()
 	local added = (git_status.added and git_status.added ~= 0) and ("  " .. git_status.added) or ""
 	local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed) or ""
 	local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed) or ""
-	local branch_name = "  " .. string.sub(git_status.head, 1, 30) .. (#git_status.head > 30 and "..." or "") .. " "
+	local branch_name = "  " .. string.sub(git_status.head, 1, 30) .. (#git_status.head > 30 and "..." or "") .. " "
 
 	return "%#St_gitIcons#" .. branch_name .. added .. changed .. removed
 end
