@@ -25,7 +25,12 @@ fi
 fpath=("${0:h}/external/src" $fpath)
 
 # Load and initialize the completion system ignoring insecure directories.
-autoload -Uz compinit && compinit -i
+autoload -Uz compinit 
+if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdump) ]; then
+  compinit -i;
+else
+  compinit -C
+fi
 
 #
 # Options
