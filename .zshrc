@@ -6,6 +6,7 @@ fi
 
 # Define list of module going to be used
 ZSH_MODULES=(
+    # starship
     prompt
     editor
     completion
@@ -15,8 +16,9 @@ ZSH_MODULES=(
     directory
     alias
     syntax-highlighting
-    z
+    # z
     # tmux
+    zoxide
     fzf
     nvm
 )
@@ -29,4 +31,3 @@ for module in $ZSH_MODULES; do
     # Modifier (.N) help ZSH to not return an error if no .zsh file is found
     for config in ~/.zsh/$module/*.zsh(.N); do source $config; done;
 done
-
