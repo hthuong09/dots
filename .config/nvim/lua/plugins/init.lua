@@ -214,6 +214,15 @@ local plugins = {
 			require("plugins.configs.gitlinker").config()
 		end,
 	},
+	["sindrets/diffview.nvim"] = {
+		dependencies = { "nvim-lua/plenary.nvim", "hthuong09/base46" },
+		config = function()
+			require("plugins.configs.diffview").config()
+		end,
+		init = function()
+			require("plugins.configs.diffview").load_keymaps()
+		end,
+	},
 }
 
 require("plugins.boostrap").int(plugins)

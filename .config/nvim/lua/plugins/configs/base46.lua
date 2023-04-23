@@ -7,11 +7,35 @@ function M.config()
 	end
 
 	base46.setup({
-		hl_add = {},
+		hl_add = {
+			DiffviewDiffAdd = {
+				bg = "#293732",
+				fg = "none",
+			},
+			DiffviewDiffChangeDiffAdd = {
+				link = "DiffviewDiffAdd",
+			},
+			DiffviewDiffTextAsAdd = {
+				bg = "#345d3c",
+				fg = "none",
+			},
+
+			DiffviewDiffDelete = {
+				link = "Comment",
+			},
+			DiffviewDiffChangeAsDelete = {
+				bg = "#372d30",
+				fg = "none",
+			},
+			DiffviewDiffAddAsDelete = {
+				link = "DiffviewDiffChangeAsDelete",
+			},
+			DiffviewDiffTextAsDelete = {
+				bg = "#7d3d3c",
+				fg = "none",
+			},
+		},
 		hl_override = {
-			-- TODO: move this to base46 repo
-			DiffAdd = { fg = "#a4b595" },
-			DiffChange = { fg = "#DE935F" },
 			-- NormalFloat = { bg = "NONE" },
 
 			-- AlphaButtons = { fg = "#81A1C1" },
@@ -44,6 +68,7 @@ function M.config()
 	base46.load_highlight("bufferline")
 	base46.load_highlight("notify")
 	base46.load_highlight("indentscope")
+	base46.load_highlight("git")
 
 	local links = {
 		["@lsp.type.namespace"] = "@namespace",

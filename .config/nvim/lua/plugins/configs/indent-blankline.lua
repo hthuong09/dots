@@ -19,6 +19,7 @@ function M.config()
 			"mason",
 			"lazy",
 			"noice",
+			"diffview",
 		},
 		buftype_exclude = { "terminal" },
 		show_trailing_blankline_indent = false,

@@ -6,8 +6,6 @@ function M.config()
 		return
 	end
 
-	require("base46").load_highlight("git")
-
 	local options = {
 		signs = {
 			add = { hl = "DiffAdd", text = "│", numhl = "GitSignsAddNr" },

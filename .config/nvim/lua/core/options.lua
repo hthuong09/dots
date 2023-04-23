@@ -16,7 +16,10 @@ opt.numberwidth = 2 -- Width of the line number column
 opt.cursorline = true -- Highlight the current line
 opt.list = true -- Display invisible characters
 opt.listchars = "tab:» ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:¬" -- Characters used to show invisible characters
-opt.fillchars = { eob = " " } -- Replace '~' at the end of buffer with a space
+opt.fillchars = {
+	eob = " ", -- Replace '~' at the end of buffer with a space
+	diff = "╱", -- Replace the default diff filler character
+}
 
 -- Search settings
 opt.ignorecase = true -- Ignore case when searching
@@ -36,8 +39,6 @@ opt.laststatus = 3 -- displays the status line on the last window of the screen 
 opt.showmode = false -- whether to display the current mode (normal, insert, visual, etc.) in the statusline
 opt.ruler = false
 
-
-
 -- Clipboard settings
 opt.clipboard = "unnamedplus" -- Use the system clipboard
 
@@ -49,13 +50,13 @@ opt.timeoutlen = 400 -- Time to wait for a mapped sequence to complete
 opt.undofile = true -- Save undo history
 
 -- Message settings
-opt.shortmess:append "sI" -- Reduce the amount of messages shown
+opt.shortmess:append("sI") -- Reduce the amount of messages shown
 
 -- Sign column
 opt.signcolumn = "yes" -- Always show the sign column
 
 -- Which wrap settings
-opt.whichwrap:append "<>[]hl" -- Allow < > [ ] { } h l to navigate wrapped lines
+opt.whichwrap:append("<>[]hl") -- Allow < > [ ] { } h l to navigate wrapped lines
 opt.textwidth = 0 -- Disable text wrap
 
 -- Popup menu height
@@ -68,12 +69,12 @@ opt.swapfile = false -- Do not use swap files for recovery
 
 -- default some provider for better startup time
 local default_providers = {
-  "node",
-  "perl",
-  "python3",
-  "ruby",
+	"node",
+	"perl",
+	"python3",
+	"ruby",
 }
 
 for _, provider in ipairs(default_providers) do
-  vim.g["loaded_" .. provider .. "_provider"] = 0
+	vim.g["loaded_" .. provider .. "_provider"] = 0
 end
