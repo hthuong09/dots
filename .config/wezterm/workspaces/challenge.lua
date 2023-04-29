@@ -2,7 +2,7 @@ local M = {}
 
 function M.startup(wezterm, mux)
 	local challenge_tab, build_pane, window = mux.spawn_window({
-		-- workspace = "challenge",
+		workspace = "challenge",
 		cwd = wezterm.home_dir .. "/ShopBack/BE/challenge",
 		args = { "nvim" },
 	})

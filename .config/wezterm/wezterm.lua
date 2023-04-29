@@ -3,7 +3,7 @@ local mux = wezterm.mux
 local darkTheme = require("themes.base16-tomorrow-night")
 local lightTheme = require("themes.ayu-light")
 
-local tab_max_width = 50
+local tab_max_width = 20
 
 local function get_theme(appearance)
 	if appearance:find("Dark") then
@@ -13,13 +13,56 @@ local function get_theme(appearance)
 	end
 end
 
-function contains(list, x)
+local function contains(list, x)
 	for _, v in pairs(list) do
 		if v == x then
 			return true
 		end
 	end
 	return false
+end
+
+local function getFileName(file)
+	local file_name = file:match("[^/]*.lua$")
+	return file_name:sub(0, #file_name - 4)
+end
+
+local function generateWorkspaceInputSelector()
+	local workspaceDir = wezterm.home_dir .. "/.config/wezterm/workspaces"
+	local workspaceFiles = wezterm.glob(workspaceDir .. "/*.lua")
+	local choices = {}
+	for _, proj_path in ipairs(workspaceFiles) do
+		local proj_name = getFileName(proj_path)
+		table.insert(choices, #choices + 1, {
+			label = proj_name,
+			id = proj_path,
+		})
+	end
+
+	return {
+		action = wezterm.action_callback(function(window, pane, filePath, workspace_name)
+			local all_workspaces = wezterm.mux.get_workspace_names()
+			if contains(all_workspaces, workspace_name) then
+				mux.set_active_workspace(workspace_name)
+				return
+			end
+
+			local success, workspace = pcall(require, "workspaces." .. workspace_name)
+			if not success then
+				wezterm.log_error("Failed to load workspace: " .. workspace_name)
+				return
+			end
+
+			if type(workspace.startup) ~= "function" then
+				wezterm.log_error("Workspace startup is not a function")
+				return
+			end
+
+			workspace.startup(wezterm, mux)
+		end),
+		title = "Select Workspaces",
+		choices = choices,
+	}
 end
 
 wezterm.on("gui-startup", function(cmd)
@@ -69,6 +112,22 @@ local launch_workspace_action = wezterm.action.InputSelector({
 		},
 	},
 })
+
+wezterm.on("update-right-status", function(window, pane)
+	local theme = get_theme(wezterm.gui.get_appearance())
+	local tab_bar = theme.tab_bar
+	local workspace = window:active_workspace()
+
+	-- Make it italic and underlined
+	window:set_right_status(wezterm.format({
+		{ Attribute = { Intensity = "Bold" } },
+		{ Background = { Color = tab_bar.active_tab.bg_color } },
+		{ Foreground = { Color = tab_bar.active_tab.fg_color } },
+		{ Text = "   ╱ " },
+		{ Text = workspace },
+		{ Text = " " },
+	}))
+end)
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local theme = get_theme(wezterm.gui.get_appearance())
@@ -231,6 +290,11 @@ return {
 		-- 	mods = "CMD|CTRL",
 		-- 	action = launch_workspace_action,
 		-- },
+		{
+			key = "O",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.InputSelector(generateWorkspaceInputSelector()),
+		},
 	},
 
 	macos_window_background_blur = 50,
@@ -261,7 +325,7 @@ return {
 			source = {
 				File = wezterm.config_dir .. "/background.png",
 			},
-			opacity = 0.05,
+			opacity = 0.02,
 			attachment = "Fixed",
 			repeat_x = "NoRepeat",
 			repeat_y = "NoRepeat",
