@@ -3,7 +3,7 @@ local mux = wezterm.mux
 local darkTheme = require("themes.base16-tomorrow-night")
 local lightTheme = require("themes.ayu-light")
 
-local tab_max_width = 20
+local tab_max_width = 30
 
 local function get_theme(appearance)
 	if appearance:find("Dark") then
@@ -22,25 +22,28 @@ local function contains(list, x)
 	return false
 end
 
-local function getFileName(file)
+local function get_file_name(file)
 	local file_name = file:match("[^/]*.lua$")
 	return file_name:sub(0, #file_name - 4)
 end
 
-local function generateWorkspaceInputSelector()
-	local workspaceDir = wezterm.home_dir .. "/.config/wezterm/workspaces"
-	local workspaceFiles = wezterm.glob(workspaceDir .. "/*.lua")
-	local choices = {}
-	for _, proj_path in ipairs(workspaceFiles) do
-		local proj_name = getFileName(proj_path)
+local function generate_workspace_input_selector()
+	local workspace_dir = wezterm.home_dir .. "/.config/wezterm/workspaces"
+	local workspace_files = wezterm.glob(workspace_dir .. "/*.lua")
+	local choices = {
+		{
+			label = "default",
+		},
+	}
+	for _, workspace_file in ipairs(workspace_files) do
+		local proj_name = get_file_name(workspace_file)
 		table.insert(choices, #choices + 1, {
 			label = proj_name,
-			id = proj_path,
 		})
 	end
 
 	return {
-		action = wezterm.action_callback(function(window, pane, filePath, workspace_name)
+		action = wezterm.action_callback(function(window, pane, id, workspace_name)
 			local all_workspaces = wezterm.mux.get_workspace_names()
 			if contains(all_workspaces, workspace_name) then
 				mux.set_active_workspace(workspace_name)
@@ -293,7 +296,7 @@ return {
 		{
 			key = "O",
 			mods = "CTRL|SHIFT",
-			action = wezterm.action.InputSelector(generateWorkspaceInputSelector()),
+			action = wezterm.action.InputSelector(generate_workspace_input_selector()),
 		},
 	},
 

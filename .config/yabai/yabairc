@@ -11,6 +11,7 @@ yabai -m config right_padding                5
 # yabai -m config mouse_follows_focus on
 
 yabai -m rule --add app="^System Preferences$"                    manage=off
+yabai -m rule --add app="^System Settings$"                       manage=off
 yabai -m rule --add app="^System Information$"                    manage=off
 # yabai -m rule --add app="^Finder$" title="(Info|Preferences)"     manage=off
 yabai -m rule --add app="^Finder$"                                manage=off
@@ -30,6 +31,7 @@ yabai -m rule --add app="^Google Chrome$" title="Google Chrome - Tyson$"  space=
 # 2. term
 yabai -m rule --add app="^kitty$"            space=^2
 yabai -m rule --add app="^WezTerm$"          space=^2
+yabai -m rule --add app="^wezterm-gui$"      space=^2
 yabai -m rule --add app="^iTerm2$"           space=^2
 
 # 3. editor
