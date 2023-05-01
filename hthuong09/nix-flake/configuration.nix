@@ -17,7 +17,7 @@
   homebrew.enable = true;
   homebrew.global.autoUpdate = false;
   homebrew.taps = [ "wez/wezterm" ];
-  homebrew.casks = [ "wez/wezterm/wezterm" "slack" "hammerspoon" "raycast" "tableplus" ];
+  homebrew.casks = [ "wez/wezterm/wezterm" "slack" "hammerspoon" "raycast" "tableplus" "openkey" ];
   homebrew.masApps = {
     Messenger = 1480068668;
     RunCat = 1429033973;
