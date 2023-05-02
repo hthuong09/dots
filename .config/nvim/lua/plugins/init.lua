@@ -155,6 +155,7 @@ local plugins = {
 		end,
 	},
 	["zbirenbaum/copilot-cmp"] = {
+		branch = "formatting-fixes",
 		config = function()
 			require("plugins.configs.copilot-cmp").config()
 		end,

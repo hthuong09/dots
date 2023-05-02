@@ -337,6 +337,19 @@ return {
 			height = 1200,
 			width = 849,
 		},
+		{
+			source = {
+				File = wezterm.config_dir .. "/background2.png",
+			},
+			opacity = 0.03,
+			attachment = "Fixed",
+			repeat_x = "NoRepeat",
+			repeat_y = "NoRepeat",
+			vertical_align = "Top",
+			horizontal_align = "Right",
+			height = 1097,
+			width = 719,
+		},
 	},
 	mouse_bindings = {
 		{
