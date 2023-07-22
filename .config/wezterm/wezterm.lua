@@ -76,6 +76,10 @@ wezterm.on("gui-startup", function(cmd)
 
 	local workspace_name = args[1]
 
+	if not workspace_name then
+		return
+	end
+
 	local all_workspaces = wezterm.mux.get_workspace_names()
 	if contains(all_workspaces, workspace_name) then
 		mux.set_active_workspace(workspace_name)
@@ -184,7 +188,7 @@ local theme = get_theme(wezterm.gui.get_appearance())
 return {
 	font = wezterm.font_with_fallback({
 		{ family = "Fira Code" },
-		{ family = "Symbols Nerd Font Mono", scale = 0.7 },
+		{ family = "Symbols Nerd Font" },
 	}),
 	font_size = 13.5,
 	line_height = 1.25,

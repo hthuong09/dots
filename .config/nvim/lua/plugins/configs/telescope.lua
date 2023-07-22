@@ -211,6 +211,12 @@ M.load_keymaps = function()
 		end,
 		desc = "Search commands",
 	}
+	maps.n["<leader>ss"] = {
+		function()
+			require("telescope.builtin").lsp_document_symbols()
+		end,
+		desc = "Search symbols",
+	}
 
 	require("core.utils").set_mappings(maps)
 end

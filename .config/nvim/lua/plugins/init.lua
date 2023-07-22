@@ -224,6 +224,11 @@ local plugins = {
 			require("plugins.configs.diffview").load_keymaps()
 		end,
 	},
+	["ggandor/leap.nvim"] = {
+		config = function()
+			require("leap").set_default_keymaps()
+		end,
+	},
 }
 
 require("plugins.boostrap").int(plugins)
