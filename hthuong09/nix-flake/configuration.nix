@@ -12,7 +12,7 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  services.karabiner-elements.enable = true;
+  # services.karabiner-elements.enable = true;
   programs.zsh.enable = true;
   homebrew.enable = true;
   homebrew.onActivation.upgrade = true;

@@ -56,6 +56,12 @@ local plugins = {
 			require("plugins.configs.lsp").config()
 		end,
 	},
+	["pmizio/typescript-tools.nvim"] = {
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		config = function()
+			require("plugins.configs.typescript-tools").config()
+		end,
+	},
 	-- Completion
 	["hrsh7th/nvim-cmp"] = {
 		event = "InsertEnter",
