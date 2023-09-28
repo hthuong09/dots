@@ -17,7 +17,7 @@
       };
     in
     {
-      darwinConfigurations."tyson-macbook-pro" = darwin.lib.darwinSystem {
+      darwinConfigurations."tyson-macbook" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           home-manager.darwinModules.home-manager
@@ -26,6 +26,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users."tyson.nguyen" = import ./home.nix;
+            users.users."tyson.nguyen".home = /Users/tyson.nguyen;
           }
           ./configuration.nix
         ];

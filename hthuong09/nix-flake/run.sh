@@ -1,2 +1,2 @@
-nix build ".#darwinConfigurations.tyson-macbook-pro.system"
+nix build ".#darwinConfigurations.tyson-macbook.local"
 ./result/sw/bin/darwin-rebuild switch --flake .
