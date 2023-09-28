@@ -4,6 +4,7 @@ autoload -Uz promptinit && promptinit
 
 PURE_PROMPT_SYMBOL='─── ─'
 PURE_PROMPT_VICMD_SYMBOL='─ ───'
+RPROMPT=''
 zstyle :prompt:pure:prompt:success color 008
 zstyle :prompt:pure:path color 008
 
