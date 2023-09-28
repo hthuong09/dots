@@ -36,6 +36,8 @@ function module(logger)
 	yabai_key({ "cmd", "control" }, "j", { "-m", "window", "--insert", "south" })
 
 	yabai_key({ "shift", "control" }, "f", { "-m", "window", "--toggle", "float" })
+	yabai_key({ "shift", "control" }, "m", { "-m", "window", "--minimize" })
+	yabai_key({ "cmd", "shift", "control" }, "f", { "-m", "window", "--toggle", "zoom-fullscreen" })
 
 	-- move window to left half of screen
 	yabai_key({ "option", "shift" }, "left", { "-m", "window", "--grid", "1:2:0:0:1:1" })
