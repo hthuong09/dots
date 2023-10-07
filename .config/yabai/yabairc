@@ -26,7 +26,7 @@ yabai -m rule --add app="^Raycast$"                               manage=off
 
 # auto goes to correct spaces
 # 1. web
-yabai -m rule --add app="^Google Chrome$" title="Google Chrome - Tyson$"  space=^1
+# yabai -m rule --add app="^Arc$"              space=^1
 
 # 2. term
 yabai -m rule --add app="^kitty$"            space=^2
@@ -36,13 +36,18 @@ yabai -m rule --add app="^iTerm2$"           space=^2
 
 # 3. editor
 yabai -m rule --add app="^Code$"             space=^3
+yabai -m rule --add app="^Code - Insiders$"  space=^3
 
-# 4. calendar
-yabai -m rule --add app="^Jira Board"       space=^4
-yabai -m rule --add app="^Google Calendar"  space=^4
+# 4. Dev Tools
+yabai -m rule --add app="^Dbeaver$"                  space=^3
+yabai -m rule --add app="^NoSQLBooster for MongoDB$" space=^3
+yabai -m rule --add app="^Postman$"                  space=^3
 
 # 5. float
 yabai -m config --space 5 layout float
 
-# 6. personal
-yabai -m rule --add app="^Google Chrome$" title="Google Chrome - Thương$"  space=^6
+# 6. Notes
+yabai -m rule --add app="^Obsidian$"            space=^6
+
+# 7. Slack
+yabai -m rule --add app="^Slack$"            space=^7
