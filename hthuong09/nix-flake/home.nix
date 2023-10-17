@@ -7,7 +7,6 @@
 
   home.packages = with pkgs; [
     postman
-    vscode
     obsidian
     dbeaver
   ];

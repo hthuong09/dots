@@ -39,9 +39,9 @@ yabai -m rule --add app="^Code$"             space=^3
 yabai -m rule --add app="^Code - Insiders$"  space=^3
 
 # 4. Dev Tools
-yabai -m rule --add app="^Dbeaver$"                  space=^3
-yabai -m rule --add app="^NoSQLBooster for MongoDB$" space=^3
-yabai -m rule --add app="^Postman$"                  space=^3
+yabai -m rule --add app="^Dbeaver$"                  space=^4
+yabai -m rule --add app="^NoSQLBooster for MongoDB$" space=^4
+yabai -m rule --add app="^Postman$"                  space=^4
 
 # 5. float
 yabai -m config --space 5 layout float
