@@ -4,6 +4,7 @@ function module(logger)
 	logger:i(hs.inspect.inspect(hs.audiodevice.allOutputDevices()))
 	local knownWifi = {
 		"HOMELAB",
+		"HOMELAB_BED",
 		"Hong Bui House 4.2_5G",
 		"Hong Bui House 4.2",
 	}
@@ -11,6 +12,7 @@ function module(logger)
 	ww = hs.wifi.watcher.new(function()
 		logger:i("wifi changed")
 		local ssid = hs.wifi.currentNetwork()
+		logger:i("current wifi: " .. ssid)
 		-- get current mute state
 		local isMuted = hs.audiodevice.findOutputByName("MacBook Pro Speakers"):muted()
 		-- if wifi is not in knownWifi list, mute the sound

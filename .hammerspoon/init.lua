@@ -1,3 +1,4 @@
+print(hs.location.get())
 local logger = hs.logger.new("local")
 logger.level = 3
 require("ConfigReload")(logger)
