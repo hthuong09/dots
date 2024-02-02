@@ -16,7 +16,7 @@
   programs.zsh.enable = true;
   homebrew.enable = true;
   homebrew.onActivation.upgrade = true;
-  homebrew.global.autoUpdate = false;
+  homebrew.global.autoUpdate = true;
   homebrew.taps = [ "wez/wezterm" ];
   homebrew.casks = [
     {
