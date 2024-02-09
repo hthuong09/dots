@@ -11,7 +11,20 @@ function M.config()
 	local cmp_loaded, cmp = pcall(require, "cmp")
 	if cmp_loaded then
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+		local ts_utils = require("nvim-treesitter.ts_utils")
+		cmp.event:on(
+			"confirm_done",
+			cmp_autopairs.on_confirm_done({
+				custom_check = function()
+					local node = ts_utils.get_node_at_cursor()
+					if node and node:type() == "jsx_self_closing_element" then
+						return false
+					end
+
+					return true
+				end,
+			})
+		)
 	end
 end
 

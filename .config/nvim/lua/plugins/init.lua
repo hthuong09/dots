@@ -20,7 +20,7 @@ local plugins = {
 			require("plugins.configs.comment").config()
 		end,
 	},
-	["windwp/nvim-autopairs"] = {
+	["hthuong09/nvim-autopairs"] = {
 		config = function()
 			require("plugins.configs.autopairs").config()
 		end,
