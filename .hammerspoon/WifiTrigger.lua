@@ -5,6 +5,7 @@ function module(logger)
 	local knownWifi = {
 		"HOMELAB",
 		"HOMELAB_BED",
+		"HOMELAB_GPON",
 		"Hong Bui House 4.2_5G",
 		"Hong Bui House 4.2",
 	}
