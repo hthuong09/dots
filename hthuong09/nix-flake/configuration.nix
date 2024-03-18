@@ -38,5 +38,13 @@
   # fonts.fonts = [];
   security.pam.enableSudoTouchIdAuth = true;
 
+  system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = true;
+  system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
+
+  # dock
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.orientation = "right";
+
   nix.package = pkgs.nix;
 }
