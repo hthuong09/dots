@@ -71,7 +71,7 @@ opt.swapfile = false -- Do not use swap files for recovery
 local default_providers = {
 	"node",
 	"perl",
-	"python3",
+	-- "python3",
 	"ruby",
 }
 
