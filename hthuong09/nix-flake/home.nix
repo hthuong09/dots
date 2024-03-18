@@ -6,20 +6,19 @@
   programs.htop.settings.show_program_path = true;
 
   home.packages = with pkgs; [
-    "python3"
-    "docker"
-    "docker-compose"
-    "helm"
-    "kubernetes-helm"
-    "ripgrep"
-    "fd"
-    "jq"
-    "unixtools.watch"
-    "kubefwd"
-    "exa"
-    "kubectl"
-    "k9s"
-    "kn"
+    python3
+    docker
+    docker-compose
+    kubernetes-helm
+    ripgrep
+    fd
+    jq
+    unixtools.watch
+    # kubefwd
+    eza
+    kubectl
+    k9s
+    kn
   ];
 
   programs.starship = {
