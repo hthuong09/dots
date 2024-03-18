@@ -17,10 +17,14 @@
   homebrew.enable = true;
   homebrew.onActivation.upgrade = true;
   homebrew.global.autoUpdate = true;
-  homebrew.taps = [ "wez/wezterm" ];
+  homebrew.taps = [ "wez/wezterm" "koekeishiya/formulae" ];
   homebrew.casks = [
     {
       name = "wez/wezterm/wezterm";
+      greedy = true;
+    }
+    {
+      name = "koekeishiya/formulae/yabai";
       greedy = true;
     }
     "slack"
@@ -28,6 +32,18 @@
     "raycast"
     "tableplus"
     "openkey"
+    "spaceman"
+    "karabiner-elements"
+    "arc"
+    "postman"
+    "obsidian"
+    "dbeaver-community"
+    "visual-studio-code"
+    "gpg-suite-no-mail"
+    "contexts"
+    "cloudflare-warp"
+    "postman"
+    "txn2/tap/kubefwd"
   ];
   homebrew.masApps = {
     Messenger = 1480068668;
@@ -38,13 +54,20 @@
   # fonts.fonts = [];
   security.pam.enableSudoTouchIdAuth = true;
 
-  system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
-  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = true;
-  system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
-
-  # dock
-  system.defaults.dock.autohide = true;
-  system.defaults.dock.orientation = "right";
+  system.defaults = {
+    dock = {
+      autohide = true;
+      orientation = "right";
+    };
+    finder = {
+      AppleShowAllFiles = true;
+      AppleShowAllExtensions = true;
+      ShowPathbar = true;
+    };
+    NSGlobalDomain = {
+      ApplePressAndHoldEnabled = true;
+    };
+  };
 
   nix.package = pkgs.nix;
 }

@@ -6,9 +6,20 @@
   programs.htop.settings.show_program_path = true;
 
   home.packages = with pkgs; [
-    postman
-    obsidian
-    dbeaver
+    "python3"
+    "docker"
+    "docker-compose"
+    "helm"
+    "kubernetes-helm"
+    "ripgrep"
+    "fd"
+    "jq"
+    "unixtools.watch"
+    "kubefwd"
+    "exa"
+    "kubectl"
+    "k9s"
+    "kn"
   ];
 
   programs.starship = {
@@ -24,6 +35,11 @@
 
       # package.disabled = true;
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
   };
 }
 
