@@ -24,6 +24,7 @@
       greedy = true;
     }
     {
+      # move to yabai service: https://github.com/LnL7/nix-darwin/blob/master/modules/services/yabai/default.nix
       name = "koekeishiya/formulae/yabai";
       greedy = true;
     }
