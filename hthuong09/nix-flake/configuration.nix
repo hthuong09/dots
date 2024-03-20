@@ -66,7 +66,7 @@
       ShowPathbar = true;
     };
     NSGlobalDomain = {
-      ApplePressAndHoldEnabled = true;
+      ApplePressAndHoldEnabled = false;
     };
   };
 
