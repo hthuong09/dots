@@ -17,6 +17,8 @@
     kubectl
     k9s
     kn
+    ranger
+    docker-client
   ];
 
   programs.starship = {

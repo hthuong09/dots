@@ -48,14 +48,12 @@
     "another-redis-desktop-manager"
     "muzzle"
     "orbstack"
+    # "whatpulse/whatpulse/whatpulse"
   ];
   homebrew.masApps = {
     Messenger = 1480068668;
     RunCat = 1429033973;
   };
-  # TODO: add fira code font
-  # fonts.fontDir.enable = true;
-  # fonts.fonts = [];
   security.pam.enableSudoTouchIdAuth = true;
 
   system.defaults = {
