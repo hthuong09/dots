@@ -7,14 +7,12 @@
 
   home.packages = with pkgs; [
     python3
-    docker
     docker-compose
     kubernetes-helm
     ripgrep
     fd
     jq
     unixtools.watch
-    # kubefwd
     eza
     kubectl
     k9s

@@ -10,6 +10,10 @@
     pkgs.zoxide
   ];
 
+  services.yabai = {
+    enable = true;
+  };
+
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   # services.karabiner-elements.enable = true;
@@ -17,17 +21,14 @@
   homebrew.enable = true;
   homebrew.onActivation.upgrade = true;
   homebrew.global.autoUpdate = true;
+  homebrew.brews = [ "txn2/tap/kubefwd" ];
   homebrew.taps = [ "wez/wezterm" "koekeishiya/formulae" ];
   homebrew.casks = [
     {
       name = "wez/wezterm/wezterm";
       greedy = true;
     }
-    {
-      # move to yabai service: https://github.com/LnL7/nix-darwin/blob/master/modules/services/yabai/default.nix
-      name = "koekeishiya/formulae/yabai";
-      greedy = true;
-    }
+    "spaceman"
     "slack"
     "hammerspoon"
     "raycast"
@@ -44,7 +45,9 @@
     "contexts"
     "cloudflare-warp"
     "postman"
-    "txn2/tap/kubefwd"
+    "another-redis-desktop-manager"
+    "muzzle"
+    "orbstack"
   ];
   homebrew.masApps = {
     Messenger = 1480068668;
@@ -61,14 +64,23 @@
       orientation = "right";
     };
     finder = {
-      AppleShowAllFiles = true;
-      AppleShowAllExtensions = true;
       ShowPathbar = true;
     };
     NSGlobalDomain = {
+      AppleShowAllFiles = true;
+      AppleShowAllExtensions = true;
       ApplePressAndHoldEnabled = false;
+      "com.apple.swipescrolldirection" = false;
     };
   };
+
+  # fonts = {
+  #   fontDir = { enable = true; };
+  #   fonts = with pkgs; [
+  #     (nerdfonts.override { fonts = [ "OperatorMono" ]; })
+  #     fira-code
+  #   ];
+  # };
 
   nix.package = pkgs.nix;
 }

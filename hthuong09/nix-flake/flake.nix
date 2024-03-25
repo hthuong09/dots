@@ -17,7 +17,7 @@
       };
     in
     {
-      darwinConfigurations."tyson-macbook" = darwin.lib.darwinSystem {
+      darwinConfigurations."tyson-macbook-pro" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           home-manager.darwinModules.home-manager
