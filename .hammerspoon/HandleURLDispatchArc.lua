@@ -45,6 +45,10 @@ function module(logger)
 						openLinkWithArchSpace(url, workSpaceIndex)
 						return
 					end
+					if triggerApp:name() == "zoom.us" then
+						openLinkWithArchSpace(url, workSpaceIndex)
+						return
+					end
 					if triggerApp:name() == "Raycast" and url:find("https://meet.google.com", 1, true) == 1 then
 						openLinkWithArchSpace(url, workSpaceIndex)
 						return

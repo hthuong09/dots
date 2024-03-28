@@ -10,9 +10,9 @@
     pkgs.zoxide
   ];
 
-  services.yabai = {
-    enable = true;
-  };
+  # services.yabai = {
+  #   enable = true;
+  # };
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -21,7 +21,7 @@
   homebrew.enable = true;
   homebrew.onActivation.upgrade = true;
   homebrew.global.autoUpdate = true;
-  homebrew.brews = [ "txn2/tap/kubefwd" ];
+  homebrew.brews = [ "txn2/tap/kubefwd" "koekeishiya/formulae/yabai"];
   homebrew.taps = [ "wez/wezterm" "koekeishiya/formulae" ];
   homebrew.casks = [
     {
@@ -41,7 +41,6 @@
     "obsidian"
     "dbeaver-community"
     "visual-studio-code"
-    "gpg-suite-no-mail"
     "contexts"
     "cloudflare-warp"
     "postman"
@@ -71,6 +70,39 @@
       "com.apple.swipescrolldirection" = false;
     };
   };
+
+  system.defaults.CustomUserPreferences = {
+    NSGlobalDomain = {
+      "com.apple.mouse.scaling" = 1.5;
+    };
+    "com.apple.finder" = {
+      # When performing a search, search the current folder by default
+      FXDefaultSearchScope = "SCcf";
+    };
+    "com.apple.desktopservices" = {
+      # Avoid creating .DS_Store files on network or USB volumes
+      DSDontWriteNetworkStores = true;
+      DSDontWriteUSBStores = true;
+    };
+    "com.apple.screensaver" = {
+      # Require password immediately after sleep or screen saver begins
+      askForPassword = 1;
+      askForPasswordDelay = 0;
+    };
+    "com.apple.dock" = {
+      # Disable rearrange spaces automatically
+      "mru-spaces" = false;
+      # Enable displays have separate Spaces
+      "spans-displays" = false;
+      # Reduce size of dock
+      tilesize = 16;
+    };
+  };
+
+  system.activationScripts.postUserActivation.text = ''
+    # Following line should allow us to avoid a logout/login cycle when applies defaults
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  '';
 
   # fonts = {
   #   fontDir = { enable = true; };
