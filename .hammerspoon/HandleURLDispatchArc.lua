@@ -4,7 +4,7 @@ function module(logger)
 
 	hs.loadSpoon("URLDispatcher")
 
-	local openLinkWithArchSpace = function(url, spaceIndex)
+	local openLinkWithArcSpace = function(url, spaceIndex)
 		local script = [[
 			tell application "Arc"
 				set focusedSpace to ""
@@ -21,9 +21,18 @@ function module(logger)
 		hs.osascript.applescript(script)
 	end
 
+	local openLinkWithArc = function(url)
+		local script = [[
+			tell application "Arc"
+				make new tab with properties {URL:"]] .. url .. [["}
+			end tell
+		]]
+		hs.osascript.applescript(script)
+	end
+
 	local sendToSpace = function(t)
 		local fn = function(url)
-			openLinkWithArchSpace(url, t[2])
+			openLinkWithArcSpace(url, t[2])
 		end
 		return { t[1], nil, fn }
 	end
@@ -42,22 +51,22 @@ function module(logger)
 				local triggerApp = hs.application.applicationForPID(senderPID)
 				if triggerApp then
 					if triggerApp:name() == "Slack" then
-						openLinkWithArchSpace(url, workSpaceIndex)
+						openLinkWithArcSpace(url, workSpaceIndex)
 						return
 					end
 					if triggerApp:name() == "zoom.us" then
-						openLinkWithArchSpace(url, workSpaceIndex)
+						openLinkWithArcSpace(url, workSpaceIndex)
 						return
 					end
 					if triggerApp:name() == "Raycast" and url:find("https://meet.google.com", 1, true) == 1 then
-						openLinkWithArchSpace(url, workSpaceIndex)
+						openLinkWithArcSpace(url, workSpaceIndex)
 						return
 					end
 				end
-				openLinkWithArchSpace(url, personalSpaceIndex)
+				-- Fallback to browser if no specific rule
+				openLinkWithArc(url)
 			end,
 		},
-		sendToSpace({ ".*", personalSpaceIndex }),
 	}
 
 	spoon.URLDispatcher:start()
