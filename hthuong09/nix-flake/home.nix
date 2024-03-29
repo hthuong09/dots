@@ -19,6 +19,7 @@
     kn
     ranger
     docker-client
+    delta
   ];
 
   programs.starship = {
