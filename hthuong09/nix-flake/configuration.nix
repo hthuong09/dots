@@ -22,7 +22,7 @@
   homebrew.onActivation.upgrade = true;
   homebrew.global.autoUpdate = true;
   homebrew.brews = [ "txn2/tap/kubefwd" "koekeishiya/formulae/yabai"];
-  homebrew.taps = [ "wez/wezterm" "koekeishiya/formulae" ];
+  homebrew.taps = [ "wez/wezterm" ];
   homebrew.casks = [
     {
       name = "wez/wezterm/wezterm";
@@ -37,16 +37,13 @@
     "spaceman"
     "karabiner-elements"
     "arc"
-    "postman"
-    "obsidian"
     "dbeaver-community"
+    "another-redis-desktop-manager"
     "visual-studio-code"
     "contexts"
-    "cloudflare-warp"
-    "postman"
-    "another-redis-desktop-manager"
     "muzzle"
     "orbstack"
+    "cloudflare-warp"
     # "whatpulse/whatpulse/whatpulse"
   ];
   homebrew.masApps = {

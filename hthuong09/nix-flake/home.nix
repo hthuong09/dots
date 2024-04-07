@@ -20,6 +20,9 @@
     ranger
     docker-client
     delta
+    postman
+    obsidian
+    nodejs
   ];
 
   programs.starship = {
