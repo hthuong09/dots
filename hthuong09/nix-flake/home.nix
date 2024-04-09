@@ -23,6 +23,7 @@
     postman
     obsidian
     nodejs
+    awscli2
   ];
 
   programs.starship = {
