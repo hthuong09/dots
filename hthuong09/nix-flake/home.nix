@@ -24,6 +24,9 @@
     obsidian
     nodejs
     awscli2
+    fzf
+    fd
+    bat
   ];
 
   programs.starship = {

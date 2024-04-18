@@ -94,6 +94,11 @@
       # Reduce size of dock
       tilesize = 16;
     };
+    "com.apple.controlcenter" = {
+      "NSStatusItem Visible WiFi" = false;
+      "NSStatusItem Visible Sound" = false;
+      "NSStatusItem Visible NowPlaying" = false;
+    };
   };
 
   system.activationScripts.postUserActivation.text = ''
