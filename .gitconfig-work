@@ -5,6 +5,7 @@
 
 [core]
 sshCommand = ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519
+hooksPath = /Users/tyson.nguyen/.sb-git-hooks/hooks
 
 [commit]
 gpgSign = true

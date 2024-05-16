@@ -7,7 +7,6 @@
   editor = 'nvim'
   excludesfile = ~/.gitignore
   pager = delta
-  # hooksPath = /Users/tysonnguyen/.sb-git-hooks/hooks
   quotepath = false
   commitGraph = true
 
