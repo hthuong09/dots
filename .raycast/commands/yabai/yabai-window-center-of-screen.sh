@@ -14,4 +14,7 @@
 # @raycast.authorURL https://raycast.com/hthuong09
 
 yabai -m window --toggle float
-yabai -m window --grid 4:4:1:1:2:2
+# check if window is floating using regex instead of jq
+if [[ $(yabai -m query --windows --window | grep -o '"is-floating":true') ]]; then
+  yabai -m window --grid 4:4:1:1:2:2
+fi
