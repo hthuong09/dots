@@ -35,6 +35,7 @@ yabai -m rule --add app="^wezterm-gui$"      space=^2
 yabai -m rule --add app="^iTerm2$"           space=^2
 
 # 3. editor
+yabai -m config --space 3 layout stack
 yabai -m rule --add app="^Code$"             space=^3
 yabai -m rule --add app="^Code - Insiders$"  space=^3
 

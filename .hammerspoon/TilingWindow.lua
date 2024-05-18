@@ -1,4 +1,5 @@
 function module(logger)
+	hs.hotkey.alertDuration = 0
 	-- yabai
 	function yabai(args, fallback)
 		hs.task
@@ -12,58 +13,58 @@ function module(logger)
 			:start()
 	end
 
-	function yabai_key(mod, key, cmd, cmd2)
-		hs.hotkey.bind(mod, key, function()
+	function yabai_key(mod, key, cmd, cmd2, desc)
+		hs.hotkey.bind(mod, key, desc, function()
 			yabai(cmd, function()
 				yabai(cmd2)
 			end)
 		end)
 	end
 
-	yabai_key({ "cmd", "option" }, "j", { "-m", "window", "--focus", "south" }, { "-m", "display", "--focus", "south" })
-	yabai_key({ "cmd", "option" }, "k", { "-m", "window", "--focus", "north" }, { "-m", "display", "--focus", "north" })
-	yabai_key({ "cmd", "option" }, "h", { "-m", "window", "--focus", "west" }, { "-m", "display", "--focus", "west" })
-	yabai_key({ "cmd", "option" }, "l", { "-m", "window", "--focus", "east" }, { "-m", "display", "--focus", "east" })
+	yabai_key({ "cmd", "option" }, "j", { "-m", "window", "--focus", "south" }, { "-m", "display", "--focus", "south" }, "Focus south")
+	yabai_key({ "cmd", "option" }, "k", { "-m", "window", "--focus", "north" }, { "-m", "display", "--focus", "north" }, "Focus north")
+	yabai_key({ "cmd", "option" }, "h", { "-m", "window", "--focus", "west" }, { "-m", "display", "--focus", "west" }, "Focus west")
+	yabai_key({ "cmd", "option" }, "l", { "-m", "window", "--focus", "east" }, { "-m", "display", "--focus", "east" }, "Focus east")
 
-	yabai_key({ "cmd", "shift" }, "h", { "-m", "window", "--swap", "west" })
-	yabai_key({ "cmd", "shift" }, "l", { "-m", "window", "--swap", "east" })
-	yabai_key({ "cmd", "shift" }, "k", { "-m", "window", "--swap", "north" })
-	yabai_key({ "cmd", "shift" }, "j", { "-m", "window", "--swap", "south" })
+	yabai_key({ "cmd", "shift" }, "h", { "-m", "window", "--swap", "west" }, nil, "Swap west")
+	yabai_key({ "cmd", "shift" }, "l", { "-m", "window", "--swap", "east" }, nil, "Swap east")
+	yabai_key({ "cmd", "shift" }, "k", { "-m", "window", "--swap", "north" }, nil, "Swap north")
+	yabai_key({ "cmd", "shift" }, "j", { "-m", "window", "--swap", "south" }, nil, "Swap south")
 
-	yabai_key({ "cmd", "control" }, "h", { "-m", "window", "--insert", "west" })
-	yabai_key({ "cmd", "control" }, "l", { "-m", "window", "--insert", "east" })
-	yabai_key({ "cmd", "control" }, "k", { "-m", "window", "--insert", "north" })
-	yabai_key({ "cmd", "control" }, "j", { "-m", "window", "--insert", "south" })
+	yabai_key({ "cmd", "control" }, "h", { "-m", "window", "--insert", "west" }, nil, "Insert west")
+	yabai_key({ "cmd", "control" }, "l", { "-m", "window", "--insert", "east" }, nil, "Insert east")
+	yabai_key({ "cmd", "control" }, "k", { "-m", "window", "--insert", "north" }, nil, "Insert north")
+	yabai_key({ "cmd", "control" }, "j", { "-m", "window", "--insert", "south" }, nil, "Insert south")
 
-	yabai_key({ "shift", "control" }, "f", { "-m", "window", "--toggle", "float" })
-	yabai_key({ "shift", "control" }, "m", { "-m", "window", "--minimize" })
-	yabai_key({ "cmd", "shift", "control" }, "f", { "-m", "window", "--toggle", "zoom-fullscreen" })
+	yabai_key({ "shift", "control" }, "f", { "-m", "window", "--toggle", "float" }, nil, "Toggle float")
+	yabai_key({ "shift", "control" }, "m", { "-m", "window", "--minimize" }, nil, "Minimize")
+	yabai_key({ "cmd", "shift", "control" }, "f", { "-m", "window", "--toggle", "zoom-fullscreen" }, nil, "Toggle zoom-fullscreen")
 
 	-- move window to left half of screen
-	yabai_key({ "option", "shift" }, "left", { "-m", "window", "--grid", "1:2:0:0:1:1" })
+	yabai_key({ "option", "shift" }, "left", { "-m", "window", "--grid", "1:2:0:0:1:1" }, nil, "move window to left half screen")
 	-- move window to right half of screen
-	yabai_key({ "option", "shift" }, "right", { "-m", "window", "--grid", "1:2:1:0:1:1" })
+	yabai_key({ "option", "shift" }, "right", { "-m", "window", "--grid", "1:2:1:0:1:1" }, nil, "move window to right half screen")
 	-- move window to top half of screen
-	yabai_key({ "option", "shift" }, "up", { "-m", "window", "--grid", "2:1:0:0:1:1" })
+	yabai_key({ "option", "shift" }, "up", { "-m", "window", "--grid", "2:1:0:0:1:1" }, nil, "move window to top half screen")
 	-- move window to bottom half of screen
-	yabai_key({ "option", "shift" }, "down", { "-m", "window", "--grid", "2:1:0:1:1:1" })
+	yabai_key({ "option", "shift" }, "down", { "-m", "window", "--grid", "2:1:0:1:1:1" }, nil, "move window to bottom half of screen")
 
 	-- stack
-	yabai_key({ "cmd", "control" }, "s", { "-m", "window", "--insert", "stack" })
-	-- yabai_key({ "shift", "control" }, "j", { "-m", "window", "--focus", "stack.prev" })
-	-- yabai_key({ "shift", "control" }, "k", { "-m", "window", "--focus", "stack.next" })
+	yabai_key({ "cmd", "control" }, "s", { "-m", "window", "--insert", "stack" }, nil, "Insert window into stack")
+	yabai_key({ "cmd", "control" }, "p", { "-m", "window", "--focus", "stack.prev" }, { "-m", "window", "--focus", "stack.last" }, "Focus previous stack window")
+	yabai_key({ "cmd", "control" }, "n", { "-m", "window", "--focus", "stack.next" }, { "-m", "window", "--focus", "stack.first" }, "Focus next stack window")
 
-	hs.hotkey.bind({ "cmd", "shift", "control", "option" }, "b", function()
+	hs.hotkey.bind({ "cmd", "shift", "control", "option" }, "b", "Enable tilling mode", function()
 		yabai({ "-m", "space", "--layout", "bsp" })
 		hs.alert.show("Tiling Mode Enabled")
 	end)
 
-	hs.hotkey.bind({ "cmd", "shift", "control", "option" }, "f", function()
+	hs.hotkey.bind({ "cmd", "shift", "control", "option" }, "f", "Enable float mode", function()
 		yabai({ "-m", "space", "--layout", "float" })
 		hs.alert.show("Float Mode Enabled")
 	end)
 
-	hs.hotkey.bind({ "option" }, "t", function()
+	hs.hotkey.bind({ "option" }, "t", "Center of screen", function()
 		yabai({ "-m", "window", "--toggle", "float" })
 		yabai({ "-m", "window", "--grid", "4:4:1:1:2:2" })
 	end)
@@ -112,16 +113,35 @@ function module(logger)
 		hs.spaces.gotoSpace(space)
 	end
 
-	for i = 0, 9, 1 do
-		hs.hotkey.bind({ "cmd" }, tostring(i), function()
+	for i = 1, 9, 1 do
+		hs.hotkey.bind({ "cmd" }, tostring(i), "Switch to space " .. tostring(i), function()
 			switchToSpace(i)
 		end)
-		hs.hotkey.bind({ "cmd", "shift" }, tostring(i), function()
+		hs.hotkey.bind({ "cmd", "shift" }, tostring(i), "Move window to space " .. tostring(i), function()
 			moveWindowToSpace(i)
 		end)
 	end
 
 	logger:i("[TilingWindow] module loaded")
 end
+
+hs.hotkey.bind({ "cmd", "shift", "option" },"h",'Show active hotkeys',function ()
+	local t=hs.hotkey.getHotkeys()
+	local s=''
+	for i=2,#t do s=s..t[i].msg..'\n' end
+	hs.alert(s:sub(1,-2),{
+		strokeWidth  = 2,
+		strokeColor = { white = 1, alpha = 1 },
+		fillColor   = { white = 0, alpha = 0.75 },
+		textColor = { white = 1, alpha = 1 },
+		textFont  = ".AppleSystemUIFont",
+		textSize  = 27,
+		radius = 27,
+		atScreenEdge = 1,
+		fadeInDuration = 0.15,
+		fadeOutDuration = 0.15,
+		padding = nil,
+	})	
+end,hs.alert.closeAll)
 
 return module
