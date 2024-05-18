@@ -20,10 +20,10 @@ function module(logger)
 		end)
 	end
 
-	yabai_key({ "cmd", "option" }, "j", { "-m", "window", "--focus", "south" })
-	yabai_key({ "cmd", "option" }, "k", { "-m", "window", "--focus", "north" })
-	yabai_key({ "cmd", "option" }, "h", { "-m", "window", "--focus", "west" })
-	yabai_key({ "cmd", "option" }, "l", { "-m", "window", "--focus", "east" })
+	yabai_key({ "cmd", "option" }, "j", { "-m", "window", "--focus", "south" }, { "-m", "display", "--focus", "south" })
+	yabai_key({ "cmd", "option" }, "k", { "-m", "window", "--focus", "north" }, { "-m", "display", "--focus", "north" })
+	yabai_key({ "cmd", "option" }, "h", { "-m", "window", "--focus", "west" }, { "-m", "display", "--focus", "west" })
+	yabai_key({ "cmd", "option" }, "l", { "-m", "window", "--focus", "east" }, { "-m", "display", "--focus", "east" })
 
 	yabai_key({ "cmd", "shift" }, "h", { "-m", "window", "--swap", "west" })
 	yabai_key({ "cmd", "shift" }, "l", { "-m", "window", "--swap", "east" })
