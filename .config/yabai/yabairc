@@ -59,5 +59,4 @@ yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yab
 yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
 # focus window after a window is minimized
-yabai -m signal --add event=window_minimized action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
-
+yabai -m signal --add event=window_minimized action="if [[ \$(yabai -m query --windows --space | jq .[0].minimized) != true ]]; then yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id); fi"

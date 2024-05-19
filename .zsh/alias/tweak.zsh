@@ -79,7 +79,7 @@ if [ "$_current_shell" = "zsh" ]; then
     }
 elif; then
     cd() {
-        builtin cd "$@" && ls -a
+        z "$@" && ls -a
     }
 fi
 

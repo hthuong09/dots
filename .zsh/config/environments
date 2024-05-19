@@ -77,12 +77,20 @@ get_yarn_prefix_path() {
   fi
 }
 
-# arn package manager
+# yarn package manager
 if hash yarn 2>/dev/null; then
   node_packages_preparing $NODE_PACKAGES_PATH
 
   if [[ $(get_yarn_prefix_path) != $NODE_PACKAGES_PATH ]]; then
     yarn config set prefix $NODE_PACKAGES_PATH > /dev/null
+  fi
+fi
+
+# npm package manager
+if hash npm 2>/dev/null; then
+  node_packages_preparing $NODE_PACKAGES_PATH
+  if [[ $(npm config get prefix) != $NODE_PACKAGES_PATH ]]; then
+    npm config set prefix $NODE_PACKAGES_PATH > /dev/null
   fi
 fi
 
