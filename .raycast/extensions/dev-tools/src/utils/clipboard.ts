@@ -1,10 +1,23 @@
 import { Clipboard } from "@raycast/api";
-import { runAppleScript } from "run-applescript";
+import { runAppleScript } from "@raycast/utils";
+import { execSync } from "child_process";
 import { isFileExist } from "./file";
 import { showErrorToast } from "./ui";
 
 export const readTextFromClipboard = async (): Promise<string | undefined> => {
   return await Clipboard.readText();
+};
+
+export const readHTMLFromClipboard = async (): Promise<string | undefined> => {
+  try {
+    const html = execSync(
+      `osascript -e 'the clipboard as "HTML"'| perl -ne 'print chr foreach unpack("C*",pack("H*",substr($_,11,-3)))'`,
+      { encoding: "utf-8" }
+    );
+    return html;
+  } catch (err) {
+    return undefined;
+  }
 };
 
 export const readFilePathFromClipBoard = async (): Promise<string | undefined> => {

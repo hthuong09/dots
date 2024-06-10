@@ -33,15 +33,17 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.42.2",
-    "@raycast/utils": "^1.4.16",
+    "@raycast/api": "^1.76.0",
+    "@raycast/utils": "^1.15.0",
     "execa": "^6.1.0",
     "jsonlint": "github:hthuong09/jsonlint",
-    "run-applescript": "^6.0.0"
+    "run-applescript": "^6.0.0",
+    "turndown": "^7.2.0"
   },
   "devDependencies": {
     "@types/node": "18.8.3",
     "@types/react": "18.0.9",
+    "@types/turndown": "^5.0.4",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^7.32.0",
