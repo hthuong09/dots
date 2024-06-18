@@ -256,21 +256,21 @@ return {
 		{ key = "8", mods = "ALT", action = wezterm.action.ActivateTab(7) },
 		{ key = "9", mods = "ALT", action = wezterm.action.ActivateTab(8) },
 
-		{ key = "X", mods = "CTRL|ALT", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
+		{ key = "x", mods = "CTRL|ALT|SHIFT", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
 
 		{
 			key = "s",
-			mods = "CTRL|SHIFT|ALT",
+			mods = "CTRL|SHIFT|CMD",
 			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 		},
 		{
 			key = "v",
-			mods = "CTRL|SHIFT|ALT",
+			mods = "CTRL|SHIFT|CMD",
 			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 		},
 		{
-			key = "E",
-			mods = "CTRL",
+			key = "e",
+			mods = "CTRL|SHIFT",
 			action = wezterm.action.QuickSelectArgs({
 				patterns = {
 					"https?://\\S+",
@@ -298,7 +298,7 @@ return {
 		-- 	action = launch_workspace_action,
 		-- },
 		{
-			key = "O",
+			key = "o",
 			mods = "CTRL|SHIFT",
 			action = wezterm.action.InputSelector(generate_workspace_input_selector()),
 		},
@@ -362,4 +362,5 @@ return {
 			mods = "NONE",
 		},
 	},
+	debug_key_events = true,
 }
