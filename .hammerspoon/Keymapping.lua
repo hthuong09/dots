@@ -85,7 +85,7 @@ function module(logger)
 				end,
 			},
 			-- toggle
-			[singleKey("t", "toggle+")] = {
+			[singleKey("l", "layout+")] = {
 				[singleKey("f", "space float")] = function()
 					yabai({ "-m", "space", "--layout", "float" })
 				end,
