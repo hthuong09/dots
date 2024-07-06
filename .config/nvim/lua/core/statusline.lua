@@ -1,5 +1,6 @@
 -- from https://github.com/hthuong09/nvchad-ui/blob/main/lua/nvchad_ui/statusline/modules.lua
 local fn = vim.fn
+local version = vim.version().minor
 local separators = {
 	left = "",
 	right = " ",
@@ -79,29 +80,6 @@ M.git = function()
 	return "%#St_gitIcons#" .. branch_name .. added .. changed .. removed
 end
 
--- LSP STUFF
-M.LSP_progress = function()
-	if not rawget(vim, "lsp") then
-		return ""
-	end
-
-	local Lsp = vim.lsp.status()
-
-	if vim.o.columns < 120 or not Lsp then
-		return ""
-	end
-
-	local msg = Lsp.message or ""
-	local percentage = Lsp.percentage or 0
-	local title = Lsp.title or ""
-	local spinners = { "", "" }
-	local ms = vim.loop.hrtime() / 1000000
-	local frame = math.floor(ms / 120) % #spinners
-	local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
-
-	return ("%#St_LspProgress#" .. content) or ""
-end
-
 M.LSP_Diagnostics = function()
 	if not rawget(vim, "lsp") then
 		return ""
@@ -133,7 +111,7 @@ M.LSP_status = function()
 	end
 
 	if rawget(vim, "lsp") then
-		for _, client in ipairs(vim.lsp.get_active_clients()) do
+		for _, client in ipairs(vim.lsp.get_clients()) do
 			if client.attached_buffers[vim.api.nvim_get_current_buf()] then
 				if vim.o.columns <= 100 then
 					return "   LSP "
@@ -190,8 +168,8 @@ M.statusline = function()
 		M.git(),
 
 		"%=",
-		M.LSP_progress(),
-		"%=",
+		-- M.LSP_progress(),
+		-- "%=",
 
 		M.LSP_Diagnostics(),
 		M.LSP_status() or "",

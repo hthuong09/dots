@@ -3,7 +3,7 @@ local mux = wezterm.mux
 local darkTheme = require("themes.base16-tomorrow-night")
 local lightTheme = require("themes.ayu-light")
 
-local tab_max_width = 30
+local tab_max_width = 25
 
 local function get_theme(appearance)
 	if appearance:find("Dark") then
