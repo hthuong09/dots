@@ -28,6 +28,7 @@ function M.config()
 				focusable = false,
 				border = {
 					style = "rounded",
+					padding = { 0, 0 },
 				},
 				win_options = {
 					winhighlight = { Normal = "CmpPmenu", FloatBorder = "CmpBorder" },
