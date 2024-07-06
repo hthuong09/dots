@@ -30,4 +30,15 @@ function M.is_available(plugin)
 	return require("lazy.core.config").plugins[plugin] ~= nil
 end
 
+M.border_settings = {
+	{ "╭", "CmpBorder" },
+	{ "─", "CmpBorder" },
+	{ "╮", "CmpBorder" },
+	{ "│", "CmpBorder" },
+	{ "╯", "CmpBorder" },
+	{ "─", "CmpBorder" },
+	{ "╰", "CmpBorder" },
+	{ "│", "CmpBorder" },
+}
+
 return M

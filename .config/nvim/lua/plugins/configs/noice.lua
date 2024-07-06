@@ -24,6 +24,22 @@ function M.config()
 					winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
 				},
 			},
+			hover = {
+				focusable = false,
+				border = {
+					style = "rounded",
+				},
+				win_options = {
+					winhighlight = { Normal = "CmpPmenu", FloatBorder = "CmpBorder" },
+				},
+				anchor = "SW",
+				position = {
+					row = 1,
+				},
+			},
+			custom_signature = {
+				view = "hover",
+			},
 		},
 		lsp = {
 			-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -33,10 +49,11 @@ function M.config()
 				["cmp.entry.get_documentation"] = true,
 			},
 			hover = {
-				enabled = false,
+				enabled = true,
 			},
 			signature = {
-				enabled = false,
+				enabled = true,
+				view = "custom_signature",
 			},
 		},
 		-- you can enable a preset for easier configuration

@@ -64,14 +64,14 @@ function M.config()
 		},
 	})
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-		border = border_settings,
-		focusable = false,
-	})
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = border_settings,
-		focusable = false,
-	})
+	-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	-- 	border = border_settings,
+	-- 	focusable = false,
+	-- })
+	-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	-- 	border = border_settings,
+	-- 	focusable = false,
+	-- })
 
 	-- Borders for LspInfo winodw
 	require("lspconfig.ui.windows").default_options.border = "single"
