@@ -53,7 +53,7 @@ function M.config()
 				enabled = true,
 			},
 			signature = {
-				enabled = true,
+				enabled = false,
 				view = "custom_signature",
 			},
 		},

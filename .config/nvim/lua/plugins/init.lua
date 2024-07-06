@@ -210,11 +210,11 @@ local plugins = {
 			-- "rcarriga/nvim-notify",
 		},
 	},
-	-- ["ray-x/lsp_signature.nvim"] = {
-	-- 	config = function()
-	-- 		require("plugins.configs.lsp_signature").config()
-	-- 	end,
-	-- },
+	["ray-x/lsp_signature.nvim"] = {
+		config = function()
+			require("plugins.configs.lsp_signature").config()
+		end,
+	},
 
 	["Darazaki/indent-o-matic"] = {
 		event = { "BufReadPre", "BufNewFile" },
