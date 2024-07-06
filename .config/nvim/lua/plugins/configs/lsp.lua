@@ -77,7 +77,7 @@ function M.config()
 	require("lspconfig.ui.windows").default_options.border = "single"
 
 	mason_lspconfig.setup({
-		ensure_installed = { "lua_ls", "rust_analyzer" },
+		ensure_installed = { "lua_ls", "rust_analyzer", "tailwindcss" },
 	})
 	mason_lspconfig.setup_handlers({
 		function(server)

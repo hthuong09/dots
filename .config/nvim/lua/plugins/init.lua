@@ -62,6 +62,12 @@ local plugins = {
 			require("plugins.configs.typescript-tools").config()
 		end,
 	},
+	["luckasRanarison/tailwind-tools.nvim"] = {
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("plugins.configs.tailwind-tools").config()
+		end,
+	},
 	-- Completion
 	["hrsh7th/nvim-cmp"] = {
 		event = "InsertEnter",
