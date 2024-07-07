@@ -28,6 +28,7 @@
     fd
     bat
     fluxcd
+    bun
   ];
 
   programs.starship = {
