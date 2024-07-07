@@ -25,9 +25,17 @@ local plugins = {
 			require("plugins.configs.autopairs").config()
 		end,
 	},
+	["windwp/nvim-ts-autotag"] = {
+		config = function()
+			require("nvim-ts-autotag").setup({
+				-- your config
+			})
+		end,
+	},
 	["nvim-treesitter/nvim-treesitter"] = {
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
+			{ "windwp/nvim-ts-autotag", lazy = true },
 			{ "nvim-autopairs", lazy = true },
 			{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
 			{ "lukas-reineke/indent-blankline.nvim", lazy = true },

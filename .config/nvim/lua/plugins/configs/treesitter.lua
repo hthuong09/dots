@@ -16,7 +16,7 @@ function M.config()
 		autopairs = { enable = true }, -- windwp/nvim-autopairs
 		incremental_selection = { enable = true },
 		indent = { enable = true }, -- lukas-reineke/indent-blankline.nvim
-		-- autotag = { enable = true }, -- windwp/nvim-ts-autotag
+		autotag = { enable = true }, -- windwp/nvim-ts-autotag
 		-- rainbow = {
 		--   enable = true,
 		--   disable = { "html" },
