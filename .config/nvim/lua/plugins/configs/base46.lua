@@ -34,6 +34,10 @@ function M.config()
 				bg = "#7d3d3c",
 				fg = "none",
 			},
+			ThuongTest = {
+				bg = "NONE",
+				fg = "NONE",
+			},
 		},
 		hl_override = {
 			-- NormalFloat = { bg = "NONE" },

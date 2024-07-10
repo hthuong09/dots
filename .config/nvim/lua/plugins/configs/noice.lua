@@ -14,6 +14,16 @@ function M.config()
 			},
 		},
 		views = {
+			cmdline_input = {
+				view = "cmdline_popup",
+				border = {
+					style = "rounded",
+					padding = { 0, 1 },
+				},
+				win_options = {
+					winhighlight = { Normal = "" },
+				},
+			},
 			cmdline_popup = { -- minimal cmdline_popup
 				border = {
 					style = "none",
