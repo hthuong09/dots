@@ -50,6 +50,7 @@
   undo = reset HEAD~1
   base = reset --hard origin/main
   update = !git au && git cm "update" && git pu
+  updateall = !git aa && git cm "update" && git pu
   untracked = status -u .
   untracked-at = status -u
   ls = ls-files

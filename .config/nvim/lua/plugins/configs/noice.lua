@@ -21,7 +21,7 @@ function M.config()
 					padding = { 0, 1 },
 				},
 				win_options = {
-					winhighlight = { Normal = "" },
+					winhighlight = { Normal = "CmpPmenu" },
 				},
 			},
 			cmdline_popup = { -- minimal cmdline_popup
