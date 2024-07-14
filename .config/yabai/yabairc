@@ -24,6 +24,7 @@ yabai -m rule --add app="^Installer$"                             manage=off
 yabai -m rule --add app="^Messenger$"                             manage=off
 yabai -m rule --add app="^Raycast$"                               manage=off
 yabai -m rule --add app="^OrbStack$"                              manage=off
+yabai -m rule --add app="^defaults edit$"                         manage=off
 
 # auto goes to correct spaces
 # 1. web

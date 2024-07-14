@@ -99,6 +99,74 @@
       "NSStatusItem Visible Sound" = false;
       "NSStatusItem Visible NowPlaying" = false;
     };
+    "com.apple.symbolichotkeys" = {
+      AppleSymbolicHotKeys = {
+        # 118 to 125 is the hot key for cmd + N to switch to a specific space using Mission Control shortcuts
+        "118" = {
+          enabled = true;
+          value = {
+            parameters = [49 18 1.048.576];
+            type = "standard";
+          };
+        };
+        "119" = {
+          enabled = true;
+          value = {
+            parameters = [50 19 1.048.576];
+            type = "standard";
+          };
+        };
+        "120" = {
+          enabled = true;
+          value = {
+            parameters = [51 20 1.048.576];
+            type = "standard";
+          };
+        };
+        "121" = {
+          enabled = true;
+          value = {
+            parameters = [52 21 1.048.576];
+            type = "standard";
+          };
+        };
+        "122" = {
+          enabled = true;
+          value = {
+            parameters = [53 23 1.048.576];
+            type = "standard";
+          };
+        };
+        "123" = {
+          enabled = true;
+          value = {
+            parameters = [54 22 1.048.576];
+            type = "standard";
+          };
+        };
+        "124" = {
+          enabled = true;
+          value = {
+            parameters = [55 26 1.048.576];
+            type = "standard";
+          };
+        };
+        "125" = {
+          enabled = true;
+          value = {
+            parameters = [56 28 1.048.576];
+            type = "standard";
+          };
+        };
+        "126" = {
+          enabled = true;
+          value = {
+            parameters = [57 25 1.048.576];
+            type = "standard";
+          };
+        };
+      };
+    };
   };
 
   system.activationScripts.postUserActivation.text = ''
