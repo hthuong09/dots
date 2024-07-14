@@ -156,10 +156,10 @@ function module(logger)
 	end
 
 	for i = 1, 9, 1 do
-		-- hs.hotkey.bind({ "cmd" }, tostring(i), "Switch to space " .. tostring(i), function()
+		-- hs.hotkey.bind({ "alt" }, tostring(i), "Switch to space " .. tostring(i), function()
 		-- 	switchToSpace(i)
 		-- end)
-		hs.hotkey.bind({ "cmd", "shift" }, tostring(i), "Move window to space " .. tostring(i), function()
+		hs.hotkey.bind({ "alt", "shift" }, tostring(i), "Move window to space " .. tostring(i), function()
 			moveWindowToSpace(i)
 		end)
 	end
