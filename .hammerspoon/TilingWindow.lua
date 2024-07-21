@@ -131,6 +131,7 @@ function module(logger)
 		hs.spaces.gotoSpace(space)
 	end
 
+	-- no longer working since macos 14.5
 	local function moveWindowToSpace(index)
 		local focused_window = hs.window.focusedWindow()
 		if not focused_window then
@@ -160,7 +161,8 @@ function module(logger)
 		-- 	switchToSpace(i)
 		-- end)
 		hs.hotkey.bind({ "alt", "shift" }, tostring(i), "Move window to space " .. tostring(i), function()
-			moveWindowToSpace(i)
+			yabai({ "-m", "window", "--space", tostring(index) })
+			hs.eventtap.keyStroke({ "alt" }, tostring(index))
 		end)
 	end
 
