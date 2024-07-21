@@ -101,67 +101,75 @@
     };
     "com.apple.symbolichotkeys" = {
       AppleSymbolicHotKeys = {
-        # 118 to 125 is the hot key for cmd + N to switch to a specific space using Mission Control shortcuts
+        # 118 to 126 is the hot key for cmd + N to switch to a specific space using Mission Control shortcuts
         "118" = {
           enabled = true;
           value = {
-            parameters = [49 18 1.048.576];
+            parameters = [49 18 524288];
             type = "standard";
           };
         };
+        
         "119" = {
           enabled = true;
           value = {
-            parameters = [50 19 1.048.576];
+            parameters = [50 19 524288];
             type = "standard";
           };
         };
+        
         "120" = {
           enabled = true;
           value = {
-            parameters = [51 20 1.048.576];
+            parameters = [51 20 524288];
             type = "standard";
           };
         };
+        
         "121" = {
           enabled = true;
           value = {
-            parameters = [52 21 1.048.576];
+            parameters = [52 21 524288];
             type = "standard";
           };
         };
+        
         "122" = {
           enabled = true;
           value = {
-            parameters = [53 23 1.048.576];
+            parameters = [53 23 524288];
             type = "standard";
           };
         };
+        
         "123" = {
           enabled = true;
           value = {
-            parameters = [54 22 1.048.576];
+            parameters = [54 22 524288];
             type = "standard";
           };
         };
+        
         "124" = {
           enabled = true;
           value = {
-            parameters = [55 26 1.048.576];
+            parameters = [55 26 524288];
             type = "standard";
           };
         };
+        
         "125" = {
           enabled = true;
           value = {
-            parameters = [56 28 1.048.576];
+            parameters = [56 28 524288];
             type = "standard";
           };
         };
+        
         "126" = {
           enabled = true;
           value = {
-            parameters = [57 25 1.048.576];
+            parameters = [57 25 524288];
             type = "standard";
           };
         };
