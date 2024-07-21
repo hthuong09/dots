@@ -161,8 +161,8 @@ function module(logger)
 		-- 	switchToSpace(i)
 		-- end)
 		hs.hotkey.bind({ "alt", "shift" }, tostring(i), "Move window to space " .. tostring(i), function()
-			yabai({ "-m", "window", "--space", tostring(index) })
-			hs.eventtap.keyStroke({ "alt" }, tostring(index))
+			yabai({ "-m", "window", "--space", tostring(i) })
+			hs.eventtap.keyStroke({ "alt" }, tostring(i))
 		end)
 	end
 
