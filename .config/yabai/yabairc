@@ -40,6 +40,7 @@ yabai -m rule --add app="^iTerm2$"           space=^2
 yabai -m config --space 3 layout stack
 yabai -m rule --add app="^Code$"             space=^3
 yabai -m rule --add app="^Code - Insiders$"  space=^3
+yabai -m rule --add app="^Cursor$"           space=^3
 
 # 4. Dev Tools
 yabai -m rule --add app="^NoSQLBooster for MongoDB$" space=^4
@@ -61,4 +62,10 @@ yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yab
 # yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
 # focus window after a window is minimized
-yabai -m signal --add event=window_minimized action="if [[ \$(yabai -m query --windows --space | jq .[0].minimized) != true ]]; then yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id); fi"
+yabai -m signal --add event=window_minimized action="
+window_id=\$YABAI_WINDOW_ID
+next_window=\$(yabai -m query --windows --space | jq -r '[.[] | select(.id != '\$window_id' and .\"is-minimized\" == false and .\"is-visible\" == true)][0].id // empty')
+if [[ -n \$next_window ]]; then
+    yabai -m window --focus \$next_window
+fi
+"
