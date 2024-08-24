@@ -67,8 +67,7 @@ fi
 
 # focus window after a window is minimized
 yabai -m signal --add event=window_minimized action="
-window_id=\$YABAI_WINDOW_ID
-next_window=\$(yabai -m query --windows --space | jq -r '[.[] | select(.id != '\$window_id' and .\"is-minimized\" == false and .\"is-visible\" == true)][0].id // empty')
+next_window=\$(yabai -m query --windows --space | jq -r '[.[] | select(.\"is-minimized\" == false and .\"is-visible\" == true)][0].id // empty')
 if [[ -n \$next_window ]]; then
     yabai -m window --focus \$next_window
 fi
