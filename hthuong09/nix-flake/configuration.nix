@@ -49,6 +49,7 @@
   homebrew.masApps = {
     Messenger = 1480068668;
     RunCat = 1429033973;
+    Equinox = 1591510203;
   };
   security.pam.enableSudoTouchIdAuth = true;
 
