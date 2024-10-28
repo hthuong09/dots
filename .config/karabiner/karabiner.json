@@ -1,5 +1,8 @@
 {
-    "global": { "show_in_menu_bar": false },
+    "global": {
+        "check_for_updates_on_startup": false,
+        "show_in_menu_bar": false
+    },
     "profiles": [
         {
             "fn_function_keys": [
@@ -31,6 +34,38 @@
                 "parameters": { "basic.simultaneous_threshold_milliseconds": 250 },
                 "rules": [
                     {
+                        "description": "Hyper Key: Right Command → left shift + left option + left command (⌃⇧⌥⌘)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_right_option",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "key_code": "left_control",
+                                        "modifiers": ["left_shift", "left_option", "left_command"]
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_right_option",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Disable command+control+option+shift+, which triggers WiFi logging.",
                         "manipulators": [
                             {
@@ -39,21 +74,6 @@
                                     "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
                                 },
                                 "to": [{ "key_code": "f13" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Map Right Command to Hyper Key with left modifiers",
-                        "manipulators": [
-                            {
-                                "from": { "key_code": "right_command" },
-                                "to": [
-                                    {
-                                        "key_code": "left_shift",
-                                        "modifiers": ["left_command", "left_control", "left_option"]
-                                    }
-                                ],
                                 "type": "basic"
                             }
                         ]
