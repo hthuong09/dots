@@ -234,6 +234,8 @@ return {
 		saturation = 0.5,
 	},
 
+	max_fps = 120,
+
 	keys = {
 		-- {
 		-- 	key = "P",
