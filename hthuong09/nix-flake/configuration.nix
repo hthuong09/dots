@@ -21,12 +21,13 @@
   homebrew.onActivation.upgrade = true;
   homebrew.global.autoUpdate = true;
   homebrew.brews = [ "txn2/tap/kubefwd" "koekeishiya/formulae/yabai"];
-  homebrew.taps = [ "wez/wezterm" ];
+  homebrew.taps = [ "wez/wezterm"  "thatsjustcheesy/tap"];
   homebrew.casks = [
     {
       name = "wez/wezterm/wezterm";
       greedy = true;
     }
+    "defaults-edit"
     "spaceman"
     "slack"
     "hammerspoon"
@@ -43,6 +44,7 @@
     "muzzle"
     "orbstack"
     "cloudflare-warp"
+    "cursor"
     # "whatpulse/whatpulse/whatpulse"
   ];
   homebrew.masApps = {
@@ -170,6 +172,22 @@
           enabled = true;
           value = {
             parameters = [57 25 524288];
+            type = "standard";
+          };
+        };
+
+        ## Disable spotlight
+        "64" = {
+          enabled = false;
+          value = {
+            parameters = [32 49 1.048.576];
+            type = "standard";
+          };
+        };
+        "65" = {
+          enabled = false;
+          value = {
+            parameters = [32 49 1.572.864];
             type = "standard";
           };
         };
