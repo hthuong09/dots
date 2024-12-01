@@ -10,7 +10,7 @@ yabai -m config right_padding                5
 # yabai -m config focus_follows_mouse autoraise
 # yabai -m config mouse_follows_focus on
 
-yabai -m rule --add app!="^(Arc|kitty|WezTerm|wezterm-gui|iTerm2|Slack)$" manage=off
+yabai -m rule --add app!="^(Arc|kitty|WezTerm|wezterm-gui|iTerm2|Slack|Cursor)$" manage=off
 
 # auto goes to correct spaces
 # 1. web
