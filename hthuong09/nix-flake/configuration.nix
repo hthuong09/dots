@@ -43,7 +43,6 @@
     "contexts"
     "muzzle"
     "orbstack"
-    "cloudflare-warp"
     "cursor"
     # "whatpulse/whatpulse/whatpulse"
   ];
