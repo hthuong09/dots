@@ -14,7 +14,7 @@ yabai -m rule --add app!="^(Arc|kitty|WezTerm|wezterm-gui|iTerm2|Slack|Cursor)$"
 
 # auto goes to correct spaces
 # 1. web
-yabai -m rule --add app="^Arc$"              space=^1
+# yabai -m rule --add app="^Arc$"              space=^1
 
 # 2. term
 yabai -m rule --add app="^kitty$"            space=^2

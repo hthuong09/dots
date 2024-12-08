@@ -6,6 +6,8 @@
 # 
 [ -f "$HOME/.shopback" ] && source "$HOME/.shopback"
 [ -f "$HOME/.kubectl-alias" ] && source "$HOME/.kubectl-alias"
+export FZF_DEFAULT_OPTS=--reverse
+
 
 export PATH=~/Library/Python/3.8/bin:/usr/local/go/bin:/opt/homebrew/bin:$PATH
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
