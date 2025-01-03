@@ -10,13 +10,22 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager }:
+  outputs =
+    {
+      self,
+      darwin,
+      nixpkgs,
+      home-manager,
+    }:
     let
       nixpkgsConfig = {
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+        };
       };
     in
     {
+      # Work configuration (Tyson's MacBook Pro)
       darwinConfigurations."tyson-macbook-pro" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
@@ -25,10 +34,30 @@
             nixpkgs = nixpkgsConfig;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users."tyson.nguyen" = import ./home.nix;
+            home-manager.users."tyson.nguyen" = {
+              imports = [ ./hosts/work/home.nix ];
+            };
             users.users."tyson.nguyen".home = /Users/tyson.nguyen;
           }
-          ./configuration.nix
+          ./hosts/work/configuration.nix
+        ];
+      };
+
+      # Personal configuration (Thuong's Mac Mini)
+      darwinConfigurations."Thuongs-Mac-mini" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          home-manager.darwinModules.home-manager
+          {
+            nixpkgs = nixpkgsConfig;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users."aichan" = {
+              imports = [ ./hosts/personal/home.nix ];
+            };
+            users.users."aichan".home = /Users/aichan;
+          }
+          ./hosts/personal/configuration.nix
         ];
       };
     };

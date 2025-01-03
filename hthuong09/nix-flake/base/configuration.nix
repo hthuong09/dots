@@ -6,8 +6,7 @@
   '';
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [
-  ];
+  environment.systemPackages = [ ];
 
   # services.yabai = {
   #   enable = true;
@@ -20,8 +19,14 @@
   homebrew.enable = true;
   homebrew.onActivation.upgrade = true;
   homebrew.global.autoUpdate = true;
-  homebrew.brews = [ "txn2/tap/kubefwd" "koekeishiya/formulae/yabai"];
-  homebrew.taps = [ "wez/wezterm"  "thatsjustcheesy/tap"];
+  homebrew.brews = [
+    "txn2/tap/kubefwd"
+    "koekeishiya/formulae/yabai"
+  ];
+  homebrew.taps = [
+    "wez/wezterm"
+    "thatsjustcheesy/tap"
+  ];
   homebrew.casks = [
     {
       name = "wez/wezterm/wezterm";
@@ -106,71 +111,107 @@
         "118" = {
           enabled = true;
           value = {
-            parameters = [49 18 524288];
+            parameters = [
+              49
+              18
+              524288
+            ];
             type = "standard";
           };
         };
-        
+
         "119" = {
           enabled = true;
           value = {
-            parameters = [50 19 524288];
+            parameters = [
+              50
+              19
+              524288
+            ];
             type = "standard";
           };
         };
-        
+
         "120" = {
           enabled = true;
           value = {
-            parameters = [51 20 524288];
+            parameters = [
+              51
+              20
+              524288
+            ];
             type = "standard";
           };
         };
-        
+
         "121" = {
           enabled = true;
           value = {
-            parameters = [52 21 524288];
+            parameters = [
+              52
+              21
+              524288
+            ];
             type = "standard";
           };
         };
-        
+
         "122" = {
           enabled = true;
           value = {
-            parameters = [53 23 524288];
+            parameters = [
+              53
+              23
+              524288
+            ];
             type = "standard";
           };
         };
-        
+
         "123" = {
           enabled = true;
           value = {
-            parameters = [54 22 524288];
+            parameters = [
+              54
+              22
+              524288
+            ];
             type = "standard";
           };
         };
-        
+
         "124" = {
           enabled = true;
           value = {
-            parameters = [55 26 524288];
+            parameters = [
+              55
+              26
+              524288
+            ];
             type = "standard";
           };
         };
-        
+
         "125" = {
           enabled = true;
           value = {
-            parameters = [56 28 524288];
+            parameters = [
+              56
+              28
+              524288
+            ];
             type = "standard";
           };
         };
-        
+
         "126" = {
           enabled = true;
           value = {
-            parameters = [57 25 524288];
+            parameters = [
+              57
+              25
+              524288
+            ];
             type = "standard";
           };
         };
@@ -179,14 +220,24 @@
         "64" = {
           enabled = false;
           value = {
-            parameters = [32 49 1.048.576];
+            parameters = [
+              32
+              49
+              1.048
+              0.576
+            ];
             type = "standard";
           };
         };
         "65" = {
           enabled = false;
           value = {
-            parameters = [32 49 1.572.864];
+            parameters = [
+              32
+              49
+              1.572
+              0.864
+            ];
             type = "standard";
           };
         };

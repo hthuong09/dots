@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   home.stateVersion = "22.05";
 
@@ -20,8 +25,8 @@
     ranger
     docker-client
     delta
-    postman
-    obsidian
+    # postman
+    # obsidian
     nodejs
     awscli2
     fzf
@@ -57,4 +62,3 @@
     defaultEditor = true;
   };
 }
-
