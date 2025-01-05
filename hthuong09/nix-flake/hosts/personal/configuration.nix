@@ -8,5 +8,6 @@
     "ghostty"
     "1password"
     "1password-cli"
+    "telegram"
   ];
 }
