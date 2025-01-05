@@ -18,6 +18,12 @@ export XMODIFIERS=@im=ibus
 # export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
 # gpg-connect-agent updatestartuptty /bye > /dev/null
 
+# macOS specific configurations
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export SSH_AUTH_SOCK=$(/usr/local/MacGPG2/bin/gpgconf --list-dirs agent-ssh-socket)
+fi
+
+
 if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
     PATH="$HOME/.config/composer/vendor/bin:$PATH"
 fi
