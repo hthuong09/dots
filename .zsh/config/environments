@@ -104,4 +104,9 @@ alias pomodorostrt='sleep 1500 && notify-send "Your pomodoro session just ended.
 alias pomodorobrk='sleep 300 && notify-send "Back to work"'
 alias pomodoro='sleep 1500 && notify-send "Your pomodoro session just ended. Have a well deserved 5 minutes break"; sleep 300 && notify-send "Back to work"'
 
+export SDKMAN_DIR="$HOME/.sdkman"
+if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
+    source "$HOME/.sdkman/bin/sdkman-init.sh" || true
+fi
+
 # vim: set filetype=zsh:

@@ -9,5 +9,6 @@
     "1password"
     "1password-cli"
     "telegram"
+    "cloudflare-warp"
   ];
 }
