@@ -29,7 +29,7 @@
   ];
   homebrew.casks = [
     {
-      name = "wez/wezterm/wezterm";
+      name = "wez/wezterm/wezterm@nightly";
       greedy = true;
     }
     "defaults-edit"
