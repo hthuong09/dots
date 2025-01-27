@@ -7,6 +7,17 @@
 {
   home.stateVersion = "22.05";
 
+  # Symlink fonts to /Library/Fonts
+  home.activation = {
+    linkFonts = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      echo "Linking fonts to /Library/Fonts..."
+      $DRY_RUN_CMD sudo mkdir -p "/Library/Fonts"
+      for font in ~/.fonts/*; do
+        $DRY_RUN_CMD sudo ln -fn "$font" "/Library/Fonts/$(basename "$font")"
+      done
+    '';
+  };
+
   programs.htop.enable = true;
   programs.htop.settings.show_program_path = true;
 
