@@ -48,6 +48,7 @@
     rm-improved
     gh
     zoxide
+    kubefwd
     # utilities
     # https://dev.to/lissy93/cli-tools-you-cant-live-without-57f6
     # thefuck - Auto-correct miss-typed commands - unable to find use case yet

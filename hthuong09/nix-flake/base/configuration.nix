@@ -20,13 +20,11 @@
   homebrew.onActivation.upgrade = true;
   homebrew.global.autoUpdate = true;
   homebrew.brews = [
-    "kubefwd"
     "yabai"
   ];
   homebrew.taps = [
     "wez/wezterm"
     "thatsjustcheesy/tap"
-    "txn2/tap"
     "koekeishiya/formulae"
   ];
   homebrew.casks = [
