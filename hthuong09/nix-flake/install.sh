@@ -26,17 +26,6 @@ prepare_macos() {
     else
         echo "Homebrew already installed"
     fi
-
-    # Check if Nix is installed
-    if ! command -v nix &> /dev/null; then
-        echo "Installing Nix..."
-        sh <(curl -L https://nixos.org/nix/install)
-        echo "Nix installation completed. Please restart your terminal to start using Nix."
-        exit 0
-    else
-        echo "Nix already installed"
-    fi
-
 }
 install_yabai_indicator() {
   # Exit if not macOS
@@ -98,9 +87,6 @@ prepare_dotfiles() {
   else
     echo "Installing dotfiles..."
     
-    # Alias dots command
-    alias dots='git --git-dir=$HOME/.gdots/ --work-tree=$HOME'
-
     # Clone dotfiles repository
     git clone --recursive --separate-git-dir=$HOME/.gdots https://github.com/hthuong09/dots /tmp/dots
     
@@ -114,19 +100,30 @@ prepare_dotfiles() {
     rm -rf /tmp/dots
     
     # Initialize submodules
-    dots submodule update --init --recursive $HOME/
+    git --git-dir=$HOME/.gdots/ --work-tree=$HOME submodule update --init --recursive $HOME/
 
     # Reverse to using ssh
-    dots remote set-url origin git@github.com:hthuong09/dots.git
+    git --git-dir=$HOME/.gdots/ --work-tree=$HOME remote set-url origin git@github.com:hthuong09/dots.git
     
     echo "Dotfiles installation complete! Please restart your terminal to use the new dotfiles."
-
-    exit 0
   fi
+}
+
+prepare_nix() {
+    # Check if Nix is installed
+    if ! command -v nix &> /dev/null; then
+        echo "Installing Nix..."
+        sh <(curl -L https://nixos.org/nix/install)
+        echo "Nix installation completed. Please restart your terminal to start using Nix."
+    else
+        echo "Nix already installed"
+    fi
 }
 
 prepare_macos
 prepare_dotfiles
+prepare_nix
+exit 0 # need to restart terminal after install nix and dotfiles
 install_yabai_indicator
 nix run nix-darwin -- switch --flake ~/hthuong09/nix-flake
 sync_secrets
