@@ -115,6 +115,7 @@ prepare_nix() {
         echo "Installing Nix..."
         sh <(curl -L https://nixos.org/nix/install)
         echo "Nix installation completed. Please restart your terminal to start using Nix."
+        exit 0
     else
         echo "Nix already installed"
     fi
@@ -123,7 +124,6 @@ prepare_nix() {
 prepare_macos
 prepare_dotfiles
 prepare_nix
-exit 0 # need to restart terminal after install nix and dotfiles
 install_yabai_indicator
 nix run nix-darwin -- switch --flake ~/hthuong09/nix-flake
 sync_secrets
