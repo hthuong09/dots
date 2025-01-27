@@ -44,6 +44,19 @@
     (writeShellScriptBin "sync-secrets" ''
       #!/usr/bin/env bash
       
+      # Function to check if signed in to 1Password
+      check_signin() {
+        if ! op vault list &>/dev/null; then
+          echo "Not signed in to 1Password. Signing in..."
+          eval $(op signin)
+          if [ $? -ne 0 ]; then
+            echo "Failed to sign in to 1Password"
+            exit 1
+          fi
+          echo "Successfully signed in to 1Password"
+        fi
+      }
+
       # Function to sync from 1Password to local file
       sync_from_1password() {
         echo "Syncing secrets from 1Password to local file..."
@@ -59,6 +72,9 @@
         op item edit "Environment Variables" "note[text]=$(cat ~/.secret-environments)"
         echo "Secrets synced to 1Password successfully!"
       }
+
+      # Check sign in status first
+      check_signin
 
       # Parse command line arguments
       case "$1" in

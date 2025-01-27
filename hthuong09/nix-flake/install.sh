@@ -43,3 +43,4 @@ else
 fi
 
 nix run nix-darwin -- switch --flake ~/hthuong09/nix-flake
+sync-secrets from
