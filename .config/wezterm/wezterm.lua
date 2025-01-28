@@ -190,8 +190,8 @@ return {
 		{ family = "Fira Code" },
 		{ family = "Symbols Nerd Font" },
 	}),
-	font_size = 13.5,
-	line_height = 1.25,
+	font_size = 14,
+	line_height = 1.35,
 	font_rules = {
 		{
 			intensity = "Bold",
