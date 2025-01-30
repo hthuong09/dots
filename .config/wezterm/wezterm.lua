@@ -2,6 +2,68 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local darkTheme = require("themes.base16-tomorrow-night")
 local lightTheme = require("themes.ayu-light")
+-- inpsired from: https://github.com/michaelbrusegard/tabline.wez/blob/main/plugin/tabline/components/tab/process.lua
+local process_icons = {
+	["air"] = wezterm.nerdfonts.md_language_go,
+	["apt"] = wezterm.nerdfonts.dev_debian,
+	["bacon"] = wezterm.nerdfonts.dev_rust,
+	["bash"] = wezterm.nerdfonts.cod_terminal_bash,
+	["bat"] = wezterm.nerdfonts.md_bat,
+	["btm"] = wezterm.nerdfonts.md_chart_donut_variant,
+	["btop"] = wezterm.nerdfonts.md_chart_areaspline,
+	["btop4win++"] = wezterm.nerdfonts.md_chart_areaspline,
+	["bun"] = "",
+	["cargo"] = wezterm.nerdfonts.dev_rust,
+	["chezmoi"] = wezterm.nerdfonts.md_home_plus_outline,
+	["cmd.exe"] = wezterm.nerdfonts.md_console_line,
+	["curl"] = wezterm.nerdfonts.md_flattr,
+	["debug"] = wezterm.nerdfonts.cod_debug,
+	["default"] = wezterm.nerdfonts.md_application,
+	["docker"] = wezterm.nerdfonts.md_docker,
+	["docker-compose"] = wezterm.nerdfonts.md_docker,
+	["dpkg"] = wezterm.nerdfonts.dev_debian,
+	["fish"] = wezterm.nerdfonts.md_fish,
+	["gh"] = wezterm.nerdfonts.dev_github_badge,
+	["git"] = wezterm.nerdfonts.dev_git,
+	["go"] = wezterm.nerdfonts.md_language_go,
+	["htop"] = wezterm.nerdfonts.md_chart_areaspline,
+	["kubectl"] = wezterm.nerdfonts.md_docker,
+	["kuberlr"] = wezterm.nerdfonts.md_docker,
+	["lazydocker"] = wezterm.nerdfonts.md_docker,
+	["lazygit"] = wezterm.nerdfonts.cod_github,
+	["lua"] = wezterm.nerdfonts.seti_lua,
+	["make"] = wezterm.nerdfonts.seti_makefile,
+	["nix"] = wezterm.nerdfonts.linux_nixos,
+	["node"] = wezterm.nerdfonts.md_nodejs,
+	["npm"] = wezterm.nerdfonts.md_npm,
+	["nvim"] = wezterm.nerdfonts.custom_neovim,
+	["pacman"] = wezterm.nerdfonts.md_pac_man,
+	["paru"] = wezterm.nerdfonts.md_pac_man,
+	["pnpm"] = wezterm.nerdfonts.md_npm,
+	["postgresql"] = wezterm.nerdfonts.dev_postgresql,
+	["powershell.exe"] = wezterm.nerdfonts.md_console,
+	["psql"] = wezterm.nerdfonts.dev_postgresql,
+	["pwsh.exe"] = wezterm.nerdfonts.md_console,
+	["rpm"] = wezterm.nerdfonts.dev_redhat,
+	["redis"] = wezterm.nerdfonts.dev_redis,
+	["ruby"] = wezterm.nerdfonts.cod_ruby,
+	["rust"] = wezterm.nerdfonts.dev_rust,
+	["serial"] = wezterm.nerdfonts.md_serial_port,
+	["ssh"] = wezterm.nerdfonts.md_ssh,
+	["sudo"] = wezterm.nerdfonts.fa_hashtag,
+	["tls"] = wezterm.nerdfonts.md_power_socket,
+	["topgrade"] = wezterm.nerdfonts.md_rocket_launch,
+	["unix"] = wezterm.nerdfonts.md_bash,
+	["valkey"] = wezterm.nerdfonts.dev_redis,
+	["vim"] = wezterm.nerdfonts.dev_vim,
+	["wget"] = wezterm.nerdfonts.md_arrow_down_box,
+	["yarn"] = wezterm.nerdfonts.seti_yarn,
+	["yay"] = wezterm.nerdfonts.md_pac_man,
+	["yazi"] = wezterm.nerdfonts.md_duck,
+	["yum"] = wezterm.nerdfonts.dev_redhat,
+	["zsh"] = wezterm.nerdfonts.dev_terminal,
+	["k9s"] = wezterm.nerdfonts.md_kubernetes,
+}
 
 local tab_max_width = 25
 
@@ -130,7 +192,7 @@ wezterm.on("update-right-status", function(window, pane)
 		{ Attribute = { Intensity = "Bold" } },
 		{ Background = { Color = tab_bar.active_tab.bg_color } },
 		{ Foreground = { Color = tab_bar.active_tab.fg_color } },
-		{ Text = "   ╱ " },
+		{ Text = " " .. wezterm.nerdfonts.cod_terminal_tmux .. " ╱ " },
 		{ Text = workspace },
 		{ Text = " " },
 	}))
@@ -142,14 +204,13 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local is_last_tab = tab.tab_index + 1 == #tabs
 
 	function tab_title(tab_info)
-		local title = tab_info.tab_title
-		-- if the tab title is explicitly set, take that
-		if title and #title > 0 then
-			return title
+		if tab_info.is_active then
+			return tab.active_pane.title
 		end
-		-- Otherwise, use the title from the active pane
-		-- in that tab
-		return tab.active_pane.title
+
+		local process = tab_info.active_pane.foreground_process_name:match("([^/\\]+)$")
+		local icon = process_icons[process] or process_icons.default
+		return icon .. " " .. process
 	end
 
 	local function create_tab_components(fg_color, bg_color, symbol)
@@ -205,8 +266,8 @@ return {
 		{
 			italic = true,
 			font = wezterm.font({
-				family = "OperatorMono Nerd Font",
-				weight = "Regular",
+				family = "Fira Code",
+				weight = 500,
 				style = "Italic",
 			}),
 		},

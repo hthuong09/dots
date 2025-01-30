@@ -44,6 +44,9 @@ function module(logger)
 			[singleKey("c", "close panel")] = function()
 				hs.eventtap.keyStroke({ "ctrl", "shift", "alt" }, "x", weztermIdentifier)
 			end,
+			[singleKey("x", "copy mode")] = function()
+				hs.eventtap.keyStroke({ "ctrl", "shift" }, "x", weztermIdentifier)
+			end,
 		},
 		[singleKey("w", "window+")] = {
 			-- focus

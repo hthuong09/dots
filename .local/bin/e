@@ -1,3 +1,0 @@
-#!env zsh
-# Fast editor command alias
-$EDITOR $@

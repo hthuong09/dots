@@ -1,3 +1,6 @@
+# Neovim editor
+alias e='nvim'
+
 # prompt before every removal and explain what is being done
 alias rm="rm -vi"
 
