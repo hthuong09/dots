@@ -229,7 +229,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
 	local function create_tab_components(fg_color, bg_color, symbol)
 		local zoomed_icon = tab_zoomed_icon(tab)
-		local truncate_size = tab_max_width - (zoomed_icon and 5 or 3)
+		local truncate_size = tab_max_width - (#zoomed_icon > 0 and 5 or 3)
 		return {
 			{ Text = " " },
 			{
