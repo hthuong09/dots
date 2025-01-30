@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local darkTheme = require("themes.base16-tomorrow-night")
 local lightTheme = require("themes.ayu-light")
--- inpsired from: https://github.com/michaelbrusegard/tabline.wez/blob/main/plugin/tabline/components/tab/process.lua
+-- inspired from: https://github.com/michaelbrusegard/tabline.wez/blob/main/plugin/tabline/components/tab/process.lua
 local process_icons = {
 	["air"] = wezterm.nerdfonts.md_language_go,
 	["apt"] = wezterm.nerdfonts.dev_debian,
@@ -213,10 +213,29 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		return icon .. " " .. process
 	end
 
+	function tab_zoomed_icon(tab_info)
+		if not tab_info.is_active then
+			return ""
+		end
+
+		for _, pane in ipairs(tab_info.panes) do
+			if pane.is_zoomed then
+				return " " .. wezterm.nerdfonts.oct_zoom_in
+			end
+		end
+
+		return ""
+	end
+
 	local function create_tab_components(fg_color, bg_color, symbol)
+		local zoomed_icon = tab_zoomed_icon(tab)
+		local truncate_size = tab_max_width - (zoomed_icon and 5 or 3)
 		return {
 			{ Text = " " },
-			{ Text = wezterm.truncate_right(tab.tab_index + 1 .. " ╱ " .. tab_title(tab), tab_max_width - 3) },
+			{
+				Text = wezterm.truncate_right(tab.tab_index + 1 .. " ╱ " .. tab_title(tab), truncate_size),
+			},
+			{ Text = zoomed_icon },
 			{ Text = " " },
 			{ Foreground = { Color = fg_color } },
 			{ Background = { Color = bg_color } },

@@ -49,6 +49,7 @@
     "muzzle"
     "orbstack"
     "cursor"
+    "gpg-suite-no-mail"
     # "whatpulse/whatpulse/whatpulse"
   ];
   homebrew.masApps = {
