@@ -188,7 +188,8 @@ local theme = get_theme(wezterm.gui.get_appearance())
 return {
 	font = wezterm.font_with_fallback({
 		{ family = "Fira Code" },
-		{ family = "Symbols Nerd Font" },
+		{ family = "Symbols Nerd Font Mono" },
+		{ family = "Symbols Nerd Font" }, -- Fallback for icons that get removed from v3.0.0 nerdfont
 	}),
 	font_size = 14,
 	line_height = 1.35,

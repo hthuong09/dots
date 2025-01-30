@@ -37,6 +37,16 @@ local modes = {
 	["!"] = { "SHELL", "St_TerminalMode" },
 }
 
+-- Table mapping LSP client names to their icons
+local client_icons = {
+	["copilot"] = "", -- Copilot icon
+	["lua_ls"] = "",
+	["tailwindcss"] = "󱏿",
+	["tsserver"] = "󰌞",
+	["typescript-tools"] = "󰌞",
+	["prettier"] = "",
+}
+
 local M = {}
 
 M.mode = function()
@@ -99,7 +109,7 @@ M.LSP_Diagnostics = function()
 end
 
 M.LSP_status = function()
-	local lsp = "%#St_LspStatus#" .. "  "
+	local lsp = "%#St_LspStatus#" .. "LSP ~ "
 	local client_names = {}
 	local function has_value(tab, val)
 		for index, value in ipairs(tab) do
@@ -138,7 +148,29 @@ M.LSP_status = function()
 		end
 	end
 	if client_names ~= "" then
-		return lsp .. table.concat(client_names, ", ") .. " "
+		local with_icons = {}
+		local without_icons = {}
+
+		for _, name in ipairs(client_names) do
+			local lower_name = string.lower(name)
+			if client_icons[lower_name] then
+				table.insert(with_icons, client_icons[lower_name])
+			else
+				table.insert(without_icons, name)
+			end
+		end
+
+		local result = lsp
+		-- Add icon clients first with just spaces
+		if #with_icons > 0 then
+			result = result .. table.concat(with_icons, " ") .. " "
+		end
+		-- Add non-icon clients after
+		if #without_icons > 0 then
+			result = result .. (#with_icons > 0 and ", " or "") .. table.concat(without_icons, ", ") .. " "
+		end
+
+		return result
 	end
 end
 
