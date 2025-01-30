@@ -204,6 +204,11 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local is_last_tab = tab.tab_index + 1 == #tabs
 
 	function tab_title(tab_info)
+		local title = tab_info.tab_title
+		if title and #title > 0 then
+			return title
+		end
+
 		if tab_info.is_active then
 			return tab.active_pane.title
 		end
