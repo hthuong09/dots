@@ -27,7 +27,8 @@
                     "to": [{ "consumer_key_code": "fastforward" }]
                 }
             ],
-            "name": "No Mapping"
+            "name": "No Mapping",
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
             "complex_modifications": {

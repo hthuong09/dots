@@ -1,3 +1,6 @@
+if [[ -n "$ZSH_DEBUGRC" ]]; then
+  zmodload zsh/zprof
+fi
 # Check if .zsh dir exist
 if [ ! -d ~/.zsh ]; then
     print ".zsh directory does not exist"
@@ -32,3 +35,6 @@ for module in $ZSH_MODULES; do
     # Modifier (.N) help ZSH to not return an error if no .zsh file is found
     for config in ~/.zsh/$module/*.zsh(.N); do source $config; done;
 done
+if [[ -n "$ZSH_DEBUGRC" ]]; then
+  zprof
+fi
