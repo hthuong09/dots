@@ -214,6 +214,10 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		end
 
 		local process = tab_info.active_pane.foreground_process_name:match("([^/\\]+)$")
+		-- in case of multiplexer or ssh, there is no process name
+		if not process then
+			return tab.active_pane.title
+		end
 		local icon = process_icons[process] or process_icons.default
 		return icon .. " " .. process
 	end
@@ -451,4 +455,15 @@ return {
 		},
 	},
 	debug_key_events = true,
+	-- multiplexer (server/client) like tmux
+	-- unix_domains = {
+	-- 	{
+	-- 		name = "unix",
+	-- 	},
+	-- },
+	-- This causes `wezterm` to act as though it was started as
+	-- `wezterm connect unix` by default, connecting to the unix
+	-- domain on startup.
+	-- If you prefer to connect manually, leave out this line.
+	-- default_gui_startup_args = { "connect", "unix" },
 }

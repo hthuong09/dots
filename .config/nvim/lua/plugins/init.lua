@@ -167,19 +167,19 @@ local plugins = {
 			require("plugins.configs.mason-null-ls").config()
 		end,
 	},
-	["zbirenbaum/copilot.lua"] = {
-		cmd = "Copilot",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("plugins.configs.copilot").config()
-		end,
-	},
-	["zbirenbaum/copilot-cmp"] = {
-		branch = "formatting-fixes",
-		config = function()
-			require("plugins.configs.copilot-cmp").config()
-		end,
-	},
+	-- ["zbirenbaum/copilot.lua"] = {
+	-- 	cmd = "Copilot",
+	-- 	event = { "BufReadPre", "BufNewFile" },
+	-- 	config = function()
+	-- 		require("plugins.configs.copilot").config()
+	-- 	end,
+	-- },
+	-- ["zbirenbaum/copilot-cmp"] = {
+	-- 	branch = "formatting-fixes",
+	-- 	config = function()
+	-- 		require("plugins.configs.copilot-cmp").config()
+	-- 	end,
+	-- },
 	-- ["yetone/avante.nvim"] = {
 	-- 	event = "VeryLazy",
 	-- 	lazy = false,
