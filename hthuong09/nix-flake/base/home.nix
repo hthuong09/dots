@@ -37,7 +37,7 @@
     docker-client
     delta
     # postman
-    # obsidian
+    obsidian
     nodejs
     awscli2
     fzf

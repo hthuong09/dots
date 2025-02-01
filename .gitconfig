@@ -50,6 +50,7 @@
   undo = reset HEAD~1
   base = reset --hard origin/main
   update = !git au && git cms "update" && git pu
+  u = "!f() { git au && git cms \"$1\" && git pu; }; f"
   updateall = !git aa && git cm "update" && git pu
   untracked = status -u .
   untracked-at = status -u
@@ -85,4 +86,3 @@
 
 [gc]
   writeCommitGraph = true
-
