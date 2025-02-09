@@ -3,10 +3,10 @@
 yabai -m config layout                       bsp
 
 yabai -m config window_gap                   10
-yabai -m config top_padding                  5
-yabai -m config bottom_padding               5
-yabai -m config left_padding                 5
-yabai -m config right_padding                5
+yabai -m config top_padding                  8
+yabai -m config bottom_padding               8
+yabai -m config left_padding                 8
+yabai -m config right_padding                8
 # yabai -m config focus_follows_mouse autoraise
 # yabai -m config mouse_follows_focus on
 
@@ -43,9 +43,9 @@ fi
 # yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
 # focus window after a window is minimized
-yabai -m signal --add event=window_minimized action="
-next_window=\$(yabai -m query --windows --space | jq -r '[.[] | select(.\"is-minimized\" == false and .\"is-visible\" == true)][0].id // empty')
-if [[ -n \$next_window ]]; then
-    yabai -m window --focus \$next_window
-fi
-"
+# yabai -m signal --add event=window_minimized action="
+# next_window=\$(yabai -m query --windows --space | jq -r '[.[] | select(.\"is-minimized\" == false and .\"is-visible\" == true)][0].id // empty')
+# if [[ -n \$next_window ]]; then
+#     yabai -m window --focus \$next_window
+# fi
+# "
