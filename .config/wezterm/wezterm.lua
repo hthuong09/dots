@@ -110,6 +110,11 @@ local config = {
 			mods = "CTRL|SHIFT",
 			action = workspaces.switch_workspace(),
 		},
+		{
+			key = "o",
+			mods = "CTRL|SHIFT|CMD",
+			action = workspaces.switch_active_workspace(),
+		},
 	},
 	mouse_bindings = {
 		{

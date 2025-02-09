@@ -46,6 +46,35 @@ end
 
 local M = {}
 M.switch_workspace = workspace_switcher.switch_workspace
+M.switch_active_workspace = function()
+	return wezterm.action_callback(function(window, pane)
+		wezterm.emit("smart_workspace_switcher.workspace_switcher.start", window, pane)
+		local choices = {}
+
+		choices, _ = workspace_switcher.choices.get_workspace_elements(choices)
+
+		window:perform_action(
+			wezterm.action.InputSelector({
+				action = wezterm.action_callback(function(_, _, id, label)
+					if id and label then
+						window:perform_action(
+							wezterm.action.SwitchToWorkspace({
+								name = id,
+							}),
+							pane
+						)
+					end
+				end),
+				title = "Choose Active Workspace",
+				description = "Select a workspace and press Enter = accept, Esc = cancel, / = filter",
+				fuzzy_description = "Workspace to switch: ",
+				choices = choices,
+				fuzzy = true,
+			}),
+			pane
+		)
+	end)
+end
 
 M.setup = function()
 	-- Listen for workspace switcher creation event
