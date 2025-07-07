@@ -115,6 +115,13 @@ local config = {
 			mods = "CTRL|SHIFT|CMD",
 			action = workspaces.switch_active_workspace(),
 		},
+
+		-- Reset key
+		{
+			key = "Enter",
+			mods = "ALT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
 	},
 	mouse_bindings = {
 		{

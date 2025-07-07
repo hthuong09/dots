@@ -2,6 +2,7 @@
 *.bak
 *.tmp
 .DS_Store
+.claude/
 
 /.config/nvim/plugged
 /.config/nvim/plugin
