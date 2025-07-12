@@ -125,5 +125,5 @@ prepare_macos
 prepare_dotfiles
 prepare_nix
 install_yabai_indicator
-nix run nix-darwin -- switch --flake ~/hthuong09/nix-flake
+darwin-rebuild build --flake ~/hthuong09/nix-flake && sudo ./result/activate
 sync_secrets

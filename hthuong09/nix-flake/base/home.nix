@@ -9,7 +9,7 @@
 
   # Symlink fonts to /Library/Fonts
   home.activation = {
-    linkFonts = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    linkFonts = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       echo "Linking fonts to /Library/Fonts..."
       $DRY_RUN_CMD sudo mkdir -p "/Library/Fonts"
       for font in ~/.fonts/*; do
@@ -53,9 +53,11 @@
     # https://dev.to/lissy93/cli-tools-you-cant-live-without-57f6
     # thefuck - Auto-correct miss-typed commands - unable to find use case yet
 
+    yt-dlp
+
     (writeShellScriptBin "sync-secrets" ''
       #!/usr/bin/env bash
-      
+
       # Function to check if signed in to 1Password
       check_signin() {
         if ! op vault list &>/dev/null; then

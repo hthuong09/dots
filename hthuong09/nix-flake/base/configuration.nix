@@ -19,9 +19,7 @@
   homebrew.enable = true;
   homebrew.onActivation.upgrade = true;
   homebrew.global.autoUpdate = true;
-  homebrew.brews = [
-    "yabai"
-  ];
+  homebrew.brews = [ "yabai" ];
   homebrew.taps = [
     "wez/wezterm"
     "thatsjustcheesy/tap"
@@ -259,5 +257,6 @@
   #   ];
   # };
 
-  nix.package = pkgs.nix;
+  # nix.enable = false;
+  nix.package = pkgs.nixVersions.nix_2_23;
 }
