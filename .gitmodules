@@ -22,3 +22,6 @@
 [submodule ".zsh/prompt/pure"]
 	path = .zsh/prompt/pure
 	url = https://github.com/hthuong09/pure
+[submodule ".zsh/fzf-tab/external"]
+	path = .zsh/fzf-tab/external
+	url = https://github.com/Aloxaf/fzf-tab.git

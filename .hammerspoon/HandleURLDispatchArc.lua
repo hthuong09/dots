@@ -4,6 +4,20 @@ function module(logger)
 
 	hs.loadSpoon("URLDispatcher")
 
+	local openLinkWithChromePorifle = function(url, profile)
+		local t = hs.task.new("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", nil, function()
+			return false
+		end, { "--profile-directory=" .. profile, url })
+		t:start()
+	end
+
+	local sendToProfile = function(t)
+		local fn = function(url)
+			openLinkWithChromePorifle(url, t[2])
+		end
+		return { t[1], nil, fn }
+	end
+
 	local openLinkWithArcSpace = function(url, spaceIndex)
 		local script = [[
 			tell application "Arc"
@@ -44,6 +58,9 @@ function module(logger)
 		sendToSpace({ "https?://gitlab%.com/shopback/", workSpaceIndex }),
 		sendToSpace({ "https?://device%.sso%.ap%-southeast%-1%.amazonaws%.com/", workSpaceIndex }),
 		sendToSpace({ "https?://shopback%.openvpn%.com/", workSpaceIndex }),
+		sendToProfile({ "https?://console%.jumpcloud%.com/", "Default" }),
+		sendToProfile({ "https?://shopback%.slack%.com/", "Default" }),
+		sendToProfile({ "https?://www%.figma%.com/", "Default" }),
 		{
 			".*",
 			nil,

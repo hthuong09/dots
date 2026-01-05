@@ -12,6 +12,8 @@ ZSH_MODULES=(
     # starship
     prompt
     editor
+    fzf
+    fzf-tab
     completion
     history
     history-substring-search
@@ -22,7 +24,6 @@ ZSH_MODULES=(
     # z
     # tmux
     zoxide
-    fzf
     nvm
     gh
 )
@@ -45,3 +46,4 @@ if [[ -n $CURSOR_TRACE_ID ]]; then
   precmd() { print -Pn "\e]133;D;%?\a" }
   preexec() { print -Pn "\e]133;C;\a" }
 fi
+

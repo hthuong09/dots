@@ -48,7 +48,7 @@
   puu = push -u
   puf = push --force-with-lease
   undo = reset HEAD~1
-  base = reset --hard origin/main
+  base = "!git fetch; git reset --hard origin/main"
   update = !git au && git cms "update" && git pu
   u = "!f() { git au && git cms \"$1\" && git pu; }; f"
   updateall = !git aa && git cm "update" && git pu
@@ -86,3 +86,5 @@
 
 [gc]
   writeCommitGraph = true
+[gpg]
+	program = /usr/local/bin/gpg
